@@ -1,0 +1,6 @@
+[submodule "FelicaSharp"]
+	path = FelicaSharp
+	url = git://github.com/pine613/FelicaSharp
+[submodule "KutDormitoryReport"]
+	path = KutDormitoryReport
+	url = https://github.com/pine613/KutDormitoryReport.git
