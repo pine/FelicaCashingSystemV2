@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FelicaSharp", "..\FelicaSha
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KutDormitoryReport", "..\KutDormitoryReport\KutDormitoryReport\KutDormitoryReport\KutDormitoryReport.csproj", "{5C904056-C232-44F3-8343-C171E9BA1B28}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FelicaData", "FelicaData\FelicaData.csproj", "{02BA654A-6D2C-4D5E-B60E-295B60AB0A98}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,12 @@ Global
 		{5C904056-C232-44F3-8343-C171E9BA1B28}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5C904056-C232-44F3-8343-C171E9BA1B28}.Release|x86.ActiveCfg = Release|x86
 		{5C904056-C232-44F3-8343-C171E9BA1B28}.Release|x86.Build.0 = Release|x86
+		{02BA654A-6D2C-4D5E-B60E-295B60AB0A98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02BA654A-6D2C-4D5E-B60E-295B60AB0A98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02BA654A-6D2C-4D5E-B60E-295B60AB0A98}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{02BA654A-6D2C-4D5E-B60E-295B60AB0A98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02BA654A-6D2C-4D5E-B60E-295B60AB0A98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02BA654A-6D2C-4D5E-B60E-295B60AB0A98}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
