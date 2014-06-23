@@ -94,6 +94,20 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\FelicaSharp\FelicaSharp\FelicaSharp.csproj">
+      <Project>{d7257530-bdec-4c81-99ca-247ce1536390}</Project>
+      <Name>FelicaSharp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\KutDormitoryReport\KutDormitoryReport\KutDormitoryReport\KutDormitoryReport.csproj">
+      <Project>{5c904056-c232-44f3-8343-c171e9ba1b28}</Project>
+      <Name>KutDormitoryReport</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FelicaData\FelicaData.csproj">
+      <Project>{02ba654a-6d2c-4d5e-b60e-295b60ab0a98}</Project>
+      <Name>FelicaData</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
