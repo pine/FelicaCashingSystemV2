@@ -78,7 +78,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Card.cs" />
+    <Compile Include="DatabaseException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RavenData.cs" />
+    <Compile Include="RavenModel.cs" />
+    <Compile Include="User.cs" />
+    <Compile Include="UserData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

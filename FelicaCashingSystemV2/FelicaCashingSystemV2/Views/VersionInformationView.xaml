@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="FelicaCashingSystemV2.Views.VersionInformationView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Text="アプリケーション名" Style="{StaticResource GridTableCellFirstColumn}" Grid.Row="0" Grid.Column="0"/>
+        <TextBlock Text="{Binding AppName}" Style="{StaticResource GridTableCell}" Grid.Row="0" Grid.Column="1" />
+
+        <TextBlock Text="バージョン" Style="{StaticResource GridTableCellFirstColumn}" Grid.Row="1" Grid.Column="0" />
+        <TextBlock Text="{Binding Version}" Style="{StaticResource GridTableCell}" Grid.Row="1" Grid.Column="1" />
+
+        <TextBlock Text="著作権情報" Style="{StaticResource GridTableCellFirstColumn}" Grid.Row="2" Grid.Column="0" />
+        <TextBlock Text="{Binding Copyright}"  Style="{StaticResource GridTableCell}" Grid.Row="2" Grid.Column="1" />
+    </Grid>
+</UserControl>
