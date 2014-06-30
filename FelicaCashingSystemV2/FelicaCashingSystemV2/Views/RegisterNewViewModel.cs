@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Net.Mail;
+using FelicaMail;
 
 namespace FelicaCashingSystemV2.Views
 {
@@ -92,18 +92,31 @@ namespace FelicaCashingSystemV2.Views
 
             try
             {
-                App.Current.UserData.CreateUser(new FelicaData.User
+                // データベースに登録
+                var user = App.Current.UserData.CreateUser(new FelicaData.User
                 {
                     Name = this.UserName,
                     Email = this.Email,
                     Password = password
                 });
+
+                if (user == null)
+                {
+                    this.ErrorMessage = "ユーザー登録に失敗しました。";
+                    return;
+                }
             }
             catch (FelicaData.DatabaseException e)
             {
                 this.ErrorMessage = e.Message;
                 return;
             }
+
+            // メールを送信
+            App.Current.Mailer.SendRegistered(this.Email, new RegisteredArgs
+            {
+                Name = this.UserName
+            });
         }
     }
 }

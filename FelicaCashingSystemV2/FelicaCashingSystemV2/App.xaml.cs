@@ -21,7 +21,7 @@ namespace FelicaCashingSystemV2
         public FelicaData.User User { get; private set; }
         public FelicaData.Card Card { get; private set; }
         public FelicaData.UserData UserData { get; private set; }
-
+        public FelicaMail.Mailer Mailer { get; private set; }
       
 
         public static new App Current {
@@ -146,6 +146,17 @@ namespace FelicaCashingSystemV2
             this.felica.FelicaCardSet += felica_FelicaCardSet;
 
             this.UserData = new FelicaData.UserData();
+
+            this.Mailer = new FelicaMail.Mailer();
+
+            var settings = FelicaCashingSystemV2.Properties.Settings.Default;
+            this.Mailer.Setup(
+                settings.MailFrom,
+                settings.SmtpHost,
+                settings.SmtpPort,
+                settings.SmtpUser,
+                settings.SmtpPassword
+                );
 
             try
             {
