@@ -104,9 +104,11 @@ namespace FelicaCashingSystemV2
             }
         }
 
-        protected void ShowRegisterWindow()
+        protected void ShowRegisterWindow(
+            FelicaSharp.EasyFelicaCardSetEventHandlerArgs unregisteredCard)
         {
             this.CloseAllWindows();
+            this.UnregisteredCard = unregisteredCard;
             this.ShowWindow<Windows.RegisterWindow>();
         }
 
@@ -179,8 +181,8 @@ namespace FelicaCashingSystemV2
 
         private void notifyIcon_Click(object sender, EventArgs e)
         {
-//            this.ShowLoginWindow();
-            this.ShowRegisterWindow();
+            this.ShowLoginWindow();
+//            this.ShowRegisterWindow();
         }
 
         private void notifyIcon_ExitClick(object sender, EventArgs e)
@@ -216,8 +218,7 @@ namespace FelicaCashingSystemV2
             // ユーザーが存在しない場合
             if (this.User == null)
             {
-                this.UnregisteredCard = e;
-                this.ShowRegisterWindow();
+                this.ShowRegisterWindow(e);
 
                 // Test code
                 /*

@@ -90,25 +90,34 @@ namespace FelicaCashingSystemV2.Views
                 return;
             }
 
+
+            FelicaData.User registeredUser = null;
+
             try
             {
                 // データベースに登録
-                var user = App.Current.UserData.CreateUser(new FelicaData.User
-                {
-                    Name = this.UserName,
-                    Email = this.Email,
-                    Password = password
-                });
-
-                if (user == null)
-                {
-                    this.ErrorMessage = "ユーザー登録に失敗しました。";
-                    return;
-                }
+                registeredUser = App.Current.UserData.CreateUser(
+                    new FelicaData.User
+                    {
+                        Name = this.UserName,
+                        Email = this.Email,
+                        Password = password
+                    },
+                    new FelicaData.Card
+                    {
+                        Name = "デフォルト",
+                        Uid = App.Current.UnregisteredCard.Idm
+                    });
             }
             catch (FelicaData.DatabaseException e)
             {
                 this.ErrorMessage = e.Message;
+                return;
+            }
+
+            if (registeredUser == null)
+            {
+                this.ErrorMessage = "ユーザー登録に失敗しました。";
                 return;
             }
 
@@ -117,6 +126,9 @@ namespace FelicaCashingSystemV2.Views
             {
                 Name = this.UserName
             });
+
+            // 登録したユーザーでログイン
+            App.Current.ShowMainWindow(registeredUser);
         }
     }
 }

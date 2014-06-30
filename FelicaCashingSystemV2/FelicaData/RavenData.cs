@@ -68,6 +68,17 @@ namespace FelicaData
             }
         }
 
+        protected void Delete<T>(T data)
+            where T: class
+        {
+            if (data == null) { return; }
+
+            using (var session = this.DocumentStore.OpenSession())
+            {
+                session.Delete<T>(data);
+            }
+        }
+
         #region Changed Event
 
         public EventHandler Changed;

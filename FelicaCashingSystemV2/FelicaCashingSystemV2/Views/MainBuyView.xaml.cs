@@ -12,26 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using MahApps.Metro.Controls;
-using WpfCommonds;
 
-namespace FelicaCashingSystemV2.Windows
+namespace FelicaCashingSystemV2.Views
 {
     /// <summary>
-    /// MainWindow.xaml の相互作用ロジック
+    /// MainBuyView.xaml の相互作用ロジック
     /// </summary>
-    public partial class MainWindow : MetroWindow
+    public partial class MainBuyView : UserControl
     {
-        public MainWindow()
+        public MainBuyView()
         {
             InitializeComponent();
-            this.SetEscClosableWindow();
-            this.DataContext = new MainWindowViewModel();
-        }
-
-        private void SystemInformationButton_Click(object sender, RoutedEventArgs e)
-        {
-            App.Current.ShowInformationWindow();
         }
     }
 }

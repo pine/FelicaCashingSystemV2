@@ -3,10 +3,10 @@
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       xmlns:localControls="clr-namespace:FelicaCashingSystemV2.Controls"
+                      xmlns:localViews="clr-namespace:FelicaCashingSystemV2.Views"
                       Height="400" Width="600"
                       WindowStartupLocation="CenterScreen"
-                      Style="{StaticResource BasicWindow}" 
-                      PreviewKeyDown="MetroWindow_PreviewKeyDown">
+                      Style="{StaticResource BasicWindow}" >
     <controls:MetroWindow.RightWindowCommands>
         <controls:WindowCommands>
             <localControls:SystemInformationButton Click="SystemInformationButton_Click"/>
@@ -23,12 +23,7 @@
                 </WrapPanel>
             </TabItem>
             <TabItem Header="購入">
-                <WrapPanel>
-                    <controls:Tile Title="Enter"  Count="110" />
-                    <controls:Tile Title="3" Count="30"/>
-                    <controls:Tile Title="O" Count="350"/>
-                    <controls:Tile Count="..."/>
-                </WrapPanel>
+                <localViews:MainBuyView/>
             </TabItem>
             <TabItem Header="入金">
             </TabItem>
