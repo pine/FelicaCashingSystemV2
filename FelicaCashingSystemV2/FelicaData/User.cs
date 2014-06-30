@@ -14,12 +14,14 @@ namespace FelicaData
             this.Email = null;
             this.Password = null;
             this.Money = 0;
+            this.IsAdmin = false;
         }
 
         public string Name { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
         public int Money { get; set; }
+        public bool IsAdmin { get; set; }
 
         /// <summary>
         /// パスワードで認証を行います。
