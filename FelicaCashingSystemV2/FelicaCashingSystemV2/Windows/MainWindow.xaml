@@ -1,0 +1,41 @@
+﻿<controls:MetroWindow x:Class="FelicaCashingSystemV2.Windows.MainWindow"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      xmlns:localControls="clr-namespace:FelicaCashingSystemV2.Controls"
+                      Height="400" Width="600"
+                      WindowStartupLocation="CenterScreen"
+                      Style="{StaticResource BasicWindow}" 
+                      PreviewKeyDown="MetroWindow_PreviewKeyDown">
+    <controls:MetroWindow.RightWindowCommands>
+        <controls:WindowCommands>
+            <localControls:SystemInformationButton Click="SystemInformationButton_Click"/>
+            <localControls:SettingButton Visibility="{Binding IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+        </controls:WindowCommands>
+    </controls:MetroWindow.RightWindowCommands>
+    
+    <StackPanel Style="{StaticResource ContentRoot}">
+        <TextBlock Style="{StaticResource Heading1}">メイン</TextBlock>
+        <TabControl>
+            <TabItem Header="ホーム">
+                <WrapPanel>
+                    <controls:Tile Title="購入"  Count="110" Style="{StaticResource MainTile}"/>
+                </WrapPanel>
+            </TabItem>
+            <TabItem Header="購入">
+                <WrapPanel>
+                    <controls:Tile Title="Enter"  Count="110" />
+                    <controls:Tile Title="3" Count="30"/>
+                    <controls:Tile Title="O" Count="350"/>
+                    <controls:Tile Count="..."/>
+                </WrapPanel>
+            </TabItem>
+            <TabItem Header="入金">
+            </TabItem>
+            <TabItem Header="出金">
+            </TabItem>
+            <TabItem Header="履歴">
+            </TabItem>
+        </TabControl>
+    </StackPanel>
+</controls:MetroWindow>

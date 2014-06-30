@@ -7,6 +7,7 @@
         <Setter Property="ResizeMode" Value="CanResizeWithGrip"/>
         <Setter Property="GlowBrush" Value="{DynamicResource AccentColorBrush}"/>
         <Setter Property="WindowTransitionsEnabled" Value="False"/>
+        <Setter Property="Title" Value="Felica Cashing System V2"/>
     </Style>
     
     <Style x:Key="ContentRoot" TargetType="{x:Type Panel}">
@@ -20,6 +21,10 @@
         <Setter Property="Foreground" Value="{StaticResource AccentColorBrush}"/>
         <Setter Property="FontSize" Value="30"/>
         <Setter Property="Margin" Value="0,0,0,10"/>
+    </Style>
+    
+    <Style x:Key="ErrorMessageText" TargetType="{x:Type TextBlock}">
+        <Setter Property="Foreground" Value="Red"/>
     </Style>
 
     <Style x:Key="FormLabel"
@@ -40,15 +45,29 @@
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Margin" Value="4,0,0,0"/>
     </Style>
-    
-    <Style x:Key="TitleBarInformationIcon" TargetType="Rectangle">
+
+    <Style x:Key="TitleBarIcon" TargetType="Rectangle">
         <Setter Property="Width" Value="20" />
         <Setter Property="Height" Value="20" />
         <Setter Property="Fill" Value="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}" />
+    </Style>
+    
+    <Style x:Key="TitleBarInformationIcon" TargetType="Rectangle"
+           BasedOn="{StaticResource TitleBarIcon}">
         <Setter Property="OpacityMask">
             <Setter.Value>
                 <VisualBrush Stretch="Fill"
                              Visual="{StaticResource appbar_information_circle}" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style x:Key="TitleBarSettingIcon" TargetType="Rectangle"
+           BasedOn="{StaticResource TitleBarIcon}">
+        <Setter Property="OpacityMask">
+            <Setter.Value>
+                <VisualBrush Stretch="Fill"
+                             Visual="{StaticResource appbar_settings}" />
             </Setter.Value>
         </Setter>
     </Style>
@@ -60,5 +79,12 @@
     <Style x:Key="GridTableCell" TargetType="{x:Type FrameworkElement}">
         <Setter Property="Margin" Value="10,5"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+    
+    <Style x:Key="MainTile"
+           TargetType="{x:Type controls:Tile}"
+           BasedOn="{StaticResource {x:Type controls:Tile}}">
+        <Setter Property="Width" Value="150"/>
+        <Setter Property="Height" Value="110"/>
     </Style>
 </ResourceDictionary>

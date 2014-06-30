@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="FelicaCashingSystemV2.Views.CardAssociationInfoView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <StackPanel Orientation="Vertical">
+        <TextBlock TextWrapping="Wrap">
+            カードを既存ユーザーに関連付けるには、
+            既に登録されているカードでログインするか、
+            ユーザー名及びパスワードでログインしてください。
+        </TextBlock>
+        
+        <StackPanel Orientation="Horizontal" Margin="0,30,0,0">
+            <Button Content="ユーザー名とパスワードでログイン"
+                    Click="Button_Click"/>
+        </StackPanel>
+    </StackPanel>
+</UserControl>

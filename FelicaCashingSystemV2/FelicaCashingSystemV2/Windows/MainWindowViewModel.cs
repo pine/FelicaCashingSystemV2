@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FelicaData
+namespace FelicaCashingSystemV2.Windows
 {
-    public class DatabaseException : Exception
+    class MainWindowViewModel
     {
-        public DatabaseException(string msg)
-            : base(msg)
+        public bool IsAdmin
         {
+            get { return false; }
         }
     }
 }

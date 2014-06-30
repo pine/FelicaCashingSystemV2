@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FelicaData
 {
-    class UserData : RavenData
+    public class UserData : RavenData
     {
         private const string CONNECTION_STRING_NAME = "UserData";
 
@@ -27,9 +27,37 @@ namespace FelicaData
             return this.Query<User>(u => u.Id == id).FirstOrDefault();
         }
 
-        public void CreateUser(User user)
+        public User GetUserByName(string name)
         {
-            this.Create(user);
+            return this.Query<User>(u => u.Name == name).FirstOrDefault();
+        }
+
+        /// <summary>
+        /// ユーザーを新規作成します。
+        /// </summary>
+        /// <param name="user">新規作成するユーザーの情報</param>
+        /// <returns>新規作成に成功した場合、作成したユーザー</returns>
+        /// <exception cref="DatabaseException">ユーザーの作成でエラーが発生した場合</exception>
+        public User CreateUser(User user)
+        {
+            if (user.Name == null)
+            {
+                throw new DatabaseException("ユーザー名が無効です。");
+            }
+            else
+            {
+                // 同じ名前のユーザーが居るか確認
+                var sameName = this.GetUserByName(user.Name);
+
+                if (sameName != null)
+                {
+                    throw new DatabaseException("既に同じ名前のユーザーが存在します。");
+                }
+                else
+                {
+                    return this.Create(user);
+                }
+            }
         }
 
         public void UpdateUser(User user)
@@ -51,14 +79,38 @@ namespace FelicaData
             return this.Query<Card>(c => c.Uid == uid).FirstOrDefault();
         }
 
+        public Card GetCardByName(int userId, string name)
+        {
+            return this.Query<Card>(c => c.UserId == userId && c.Name == name).FirstOrDefault();
+        }
+
         public List<Card> GetCards(int userId)
         {
             return this.Query<Card>(c => c.UserId == userId).ToList();
         }
 
-        public void CreateCard(Card card)
+        public Card CreateCard(Card card)
         {
-            this.Create(card);
+            var user = this.GetUser(card.UserId);
+            var sameUid = this.GetCard(card.Uid);
+            var sameName = this.GetCardByName(card.UserId, card.Name);
+
+            if (user == null)
+            {
+                throw new DatabaseException("ユーザーが存在しません。");
+            }
+
+            if (sameUid != null)
+            {
+                throw new DatabaseException("既にカードが登録されています。");
+            }
+
+            if (sameName != null)
+            {
+                throw new DatabaseException("既に同じ名前のカードが存在します。");
+            }
+
+            return this.Create(card);
         }
 
         public void UpdateCard(Card card)

@@ -1,4 +1,4 @@
-﻿<controls:MetroWindow x:Class="FelicaCashingSystemV2.LoginWindow"
+﻿<controls:MetroWindow x:Class="FelicaCashingSystemV2.Windows.LoginWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
@@ -6,9 +6,6 @@
         xmlns:behaviours="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
         xmlns:localControls="clr-namespace:FelicaCashingSystemV2.Controls"
         Title="Felica Cashing System v2" Height="400" Width="600"
-        GlowBrush="{DynamicResource AccentColorBrush}"
-        ResizeMode="CanResizeWithGrip"
-        WindowTransitionsEnabled="False"
         WindowStartupLocation="CenterScreen">
     <controls:MetroWindow.RightWindowCommands>
         <controls:WindowCommands>
@@ -45,7 +42,7 @@
 
                     <TextBlock Grid.Column="0"
                                Grid.Row="0"
-                               Text="ユーザー名"
+                               Text="名前"
                                Style="{StaticResource FormLabel}"
                                />
 
@@ -66,7 +63,8 @@
                                   ItemsSource="{Binding Users}"
                                   DisplayMemberPath="Name"
                                   SelectedValuePath="Id"
-                                  SelectedValue="{Binding UserId}"/>
+                                  SelectedValue="{Binding UserId}" SelectionChanged="comboBoxUsers_SelectionChanged"
+                                  />
 
                         <TextBlock Grid.Column="1" Text="さん"
                                    Style="{StaticResource FormHelperText}"/>
@@ -81,15 +79,14 @@
                                  Grid.Column="1"
                                  Grid.Row="1"
                                  Margin="10,5"
-                                 Width="250"
-                                />
+                                 Width="250"/>
 
                     <Grid Grid.Column="1"
                           Grid.Row="2"
                           Margin="15,0,10,5"
                           >
                         <TextBlock Text="{Binding ErrorMessage}"
-                                   />
+                                   Style="{StaticResource ErrorMessageText}"/>
                     </Grid>
 
                     <Button x:Name="buttonAccept"
@@ -100,7 +97,7 @@
                             Content="ログイン"
                             HorizontalAlignment="Right"
                             Margin="0,20,10,0"
-                            Command="{Binding Login}"
+                            Command="{Binding LoginCommand}"
                             CommandParameter="{Binding ElementName=passwordBox}"/>
                 </Grid>
             </StackPanel>

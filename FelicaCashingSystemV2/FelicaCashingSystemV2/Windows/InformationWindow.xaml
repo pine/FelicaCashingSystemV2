@@ -1,10 +1,10 @@
-﻿<controls:MetroWindow x:Class="FelicaCashingSystemV2.InformationWindow"
+﻿<controls:MetroWindow x:Class="FelicaCashingSystemV2.Windows.InformationWindow"
                       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                      xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+                      xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       xmlns:behaviours="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
-                      xmlns:v="clr-namespace:FelicaCashingSystemV2.Views"
+                      xmlns:localViews="clr-namespace:FelicaCashingSystemV2.Views"
                       Title="Felica Cashing System v2" Height="350" Width="525"                      
                       
                       
@@ -17,11 +17,13 @@
         <TextBlock Style="{StaticResource Heading1}">システム情報</TextBlock>
         <TabControl>
             <TabItem Header="バージョン">
+                <localViews:VersionInformationView/>
             </TabItem>
             <TabItem Header="更新情報">
+                <localViews:ReadonlyTextFileView Source="Texts\UpdateHistory.txt"/>
             </TabItem>
             <TabItem Header="謝辞">
-                
+                <localViews:ReadonlyTextFileView Source="Texts\Thanks.txt"/>
             </TabItem>
         </TabControl>
     </StackPanel>

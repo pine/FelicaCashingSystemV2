@@ -10,24 +10,25 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using MahApps.Metro.Controls;
 
-namespace FelicaCashingSystemV2
+namespace FelicaCashingSystemV2.Views
 {
     /// <summary>
-    /// LoginWindow.xaml の相互作用ロジック
+    /// VersionInformationView.xaml の相互作用ロジック
     /// </summary>
-    public partial class LoginWindow : MetroWindow
+    public partial class CardAssociationInfoView : UserControl
     {
-        public LoginWindow()
+        public CardAssociationInfoView()
         {
             InitializeComponent();
+            this.DataContext = new VersionInformationViewModel();
         }
 
-        private void SystemInformationButton_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var window = new InformationWindow();
+            App.Current.ShowLoginWindow();
         }
     }
 }

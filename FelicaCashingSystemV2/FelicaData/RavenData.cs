@@ -8,7 +8,7 @@ using Raven.Client.Embedded;
 
 namespace FelicaData
 {
-    abstract class RavenData
+    abstract public class RavenData : IDisposable
     {
         protected IDocumentStore DocumentStore { get; set; }
 
@@ -19,14 +19,17 @@ namespace FelicaData
                 ConnectionStringName = connectionStringName
             };
 
-            this.DocumentStore.Initialize();
+            this.DocumentStore.Initialize(); // 初期化は時間が掛かる
         }
 
-        protected void Create<T>(T data)
+        protected T Create<T>(T data)
             where T : RavenModel
         {
-            data.Id = 0;
+            data.Id = 0; // アップデートにならないように Id を無効化
+
             this.Store(data);
+
+            return data;
         }
 
         protected void Update<T>(T data)
@@ -77,6 +80,72 @@ namespace FelicaData
             }
         }
 
+        #endregion
+
+        #region Dispose Finalize パターン
+ 
+        /// <summary>
+        /// 既にDisposeメソッドが呼び出されているかどうかを表します。
+        /// </summary>
+        private bool disposed = false;
+ 
+        /// <summary>
+        /// ConsoleApplication1.DisposableClass1 によって使用されているすべてのリソースを解放します。
+        /// </summary>
+        public void Dispose()
+        {
+            GC.SuppressFinalize(this);
+            this.Dispose(true);
+        }
+ 
+        /// <summary>
+        /// ConsoleApplication1.DisposableClass1 クラスのインスタンスがGCに回収される時に呼び出されます。
+        /// </summary>
+        ~RavenData()
+        {
+            this.Dispose(false);
+        }
+ 
+        /// <summary>
+        /// ConsoleApplication1.DisposableClass1 によって使用されているアンマネージ リソースを解放し、オプションでマネージ リソースも解放します。
+        /// </summary>
+        /// <param name="disposing">マネージ リソースとアンマネージ リソースの両方を解放する場合は true。アンマネージ リソースだけを解放する場合は false。 </param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (this.disposed)
+            {
+                return;
+            }
+            this.disposed = true;
+ 
+            if (disposing)
+            {
+                // マネージ リソースの解放処理をこの位置に記述します。
+                this.DocumentStore.Dispose();
+            }
+            // アンマネージ リソースの解放処理をこの位置に記述します。
+        }
+ 
+        /// <summary>
+        /// 既にDisposeメソッドが呼び出されている場合、例外をスローします。
+        /// </summary>
+        /// <exception cref="System.ObjectDisposedException">既にDisposeメソッドが呼び出されています。</exception>
+        protected void ThrowExceptionIfDisposed()
+        {
+            if (this.disposed)
+            {
+                throw new ObjectDisposedException(this.GetType().FullName);
+            }
+        }
+ 
+        /// <summary>
+        /// Dispose Finalize パターンに必要な初期化処理を行います。
+        /// </summary>
+        private void InitializeDisposeFinalizePattern()
+        {
+            this.disposed = false;
+        }
+ 
         #endregion
     }
 }

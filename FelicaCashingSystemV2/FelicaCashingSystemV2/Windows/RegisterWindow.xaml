@@ -1,0 +1,23 @@
+﻿<controls:MetroWindow x:Class="FelicaCashingSystemV2.Windows.RegisterWindow"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      xmlns:localViews="clr-namespace:FelicaCashingSystemV2.Views"
+                      Height="450" Width="670"
+                      WindowStartupLocation="CenterScreen"
+                      Style="{StaticResource BasicWindow}">
+    <StackPanel Style="{StaticResource ContentRoot}">
+        <TextBlock Style="{StaticResource Heading1}">ユーザー登録</TextBlock>
+        <TabControl>
+            <TabItem Header="新規登録">
+                <localViews:RegisterNewView/>
+            </TabItem>
+            <TabItem Header="カードの関連付け">
+                <localViews:CardAssociationInfoView/>
+            </TabItem>
+            <TabItem Header="利用規約">
+                <localViews:ReadonlyTextFileView Source=".\Texts\Rules.txt"/>
+            </TabItem>
+        </TabControl>
+    </StackPanel>
+</controls:MetroWindow>

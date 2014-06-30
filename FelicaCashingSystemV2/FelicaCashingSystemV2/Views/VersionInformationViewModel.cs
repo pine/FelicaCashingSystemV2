@@ -21,7 +21,7 @@ namespace FelicaCashingSystemV2.Views
 
         public string Copyright
         {
-            get { return SystemInformation.AppName; }
+            get { return SystemInformation.Copyright; }
         }
     }
 }

@@ -12,18 +12,18 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using MahApps.Metro.Controls;
 
-namespace FelicaCashingSystemV2
+namespace FelicaCashingSystemV2.Views
 {
     /// <summary>
-    /// MainWindow.xaml の相互作用ロジック
+    /// RegisterNewView.xaml の相互作用ロジック
     /// </summary>
-    public partial class InformationWindow : MetroWindow
+    public partial class RegisterNewView : UserControl
     {
-        public InformationWindow()
+        public RegisterNewView()
         {
             InitializeComponent();
+            this.DataContext = new RegisterNewViewModel();
         }
     }
 }
