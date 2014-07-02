@@ -69,6 +69,7 @@
     <Compile Include="Controls\ProfileButton.xaml.cs">
       <DependentUpon>ProfileButton.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MetroWindowDialogMessageReceiver.cs" />
     <Compile Include="Views\MainBuyView.xaml.cs">
       <DependentUpon>MainBuyView.xaml</DependentUpon>
     </Compile>

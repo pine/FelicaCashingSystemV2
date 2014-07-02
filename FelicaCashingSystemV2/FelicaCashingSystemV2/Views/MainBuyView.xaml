@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="700">
     <UserControl.Resources>
         <Style TargetType="{x:Type controls:Tile}"
                BasedOn="{StaticResource MainTile}"/>
@@ -13,8 +13,8 @@
     
     <WrapPanel>
         <controls:Tile Count="30"/>
-        <controls:Tile  Count="110" />
-        <controls:Tile  Count="150" />
+        <controls:Tile Count="110" />
+        <controls:Tile Count="150" />
         <controls:Tile Count="350"/>
         <controls:Tile Count="..."/>
     </WrapPanel>

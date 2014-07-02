@@ -16,7 +16,7 @@ namespace FelicaData
 		/// <returns></returns>
         public bool Buy(
             int userId, 
-            int money, 
+            int money,
             int performerUserId = 0,
             string comment = null
             )
@@ -56,6 +56,7 @@ namespace FelicaData
                 };
 
                 user.Money -= money;
+
                 this.UpdateUser(user);
                 this.CreateMoneyHistory(history);
                 

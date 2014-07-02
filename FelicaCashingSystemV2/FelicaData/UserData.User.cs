@@ -41,15 +41,10 @@ namespace FelicaData
             {
                 // 同じ名前のユーザーが居るか確認
                 var sameName = this.GetUserByName(user.Name);
-                var sameCard = this.GetCard(card.Uid);
 
                 if (sameName != null)
                 {
                     throw new DatabaseException("既に同じ名前のユーザーが存在します。");
-                }
-                else if (sameCard != null)
-                {
-                    throw new DatabaseException("既に同じカードが登録されています。");
                 }
                 else
                 {
@@ -59,6 +54,13 @@ namespace FelicaData
                     {
                         if (card != null)
                         {
+                            var sameCard = this.GetCard(card.Uid);
+
+                            if (sameCard != null)
+                            {
+                                throw new DatabaseException("既に同じカードが登録されています。");
+                            }
+
                             card.UserId = user.Id;
                             this.CreateCard(card);
 
@@ -71,6 +73,11 @@ namespace FelicaData
                             {
                                 return user;
                             }
+                        }
+
+                        else
+                        {
+                            return user;
                         }
                     }
                 }

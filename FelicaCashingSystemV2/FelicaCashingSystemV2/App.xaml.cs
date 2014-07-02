@@ -151,7 +151,17 @@ namespace FelicaCashingSystemV2
             this.felica.FelicaCardSet += felica_FelicaCardSet;
 
             this.UserData = new FelicaData.UserData();
-            
+
+            /*
+            // Test code
+            this.UserData.CreateUser(new FelicaData.User
+            {
+                Name = "tester",
+                Email = "tester@tester.jp",
+                IsAdmin = true,
+                Password = "tester"
+            });
+            */
 
             this.Mailer = new FelicaMail.Mailer();
 

@@ -44,5 +44,21 @@ namespace WpfCommonds
             OnPropertyChanged(
                 propertyExpression.Select(ex => ((MemberExpression)ex.Body).Member.Name).ToArray());
         }
+
+        /// <summary>
+        /// メッセージボックスを表示する
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="title"></param>
+        public void ShowMessageBox(string message, string title = null)
+        {
+            Messenger.Default.Send<DialogMessage>(
+                this,
+                new DialogMessage
+                {
+                    Title = title,
+                    Message = message
+                });
+        }
     }
 }

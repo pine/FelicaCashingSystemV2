@@ -11,7 +11,7 @@ using WpfCommonds;
 
 namespace FelicaCashingSystemV2.Windows
 {
-    class MainWindowViewModel
+    class MainWindowViewModel : ViewModelBase
     {
         public MainWindowViewModel()
         {
@@ -37,6 +37,8 @@ namespace FelicaCashingSystemV2.Windows
                 throw new ArgumentOutOfRangeException("money");
             }
 
+
+
             // 購入処理
             if (App.Current.User != null)
             {
@@ -44,15 +46,15 @@ namespace FelicaCashingSystemV2.Windows
                 {
                     Debug.WriteLine("Buying succeed");
 
-                    MessageBox.Show("#");
+                    this.ShowMessageBox(
+                        "「 " + money + " 」 円の商品を購入しました。\n" +
+                        "残高は 「 " + (App.Current.User.Money - money) + " 」 円です。",
+                        "購入成功");
                 }
                 else
                 {
                     Debug.WriteLine("Buying error");
-
-                    MessageBox.Show("#");
-                    
-                    
+                    this.ShowMessageBox("商品の購入でエラーが発生しました。", "購入失敗");
                 }
             }
         }
