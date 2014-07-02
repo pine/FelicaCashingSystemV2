@@ -86,6 +86,7 @@
     <Compile Include="RavenModel.cs" />
     <Compile Include="User.cs" />
     <Compile Include="UserData.cs" />
+    <Compile Include="UserData.User.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

@@ -22,7 +22,6 @@ namespace FelicaCashingSystemV2
         public FelicaData.Card Card { get; private set; }
         public FelicaData.UserData UserData { get; private set; }
         public FelicaMail.Mailer Mailer { get; private set; }
-      
 
         public static new App Current {
             get

@@ -125,9 +125,12 @@ namespace FelicaCashingSystemV2.Views
             }
 
             // メールを送信
-            App.Current.Mailer.SendRegistered(this.Email, new RegisteredArgs
+            Task.Run(() =>
             {
-                Name = this.UserName
+                App.Current.Mailer.SendRegistered(this.Email, new RegisteredArgs
+                {
+                    Name = this.UserName
+                });
             });
 
             // 登録したユーザーでログイン

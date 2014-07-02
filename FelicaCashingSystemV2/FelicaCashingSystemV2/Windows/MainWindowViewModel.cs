@@ -10,7 +10,11 @@ namespace FelicaCashingSystemV2.Windows
     {
         public bool IsAdmin
         {
-            get { return false; }
+            get
+            {
+                return App.Current.User != null &&
+                    App.Current.User.IsAdmin;
+            }
         }
     }
 }
