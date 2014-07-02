@@ -8,7 +8,7 @@ using System.Windows;
 
 namespace FelicaCashingSystemV2
 {
-    class NotifyIcon : IDisposable
+    public class NotifyIcon : IDisposable
     {
         public event EventHandler<System.Windows.Forms.MouseEventArgs> Click;
         public event EventHandler ExitClick;
@@ -29,6 +29,16 @@ namespace FelicaCashingSystemV2
         public NotifyIcon(System.Drawing.Icon icon)
         {
             this.Initialize(icon);
+        }
+
+        public void ShowBalloonTip(
+            string title, 
+            string text, 
+            ToolTipIcon icon,
+            int timeout
+            )
+        {
+            this.notifyIcon.ShowBalloonTip(timeout, title, text, (System.Windows.Forms.ToolTipIcon)icon);
         }
 
         private void Initialize(System.Drawing.Icon icon)
@@ -146,5 +156,13 @@ namespace FelicaCashingSystemV2
         }
  
         #endregion
+
+        public enum ToolTipIcon
+        {
+            Error = System.Windows.Forms.ToolTipIcon.Error,
+            Info = System.Windows.Forms.ToolTipIcon.Info,
+            None = System.Windows.Forms.ToolTipIcon.None,
+            Warning = System.Windows.Forms.ToolTipIcon.Warning
+        }
     }
 }

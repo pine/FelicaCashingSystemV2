@@ -9,9 +9,9 @@ using WpfCommonds;
 
 namespace FelicaCashingSystemV2
 {
-    abstract class MoneyViewModelBase : FelicaViewModelBase
+    class MoneyViewModel : FelicaViewModelBase
     {
-        public MoneyViewModelBase()
+        public MoneyViewModel()
         {
             this.BuyCommand = new DelegateCommand<int>(this.Buy);
         }

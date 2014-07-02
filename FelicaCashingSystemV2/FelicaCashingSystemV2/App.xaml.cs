@@ -120,6 +120,31 @@ namespace FelicaCashingSystemV2
             this.ShowDialog<Windows.InformationWindow>();
         }
 
+        public void ShowProfileWindow()
+        {
+            this.ShowDialog<Windows.ProfileWindow>();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="title"></param>
+        /// <param name="text"></param>
+        /// <param name="icon"></param>
+        /// <param name="timeout">タイムアウトをミリ秒で指定します。</param>
+        public void ShowBalloonTip(
+            string title, 
+            string text, 
+            NotifyIcon.ToolTipIcon icon = NotifyIcon.ToolTipIcon.None,
+            int timeout = 20000
+            )
+        {
+            if (this.notifyIcon != null)
+            {
+                this.notifyIcon.ShowBalloonTip(title, text, icon, timeout);
+            }
+        }
+
         /// <summary>
         /// 表示されているウィンドウをすべて閉じる
         /// </summary>
@@ -146,6 +171,13 @@ namespace FelicaCashingSystemV2
             this.notifyIcon = new NotifyIcon(new Uri("pack://application:,,,/Resources/FelicaIcon.ico"));
             this.notifyIcon.Click += this.notifyIcon_Click;
             this.notifyIcon.ExitClick += this.notifyIcon_ExitClick;
+
+            this.ShowBalloonTip(
+                "起動中",
+                "Felica Cashing Sytem V2 を起動しています。しばらくお待ちください。",
+                NotifyIcon.ToolTipIcon.Info,
+                30000
+                );
 
             this.felica = new FelicaSharp.EasyFelicaReader();
             this.felica.FelicaCardSet += felica_FelicaCardSet;
@@ -183,6 +215,14 @@ namespace FelicaCashingSystemV2
             {
                 Debug.WriteLine(ee.Message);
             }
+            
+            Debug.WriteLine("Startup succeed");
+
+            this.ShowBalloonTip(
+                "起動完了",
+                "Felica Cashing Sytem V2 の起動が完了しました。",
+                NotifyIcon.ToolTipIcon.Info
+                );
         }
 
         private void Application_Exit(object sender, ExitEventArgs e)

@@ -79,9 +79,12 @@
     </Compile>
     <Compile Include="Views\RegisterNewViewModel.cs" />
     <Compile Include="Windows\LoginWindowViewModel.cs" />
+    <Compile Include="Windows\ProfileWindow.xaml.cs">
+      <DependentUpon>ProfileWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\MainWindowViewModel.cs" />
     <Compile Include="NotifyIcon.cs" />
-    <Compile Include="MoneyViewModelBase.cs" />
+    <Compile Include="MoneyViewModel.cs" />
     <Compile Include="Windows\RegisterWindow.xaml.cs">
       <DependentUpon>RegisterWindow.xaml</DependentUpon>
     </Compile>
@@ -124,6 +127,10 @@
     <Page Include="Windows\LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ProfileWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Windows\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

@@ -20,27 +20,19 @@ namespace FelicaCashingSystemV2.Windows
     /// <summary>
     /// MainWindow.xaml の相互作用ロジック
     /// </summary>
-    public partial class MainWindow : MetroWindow
+    public partial class ProfileWindow : MetroWindow
     {
-        public MainWindow()
+        public ProfileWindow()
         {
             InitializeComponent();
             
             this.SetEscClosableWindow();
-
-            this.DataContext = new MainWindowViewModel();
-            this.SetDialogMessageReceiver();
         }
 
         private void SystemInformationButton_Click(object sender, RoutedEventArgs e)
         {
             App.Current.ShowInformationWindow();
             
-        }
-
-        private void ProfileButton_Click(object sender, RoutedEventArgs e)
-        {
-            App.Current.ShowProfileWindow();
         }
     }
 }

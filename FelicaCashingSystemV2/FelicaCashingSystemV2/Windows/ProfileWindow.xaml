@@ -1,4 +1,4 @@
-﻿<controls:MetroWindow x:Class="FelicaCashingSystemV2.Windows.MainWindow"
+﻿<controls:MetroWindow x:Class="FelicaCashingSystemV2.Windows.ProfileWindow"
                       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
@@ -7,21 +7,13 @@
                       Height="480" Width="700"
                       WindowStartupLocation="CenterScreen"
                       Style="{StaticResource BasicWindow}" >
-    <controls:MetroWindow.RightWindowCommands>
-        <controls:WindowCommands>
-            <localControls:SystemInformationButton Click="SystemInformationButton_Click"/>
-            <localControls:ProfileButton Click="ProfileButton_Click"/>
-            <localControls:SettingButton Visibility="{Binding IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-        </controls:WindowCommands>
-    </controls:MetroWindow.RightWindowCommands>
-    
     <Grid Style="{StaticResource ContentRoot}">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="メイン"
+        <TextBlock Text="プロフィール"
                    Style="{StaticResource Heading1}" 
                    Grid.Row="0"/>
         

@@ -11,7 +11,7 @@ using WpfCommonds;
 
 namespace FelicaCashingSystemV2.Windows
 {
-    class MainWindowViewModel : MoneyViewModelBase
+    class MainWindowViewModel : MoneyViewModel
     {
 
     }
