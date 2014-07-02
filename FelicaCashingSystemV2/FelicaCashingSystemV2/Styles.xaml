@@ -81,10 +81,12 @@
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
     
+    
     <Style x:Key="MainTile"
            TargetType="{x:Type controls:Tile}"
            BasedOn="{StaticResource {x:Type controls:Tile}}">
         <Setter Property="Width" Value="150"/>
         <Setter Property="Height" Value="110"/>
     </Style>
+    
 </ResourceDictionary>

@@ -12,6 +12,11 @@ namespace FelicaData
     {
         protected IDocumentStore DocumentStore { get; set; }
 
+        /// <summary>
+        /// 変更フラグ
+        /// </summary>
+        private Dictionary<Type, bool> changedFlags = new Dictionary<Type, bool>();
+
         protected RavenData(string connectionStringName)
         {
             this.DocumentStore = new EmbeddableDocumentStore
@@ -47,7 +52,7 @@ namespace FelicaData
                 session.SaveChanges();
             }
 
-            this.OnChanged();
+            this.OnChanged(typeof(T));
         }
 
         protected List<T> Query<T>()
@@ -59,10 +64,52 @@ namespace FelicaData
         protected List<T> Query<T>(Func<T, bool> predicate)
             where T : class
         {
+            // 変更があった場合、書き込みを待機
+            if (this.changedFlags.ContainsKey(typeof(T)) &&
+                this.changedFlags[typeof(T)])
+            {
+                return this.QueryBlocking(predicate);
+            }
+
+            else
+            {
+                return this.QueryNonBlocking(predicate);
+            }
+        }
+
+        /// <summary>
+        /// 書き込みを待機してクエリを実行する
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        private List<T> QueryBlocking<T>(Func<T, bool> predicate)
+        {
+            using (var session = this.DocumentStore.OpenSession())
+            {
+                var result = session.Query<T>()
+                    .Customize(x => x.WaitForNonStaleResultsAsOfLastWrite()) // 書き込みを待機
+                    .Where(predicate)
+                    .ToList();
+
+                // 変更を書き込み済み
+                this.changedFlags[typeof(T)] = false;
+
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// 書き込みを待機せずクエリを実行する
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        private List<T> QueryNonBlocking<T>(Func<T, bool> predicate)
+        {
             using (var session = this.DocumentStore.OpenSession())
             {
                 return session.Query<T>()
-                    .Customize(x => x.WaitForNonStaleResultsAsOfLastWrite()) // 書き込みを待機
                     .Where(predicate)
                     .ToList();
             }
@@ -79,15 +126,18 @@ namespace FelicaData
             }
         }
 
+
         #region Changed Event
 
-        public EventHandler Changed;
+        public EventHandler<Type> Changed;
 
-        protected void OnChanged()
+        protected void OnChanged(Type type)
         {
+            this.changedFlags[type] = true;
+
             if (this.Changed != null)
             {
-                this.Changed(this, EventArgs.Empty);
+                this.Changed(this, type);
             }
         }
 
