@@ -66,6 +66,9 @@
     <Compile Include="Controls\SettingButton.xaml.cs">
       <DependentUpon>SettingButton.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ProfileButton.xaml.cs">
+      <DependentUpon>ProfileButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainBuyView.xaml.cs">
       <DependentUpon>MainBuyView.xaml</DependentUpon>
     </Compile>
@@ -92,6 +95,10 @@
     </Compile>
     <Compile Include="Views\VersionInformationViewModel.cs" />
     <Page Include="Controls\SettingButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ProfileButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

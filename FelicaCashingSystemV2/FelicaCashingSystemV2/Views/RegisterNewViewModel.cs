@@ -90,9 +90,11 @@ namespace FelicaCashingSystemV2.Views
                 return;
             }
 
-
+            string cardUid = App.Current.UnregisteredCard.Idm;
+            bool isAdmin =
+                FelicaCashingSystemV2.Properties.Settings.Default.AdminCardUids.Contains(cardUid);
             FelicaData.User registeredUser = null;
-
+            
             try
             {
                 // データベースに登録
@@ -101,12 +103,13 @@ namespace FelicaCashingSystemV2.Views
                     {
                         Name = this.UserName,
                         Email = this.Email,
-                        Password = password
+                        Password = password,
+                        IsAdmin = isAdmin
                     },
                     new FelicaData.Card
                     {
                         Name = "デフォルト",
-                        Uid = App.Current.UnregisteredCard.Idm
+                        Uid = cardUid
                     });
             }
             catch (FelicaData.DatabaseException e)

@@ -4,12 +4,13 @@
                       xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       xmlns:localControls="clr-namespace:FelicaCashingSystemV2.Controls"
                       xmlns:localViews="clr-namespace:FelicaCashingSystemV2.Views"
-                      Height="450" Width="650"
+                      Height="480" Width="700"
                       WindowStartupLocation="CenterScreen"
                       Style="{StaticResource BasicWindow}" >
     <controls:MetroWindow.RightWindowCommands>
         <controls:WindowCommands>
             <localControls:SystemInformationButton Click="SystemInformationButton_Click"/>
+            <localControls:ProfileButton/>
             <localControls:SettingButton Visibility="{Binding IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}}"/>
         </controls:WindowCommands>
     </controls:MetroWindow.RightWindowCommands>

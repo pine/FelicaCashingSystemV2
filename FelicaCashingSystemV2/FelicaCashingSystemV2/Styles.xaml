@@ -73,6 +73,16 @@
         </Setter>
     </Style>
 
+    <Style x:Key="TitleBarProfileIcon" TargetType="Rectangle"
+           BasedOn="{StaticResource TitleBarIcon}">
+        <Setter Property="OpacityMask">
+            <Setter.Value>
+                <VisualBrush Stretch="Fill"
+                             Visual="{StaticResource appbar_people_profile}" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="GridTableCellFirstColumn" TargetType="{x:Type FrameworkElement}">
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>

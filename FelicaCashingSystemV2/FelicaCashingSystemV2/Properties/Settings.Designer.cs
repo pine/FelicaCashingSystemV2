@@ -67,5 +67,16 @@ namespace FelicaCashingSystemV2.Properties {
                 return ((string)(this["MailFrom"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
+            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
+            "tring>01-16-04-00-97-0E-4C-0C</string>\r\n</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection AdminCardUids {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["AdminCardUids"]));
+            }
+        }
     }
 }

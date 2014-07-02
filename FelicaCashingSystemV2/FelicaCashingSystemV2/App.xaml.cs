@@ -152,6 +152,7 @@ namespace FelicaCashingSystemV2
             this.felica.FelicaCardSet += felica_FelicaCardSet;
 
             this.UserData = new FelicaData.UserData();
+            
 
             this.Mailer = new FelicaMail.Mailer();
 
@@ -230,6 +231,7 @@ namespace FelicaCashingSystemV2
                     "UserId = " + this.User.Id +
                     ", Name = " + this.User.Name +
                     ", Email = " + this.User.Email +
+                    ", IsAdmin = " + this.User.IsAdmin.ToString() +
                     ", Password = " + this.User.Password);
 
                 // メインウィンドウを表示

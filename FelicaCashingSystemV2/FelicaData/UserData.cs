@@ -38,8 +38,10 @@ namespace FelicaData
         /// <param name="user">新規作成するユーザーの情報</param>
         /// <returns>新規作成に成功した場合、作成したユーザー</returns>
         /// <exception cref="DatabaseException">ユーザーの作成でエラーが発生した場合</exception>
-        public User CreateUser(User user, Card card)
+        public User CreateUser(User user, Card card = null)
         {
+            if (user == null) { throw new ArgumentNullException("user"); }
+
             if (user.Name == null)
             {
                 throw new DatabaseException("ユーザー名が無効です。");
@@ -64,17 +66,20 @@ namespace FelicaData
 
                     if (user.Id > 0)
                     {
-                        card.UserId = user.Id;
-                        this.CreateCard(card);
+                        if (card != null)
+                        {
+                            card.UserId = user.Id;
+                            this.CreateCard(card);
 
-                        // カード登録失敗
-                        if (card.Id == 0)
-                        {
-                            this.DeleteUser(user.Id);
-                        }
-                        else
-                        {
-                            return user;
+                            // カード登録失敗
+                            if (card.Id == 0)
+                            {
+                                this.DeleteUser(user.Id);
+                            }
+                            else
+                            {
+                                return user;
+                            }
                         }
                     }
                 }
