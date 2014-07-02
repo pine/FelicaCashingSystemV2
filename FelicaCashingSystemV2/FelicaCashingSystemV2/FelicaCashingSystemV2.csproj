@@ -69,6 +69,7 @@
     <Compile Include="Controls\ProfileButton.xaml.cs">
       <DependentUpon>ProfileButton.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FelicaViewModelBase.cs" />
     <Compile Include="MetroWindowDialogMessageReceiver.cs" />
     <Compile Include="Views\MainBuyView.xaml.cs">
       <DependentUpon>MainBuyView.xaml</DependentUpon>
@@ -80,6 +81,7 @@
     <Compile Include="Windows\LoginWindowViewModel.cs" />
     <Compile Include="Windows\MainWindowViewModel.cs" />
     <Compile Include="NotifyIcon.cs" />
+    <Compile Include="MoneyViewModelBase.cs" />
     <Compile Include="Windows\RegisterWindow.xaml.cs">
       <DependentUpon>RegisterWindow.xaml</DependentUpon>
     </Compile>
