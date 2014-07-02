@@ -18,8 +18,8 @@ namespace FelicaData
         public int UserId { get; set; }
         public int PerformerUserId { get; set; }
         public bool IsCancel { get; set; }
+        public bool IsBuy { get; set; }
         public int Money { get; set; }
         public string Comment { get; set; }
-
     }
 }

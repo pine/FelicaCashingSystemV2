@@ -79,32 +79,6 @@ namespace FelicaData
             return null;
         }
 
-        public bool Buy(int userId, int money)
-        {
-            var user = this.GetUser(userId);
-
-            if (user != null)
-            {
-                // 履歴の追加
-                var history = new FelicaData.MoneyHistory
-                {
-                    UserId = userId,
-                    PerformerUserId = userId,
-                    Money = money
-                };
-
-                user.Money -= money;
-                this.UpdateUser(user);
-
-                if (this.CreateMoneyHistory(history) != null)
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
         public void UpdateUser(User user)
         {
             this.Update(user);

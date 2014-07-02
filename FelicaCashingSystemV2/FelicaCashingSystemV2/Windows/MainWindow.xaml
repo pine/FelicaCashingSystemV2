@@ -29,7 +29,11 @@
             <TabControl>
                 <TabItem Header="ホーム">
                     <WrapPanel>
-                        <controls:Tile Title="購入"  Count="110" Style="{StaticResource MainTile}"/>
+                        <controls:Tile Title="購入"
+                                       Count="110"
+                                       Style="{StaticResource MainTile}"
+                                       CommandParameter="110"
+                                       Command="{Binding BuyCommand}"/>
                     </WrapPanel>
                 </TabItem>
                 <TabItem Header="購入">

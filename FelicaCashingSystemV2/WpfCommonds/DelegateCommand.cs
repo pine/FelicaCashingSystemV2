@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
+using System.Reflection;
 
 namespace WpfCommonds
 {
@@ -111,8 +112,58 @@ namespace WpfCommonds
             {
                 return default(T);
             }
+
+            if (parameter is string && IS_VALUE_TYPE)
+            {
+                object result = ConvertTryParseType.TryParse<T>((string)parameter);
+
+                if (result != null)
+                {
+                    return (T)result;
+                }
+            }
+
             return (T)parameter;
         }
+
+
+        #region Convert TryParse Type
+
+        private static class ConvertTryParseType
+        {
+            // http://pullup.net/technical/csharp/index.html
+            public static object TryParse<T>(string str)
+            {
+                // 変換タイプ
+                Type classType = typeof(T); //←変換後の型。とりあえずintとする
+
+                // 変換後の値を取得するために、値を受け取るオブジェクトを作る
+                object ansObject = Activator.CreateInstance(classType);
+
+                // TryParse()に渡す引数を作る
+                object[] args = new object[] { str, ansObject }; // 文字列"12345"を数値化させる
+
+                // 型に対応するTryParseを実行
+                bool result = (bool)classType.InvokeMember(
+                    "TryParse",
+                    BindingFlags.InvokeMethod,
+                    null,
+                    null,
+                    args
+                    );
+
+                // 失敗したら入力に戻る
+                if (!result)
+                {
+                    return null;
+                }
+
+                // 変換に成功したら値を受け入れる
+                return args[1]; // objectで返す
+            }
+        }
+
+        #endregion
     }
 
     #endregion

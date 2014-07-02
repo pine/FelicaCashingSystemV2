@@ -76,26 +76,5 @@ namespace FelicaData
         }
 
         #endregion
-
-        #region Money Histories
-
-        public MoneyHistory CreateMoneyHistory(MoneyHistory history)
-        {
-            var user = this.GetUser(history.UserId);
-
-            if (user != null)
-            {
-                return this.Create(history);
-            }
-
-            return null;
-        }
-
-        public List<MoneyHistory> GetMoneyHistories(int userId)
-        {
-            return this.Query<MoneyHistory>(h => h.UserId == userId);
-        }
-
-        #endregion
     }
 }
