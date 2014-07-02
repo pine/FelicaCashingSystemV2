@@ -132,10 +132,10 @@ namespace WpfCommonds
         private static class ConvertTryParseType
         {
             // http://pullup.net/technical/csharp/index.html
-            public static object TryParse<T>(string str)
+            public static object TryParse<X>(string str)
             {
                 // 変換タイプ
-                Type classType = typeof(T); //←変換後の型。とりあえずintとする
+                Type classType = typeof(X); //←変換後の型。とりあえずintとする
 
                 // 変換後の値を取得するために、値を受け取るオブジェクトを作る
                 object ansObject = Activator.CreateInstance(classType);

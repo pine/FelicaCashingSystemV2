@@ -33,10 +33,13 @@ namespace FelicaCashingSystemV2
                 {
                     Debug.WriteLine("Buying succeed");
 
+                    App.Current.UpdateUser();
                     this.ShowMessageBox(
                         "「 " + money + " 」 円の商品を購入しました。\n" +
-                        "残高は 「 " + (App.Current.User.Money - money) + " 」 円です。",
+                        "残高は 「 " + App.Current.User.Money + " 」 円です。",
                         "購入成功");
+
+                    
                 }
                 else
                 {

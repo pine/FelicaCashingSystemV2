@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls;
 using WpfCommonds;
+using System.Diagnostics;
 
 namespace FelicaCashingSystemV2.Windows
 {
@@ -35,7 +36,6 @@ namespace FelicaCashingSystemV2.Windows
         private void SystemInformationButton_Click(object sender, RoutedEventArgs e)
         {
             App.Current.ShowInformationWindow();
-            
         }
 
         private void ProfileButton_Click(object sender, RoutedEventArgs e)

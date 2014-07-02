@@ -16,16 +16,30 @@
     </controls:MetroWindow.RightWindowCommands>
     
     <Grid Style="{StaticResource ContentRoot}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-
-        <TextBlock Text="メイン"
-                   Style="{StaticResource Heading1}" 
-                   Grid.Row="0"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
         
-        <ScrollViewer Grid.Row="1">
+        <Grid Margin="0,0,15,0" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="{Binding Name}" TextAlignment="Left" Grid.Row="0"/>
+            <TextBlock Text="さん" TextAlignment="Right" Grid.Row="1"/>
+            
+            <TextBlock TextAlignment="Center" Text="{Binding Money}" Grid.Row="2"/>
+            
+            <Image Source="{Binding AvatarSource}" Style="{StaticResource AvatarImage}" Grid.Row="3"/>
+            
+            
+        </Grid>
+        
+        <ScrollViewer Grid.Column="1">
             <TabControl>
                 <TabItem Header="ホーム">
                     <WrapPanel>

@@ -18,15 +18,36 @@ namespace FelicaCashingSystemV2
         private FelicaSharp.EasyFelicaReader felica = null;
 
         public FelicaSharp.EasyFelicaCardSetEventHandlerArgs UnregisteredCard { get; private set; }
-        public FelicaData.User User { get; private set; }
+        
         public FelicaData.Card Card { get; private set; }
         public FelicaData.UserData UserData { get; private set; }
         public FelicaMail.Mailer Mailer { get; private set; }
+
+        private FelicaData.User user = null;
+        public FelicaData.User User
+        {
+            get { return this.user; }
+            private set 
+            {
+                this.user = value;
+                this.OnUserChanged(value);
+            }
+        }
+
+        public event EventHandler<FelicaData.User> UserChanged;
 
         public static new App Current {
             get
             {
                 return (App)Application.Current;
+            }
+        }
+
+        public void UpdateUser()
+        {
+            if (this.User != null)
+            {
+                this.User = this.UserData.GetUser(this.User.Id);
             }
         }
 
@@ -122,7 +143,10 @@ namespace FelicaCashingSystemV2
 
         public void ShowProfileWindow()
         {
-            this.ShowDialog<Windows.ProfileWindow>();
+            if (this.User != null)
+            {
+                this.ShowDialog<Windows.ProfileWindow>();
+            }
         }
 
         /// <summary>
@@ -166,6 +190,14 @@ namespace FelicaCashingSystemV2
             this.User = null;
         }
 
+        protected virtual void OnUserChanged(FelicaData.User user)
+        {
+            if (this.UserChanged != null)
+            {
+                this.UserChanged(this, user);
+            }
+        }
+
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             this.notifyIcon = new NotifyIcon(new Uri("pack://application:,,,/Resources/FelicaIcon.ico"));
@@ -176,7 +208,7 @@ namespace FelicaCashingSystemV2
                 "起動中",
                 "Felica Cashing Sytem V2 を起動しています。しばらくお待ちください。",
                 NotifyIcon.ToolTipIcon.Info,
-                30000
+                30 * 1000
                 );
 
             this.felica = new FelicaSharp.EasyFelicaReader();
@@ -184,16 +216,19 @@ namespace FelicaCashingSystemV2
 
             this.UserData = new FelicaData.UserData();
 
-            /*
-            // Test code
-            this.UserData.CreateUser(new FelicaData.User
+#if DEBUG
+            try
             {
-                Name = "tester",
-                Email = "tester@tester.jp",
-                IsAdmin = true,
-                Password = "tester"
-            });
-            */
+                this.UserData.CreateUser(new FelicaData.User
+                {
+                    Name = "Tester User",
+                    Email = "tester@tester.jp",
+                    IsAdmin = true,
+                    Password = "tester"
+                });
+            }
+            catch (Exception) { }
+#endif
 
             this.Mailer = new FelicaMail.Mailer();
 
@@ -209,20 +244,26 @@ namespace FelicaCashingSystemV2
             try
             {
                 this.felica.Connect();
+
+                this.ShowBalloonTip(
+                    "起動完了",
+                    "Felica Cashing Sytem V2 の起動が完了しました。",
+                    NotifyIcon.ToolTipIcon.Info
+                    );
             }
 
             catch (FelicaSharp.FelicaException ee)
             {
                 Debug.WriteLine(ee.Message);
+
+                this.ShowBalloonTip(
+                    "警告",
+                    "カードリーダーが検出されませんでした。パスワードログインのみが可能です。",
+                    NotifyIcon.ToolTipIcon.Warning
+                    );
             }
             
             Debug.WriteLine("Startup succeed");
-
-            this.ShowBalloonTip(
-                "起動完了",
-                "Felica Cashing Sytem V2 の起動が完了しました。",
-                NotifyIcon.ToolTipIcon.Info
-                );
         }
 
         private void Application_Exit(object sender, ExitEventArgs e)

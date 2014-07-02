@@ -1,6 +1,7 @@
 ﻿<Application x:Class="FelicaCashingSystemV2.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:commons="clr-namespace:WpfCommonds;assembly=WpfCommonds"
              ShutdownMode="OnExplicitShutdown"
              Startup="Application_Startup" Exit="Application_Exit">
     <Application.Resources>
@@ -18,6 +19,7 @@
             </ResourceDictionary.MergedDictionaries>
 
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+            <commons:DualPasswordBoxMultiConverter x:Key="DualPasswordBoxMultiConverter"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

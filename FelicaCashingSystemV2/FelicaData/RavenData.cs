@@ -56,13 +56,13 @@ namespace FelicaData
         }
 
         protected List<T> Query<T>()
-            where T : class
+            where T : RavenModel
         {
             return this.Query<T>(x => true);
         }
 
         protected List<T> Query<T>(Func<T, bool> predicate)
-            where T : class
+            where T : RavenModel
         {
             // 変更があった場合、書き込みを待機
             if (this.changedFlags.ContainsKey(typeof(T)) &&
@@ -84,11 +84,13 @@ namespace FelicaData
         /// <param name="predicate"></param>
         /// <returns></returns>
         private List<T> QueryBlocking<T>(Func<T, bool> predicate)
+            where T: RavenModel
         {
             using (var session = this.DocumentStore.OpenSession())
             {
                 var result = session.Query<T>()
                     .Customize(x => x.WaitForNonStaleResultsAsOfLastWrite()) // 書き込みを待機
+                    .OrderBy(x => x.Id)
                     .Where(predicate)
                     .ToList();
 
@@ -106,6 +108,7 @@ namespace FelicaData
         /// <param name="predicate"></param>
         /// <returns></returns>
         private List<T> QueryNonBlocking<T>(Func<T, bool> predicate)
+            where T: RavenModel
         {
             using (var session = this.DocumentStore.OpenSession())
             {

@@ -23,5 +23,8 @@
   &lt;string&gt;01-16-04-00-97-0E-4C-0C&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
+    <Setting Name="AvatarSize" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">96</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

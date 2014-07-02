@@ -25,14 +25,10 @@ namespace FelicaCashingSystemV2.Windows
         public ProfileWindow()
         {
             InitializeComponent();
-            
             this.SetEscClosableWindow();
-        }
 
-        private void SystemInformationButton_Click(object sender, RoutedEventArgs e)
-        {
-            App.Current.ShowInformationWindow();
-            
+            this.DataContext = new ProfileWindowViewModel();
+            this.SetDialogMessageReceiver();
         }
     }
 }

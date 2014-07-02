@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="DelegateCommand.cs" />
     <Compile Include="DialogMessage.cs" />
+    <Compile Include="DualPasswordBoxMultiConverter.cs" />
     <Compile Include="EscClosableWindow.cs" />
     <Compile Include="MessageBase.cs" />
     <Compile Include="Messenger.cs" />

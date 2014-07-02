@@ -1,7 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib"
-                    xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro">
+                    xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                    xmlns:properties="clr-namespace:FelicaCashingSystemV2.Properties">
 
     <Style x:Key="BasicWindow" TargetType="{x:Type controls:MetroWindow}">
         <Setter Property="ResizeMode" Value="CanResizeWithGrip"/>
@@ -100,4 +101,9 @@
         <Setter Property="Height" Value="110"/>
     </Style>
     
+    <Style x:Key="AvatarImage"
+        TargetType="{x:Type Image}">
+        <Setter Property="Width" Value="{Binding Path=AvatarSize,Source={x:Static properties:Settings.Default}}"/>
+        <Setter Property="Height" Value="{Binding Path=AvatarSize,Source={x:Static properties:Settings.Default}}"/>
+    </Style>
 </ResourceDictionary>

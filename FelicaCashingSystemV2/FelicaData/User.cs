@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace FelicaData
 {
-    public class User : RavenModel
+    [Serializable]
+    public sealed class User : RavenModel
     {
         public User()
         {
@@ -15,6 +17,7 @@ namespace FelicaData
             this.Password = null;
             this.Money = 0;
             this.IsAdmin = false;
+            this.Avatar = null;
         }
 
         public string Name { get; set; }
@@ -22,6 +25,7 @@ namespace FelicaData
         public string Password { get; set; }
         public int Money { get; set; }
         public bool IsAdmin { get; set; }
+        public byte[] Avatar { get; set; }
 
         /// <summary>
         /// パスワードで認証を行います。
@@ -32,6 +36,17 @@ namespace FelicaData
         {
             return !string.IsNullOrWhiteSpace(this.Password) &&
                 this.Password == password;
+        }
+
+        /// <summary>
+        /// 同じ情報を持つユーザーの別インスタンスを返します。
+        /// </summary>
+        /// <returns></returns>
+        public User Clone()
+        {
+            var user = (User)this.MemberwiseClone();
+
+            return user;
         }
     }
 }

@@ -74,7 +74,7 @@ namespace FelicaData
             {
                 return this.Create(history);
             }
-
+            
             return null;
         }
 

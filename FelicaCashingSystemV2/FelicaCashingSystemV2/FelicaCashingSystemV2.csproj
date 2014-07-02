@@ -63,6 +63,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BitmapSerializer.cs" />
+    <Compile Include="BitmapSizeResizer.cs" />
+    <Compile Include="BitmapToBitmapSourceConverter.cs" />
     <Compile Include="Controls\SettingButton.xaml.cs">
       <DependentUpon>SettingButton.xaml</DependentUpon>
     </Compile>
@@ -71,6 +74,7 @@
     </Compile>
     <Compile Include="FelicaViewModelBase.cs" />
     <Compile Include="MetroWindowDialogMessageReceiver.cs" />
+    <Compile Include="PasswordBoxUtility.cs" />
     <Compile Include="Views\MainBuyView.xaml.cs">
       <DependentUpon>MainBuyView.xaml</DependentUpon>
     </Compile>
@@ -85,6 +89,7 @@
     <Compile Include="Windows\MainWindowViewModel.cs" />
     <Compile Include="NotifyIcon.cs" />
     <Compile Include="MoneyViewModel.cs" />
+    <Compile Include="Windows\ProfileWindowViewModel.cs" />
     <Compile Include="Windows\RegisterWindow.xaml.cs">
       <DependentUpon>RegisterWindow.xaml</DependentUpon>
     </Compile>
