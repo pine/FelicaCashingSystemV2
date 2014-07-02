@@ -51,6 +51,8 @@ namespace FelicaCashingSystemV2
                 }
 
                 var window = new T();
+                window.Topmost = true;
+
                 this.windows.Add(window);
 
                 if (isBlocking)
@@ -62,6 +64,8 @@ namespace FelicaCashingSystemV2
                 else
                 {
                     window.Show();
+                    window.Topmost = false;
+                    window.Activate();
                 }
             }));
         }
@@ -140,7 +144,7 @@ namespace FelicaCashingSystemV2
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            this.notifyIcon = new NotifyIcon("FelicaIcon.ico");
+            this.notifyIcon = new NotifyIcon(new Uri("pack://application:,,,/Resources/FelicaIcon.ico"));
             this.notifyIcon.Click += this.notifyIcon_Click;
             this.notifyIcon.ExitClick += this.notifyIcon_ExitClick;
 
@@ -173,18 +177,28 @@ namespace FelicaCashingSystemV2
 
         private void Application_Exit(object sender, ExitEventArgs e)
         {
+            this.CloseAllWindows();
+
             if (this.notifyIcon != null) { this.notifyIcon.Dispose(); }
             if (this.felica != null) { this.felica.Dispose(); }
 
             if (this.UserData != null) { this.UserData.Dispose(); }
+
         }
 
         private void notifyIcon_Click(object sender, EventArgs e)
         {
-            this.ShowLoginWindow();
-//            this.ShowRegisterWindow();
+            if (!this.IsShownWindow<Windows.MainWindow>())
+            {
+                this.ShowLoginWindow();
+            }
         }
 
+        /// <summary>
+        /// プログラムを終了する唯一のメソッド
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void notifyIcon_ExitClick(object sender, EventArgs e)
         {
             this.Shutdown();
@@ -194,7 +208,7 @@ namespace FelicaCashingSystemV2
         {
             Debug.WriteLine("felica_FelicaCardSet");
             Debug.WriteLine("Idm = " + e.Idm + ", Pmm = " + e.Pmm);
-            
+
             this.Card = this.UserData.GetCard(e.Idm);
             this.User = null;
 

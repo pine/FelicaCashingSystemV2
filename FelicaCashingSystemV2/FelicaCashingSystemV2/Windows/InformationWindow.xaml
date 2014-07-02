@@ -5,26 +5,37 @@
                       xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       xmlns:behaviours="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
                       xmlns:localViews="clr-namespace:FelicaCashingSystemV2.Views"
-                      Title="Felica Cashing System v2" Height="350" Width="525"                      
-                      
-                      
+                      Height="450" Width="650"                      
                       WindowStartupLocation="CenterScreen"
                       ShowMaxRestoreButton="False"
                       ShowMinButton="False"
                       Style="{StaticResource BasicWindow}">
     
-    <StackPanel Style="{StaticResource ContentRoot}">
-        <TextBlock Style="{StaticResource Heading1}">システム情報</TextBlock>
-        <TabControl>
-            <TabItem Header="バージョン">
-                <localViews:VersionInformationView/>
-            </TabItem>
-            <TabItem Header="更新情報">
-                <localViews:ReadonlyTextFileView Source="Texts\UpdateHistory.txt"/>
-            </TabItem>
-            <TabItem Header="謝辞">
-                <localViews:ReadonlyTextFileView Source="Texts\Thanks.txt"/>
-            </TabItem>
-        </TabControl>
-    </StackPanel>
+    <Grid Style="{StaticResource ContentRoot}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="システム情報"
+                   Style="{StaticResource Heading1}"
+                   Grid.Row="0"/>
+        
+        <ScrollViewer Grid.Row="1">
+            <TabControl>
+                <TabItem Header="バージョン">
+                    <localViews:VersionInformationView/>
+                </TabItem>
+                <TabItem Header="更新情報">
+                    <localViews:ReadonlyTextFileView Source="Texts\UpdateHistory.txt"/>
+                </TabItem>
+                <TabItem Header="謝辞">
+                    <localViews:ReadonlyTextFileView Source="Texts\Thanks.txt"/>
+                </TabItem>
+                <TabItem Header="利用規約">
+                    <localViews:ReadonlyTextFileView Source="Texts\Rules.txt"/>
+                </TabItem>
+            </TabControl>
+        </ScrollViewer>
+    </Grid>
 </controls:MetroWindow>

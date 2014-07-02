@@ -1,1 +1,11 @@
-﻿謝辞
+﻿本アプリケーションを作成するにあたり、以下のフレームワーク、及びライブラリを使用しています。この場を借りてお礼申し上げます。
+
+★ フレームワーク
+ ・ .NET Framework 4.5
+ ・ WPF (Windows Presentation Foundation)
+
+★ ライブラリ
+ ・ MahApps.Metro
+ ・ RavenDB
+ ・ iTextSharp
+ ・ Adobe Acrobat 7.0 Browser Control Type Library 1.0

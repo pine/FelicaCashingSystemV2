@@ -4,7 +4,7 @@
                       xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       xmlns:localControls="clr-namespace:FelicaCashingSystemV2.Controls"
                       xmlns:localViews="clr-namespace:FelicaCashingSystemV2.Views"
-                      Height="400" Width="600"
+                      Height="450" Width="650"
                       WindowStartupLocation="CenterScreen"
                       Style="{StaticResource BasicWindow}" >
     <controls:MetroWindow.RightWindowCommands>
@@ -14,23 +14,33 @@
         </controls:WindowCommands>
     </controls:MetroWindow.RightWindowCommands>
     
-    <StackPanel Style="{StaticResource ContentRoot}">
-        <TextBlock Style="{StaticResource Heading1}">メイン</TextBlock>
-        <TabControl>
-            <TabItem Header="ホーム">
-                <WrapPanel>
-                    <controls:Tile Title="購入"  Count="110" Style="{StaticResource MainTile}"/>
-                </WrapPanel>
-            </TabItem>
-            <TabItem Header="購入">
-                <localViews:MainBuyView/>
-            </TabItem>
-            <TabItem Header="入金">
-            </TabItem>
-            <TabItem Header="出金">
-            </TabItem>
-            <TabItem Header="履歴">
-            </TabItem>
-        </TabControl>
-    </StackPanel>
+    <Grid Style="{StaticResource ContentRoot}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="メイン"
+                   Style="{StaticResource Heading1}" 
+                   Grid.Row="0"/>
+        
+        <ScrollViewer Grid.Row="1">
+            <TabControl>
+                <TabItem Header="ホーム">
+                    <WrapPanel>
+                        <controls:Tile Title="購入"  Count="110" Style="{StaticResource MainTile}"/>
+                    </WrapPanel>
+                </TabItem>
+                <TabItem Header="購入">
+                    <localViews:MainBuyView/>
+                </TabItem>
+                <TabItem Header="入金">
+                </TabItem>
+                <TabItem Header="出金">
+                </TabItem>
+                <TabItem Header="履歴">
+                </TabItem>
+            </TabControl>
+        </ScrollViewer>
+    </Grid>
 </controls:MetroWindow>

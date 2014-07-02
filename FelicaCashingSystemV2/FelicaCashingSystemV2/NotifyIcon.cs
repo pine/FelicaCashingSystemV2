@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace FelicaCashingSystemV2
 {
@@ -15,12 +17,26 @@ namespace FelicaCashingSystemV2
         private System.Windows.Forms.ContextMenuStrip menuStrip = null;
         private System.Windows.Forms.ToolStripMenuItem exitItem = null;
 
-        public NotifyIcon(string iconFileName)
+        public NotifyIcon(Uri iconUri)
+        {
+            using (Stream iconStream = Application.GetResourceStream(iconUri).Stream)
+            {
+                System.Drawing.Icon icon = new System.Drawing.Icon(iconStream);
+                this.Initialize(icon);
+            }
+        }
+
+        public NotifyIcon(System.Drawing.Icon icon)
+        {
+            this.Initialize(icon);
+        }
+
+        private void Initialize(System.Drawing.Icon icon)
         {
             this.notifyIcon = new System.Windows.Forms.NotifyIcon();
 
             this.notifyIcon.Text = SystemInformation.AppName;
-            this.notifyIcon.Icon = new System.Drawing.Icon(iconFileName);
+            this.notifyIcon.Icon = icon;
             this.notifyIcon.Visible = true;
             this.notifyIcon.MouseClick += this.notifyIcon_MouseClick;
             this.menuStrip = new System.Windows.Forms.ContextMenuStrip();

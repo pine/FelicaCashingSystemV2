@@ -8,6 +8,7 @@
         <Setter Property="GlowBrush" Value="{DynamicResource AccentColorBrush}"/>
         <Setter Property="WindowTransitionsEnabled" Value="False"/>
         <Setter Property="Title" Value="Felica Cashing System V2"/>
+        <Setter Property="Icon" Value="pack://application:,,,/Resources/FelicaIcon.ico"/>
     </Style>
     
     <Style x:Key="ContentRoot" TargetType="{x:Type Panel}">
