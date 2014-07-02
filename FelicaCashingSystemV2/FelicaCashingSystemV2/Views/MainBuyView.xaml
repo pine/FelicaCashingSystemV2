@@ -12,9 +12,10 @@
     </UserControl.Resources>
     
     <WrapPanel>
-        <controls:Tile Title="Enter"  Count="110" />
-        <controls:Tile Title="3" Count="30"/>
-        <controls:Tile Title="O" Count="350"/>
+        <controls:Tile Count="30"/>
+        <controls:Tile  Count="110" />
+        <controls:Tile  Count="150" />
+        <controls:Tile Count="350"/>
         <controls:Tile Count="..."/>
     </WrapPanel>
 </UserControl>

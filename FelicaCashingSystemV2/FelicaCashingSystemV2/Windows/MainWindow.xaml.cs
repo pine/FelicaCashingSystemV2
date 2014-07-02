@@ -32,6 +32,8 @@ namespace FelicaCashingSystemV2.Windows
         private void SystemInformationButton_Click(object sender, RoutedEventArgs e)
         {
             App.Current.ShowInformationWindow();
+            
+            
         }
     }
 }

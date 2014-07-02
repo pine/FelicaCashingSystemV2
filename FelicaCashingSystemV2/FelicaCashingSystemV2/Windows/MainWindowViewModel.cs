@@ -4,7 +4,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
+using MahApps.Metro.Controls;
 using WpfCommonds;
 
 namespace FelicaCashingSystemV2.Windows
@@ -35,7 +37,24 @@ namespace FelicaCashingSystemV2.Windows
                 throw new ArgumentOutOfRangeException("money");
             }
 
-            
+            // 購入処理
+            if (App.Current.User != null)
+            {
+                if (App.Current.UserData.Buy(App.Current.User.Id, money))
+                {
+                    Debug.WriteLine("Buying succeed");
+
+                    MessageBox.Show("#");
+                }
+                else
+                {
+                    Debug.WriteLine("Buying error");
+
+                    MessageBox.Show("#");
+                    
+                    
+                }
+            }
         }
     }
 }
