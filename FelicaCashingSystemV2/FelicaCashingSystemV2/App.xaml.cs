@@ -196,49 +196,37 @@ namespace FelicaCashingSystemV2
             Debug.WriteLine("Idm = " + e.Idm + ", Pmm = " + e.Pmm);
             
             this.Card = this.UserData.GetCard(e.Idm);
+            this.User = null;
 
+            // カードが存在する場合
             if (this.Card != null)
             {
+                Debug.WriteLine(
+                    "CardId = " + this.Card.Id +
+                    ", Name = " + this.Card.Name +
+                    ", UserId = " + this.Card.UserId);
+
                 this.User = this.UserData.GetUser(this.Card.UserId);
             }
-            else
-            {
-                this.User = null;
-            }
 
+            // ユーザーが存在する場合
             if (this.User != null)
             {
-                Debug.WriteLine("UserName = " + this.User.Name +
+                Debug.WriteLine(
+                    "UserId = " + this.User.Id +
+                    ", Name = " + this.User.Name +
+                    ", Email = " + this.User.Email +
                     ", Password = " + this.User.Password);
 
-                this.User.Password = "password";
-                this.UserData.UpdateUser(this.User);
-            }
-
-            // ユーザーが存在しない場合
-            if (this.User == null)
-            {
-                this.ShowRegisterWindow(e);
-
-                // Test code
-                /*
-                this.User = this.UserData.CreateUser(new FelicaData.User
-                {
-                    Name = "MIZUNE Pine"
-                });
-
-                this.Card = this.UserData.CreateCard(new FelicaData.Card
-                {
-                    Name = "学生証",
-                    Uid = e.Idm,
-                    UserId = this.User.Id
-                });
-                */
+                // メインウィンドウを表示
+                this.ShowMainWindow(this.User);
             }
             else
             {
-                this.ShowMainWindow(this.User);
+                // 登録ウィンドウを表示
+                this.ShowRegisterWindow(e);
             }
+
         }
 
     }
