@@ -246,7 +246,21 @@ namespace FelicaCashingSystemV2
             this.felica = new FelicaSharp.EasyFelicaReader();
             this.felica.FelicaCardSet += felica_FelicaCardSet;
 
-            this.UserData = new FelicaData.UserData();
+            try
+            {
+                this.UserData = new FelicaData.UserData();
+            }
+            catch (FelicaData.DatabaseException dbe)
+            {
+                MessageBox.Show(
+                    dbe.Message,
+                    "起動に失敗しました",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error
+                    );
+
+                this.Shutdown(1);
+            }
 
 #if DEBUG
             try

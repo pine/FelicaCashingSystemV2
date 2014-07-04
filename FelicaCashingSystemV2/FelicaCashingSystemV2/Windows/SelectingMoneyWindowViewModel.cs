@@ -38,11 +38,21 @@ namespace FelicaCashingSystemV2.Windows
             }
         }
 
+        private int executeTryCount = 0;
+
         public ICommand ExecuteCommand { get; private set; }
         private void Execute()
         {
             int money = 0;
             this.ErrorMessage = string.Empty;
+
+            ++executeTryCount;
+            if (executeTryCount > 5)
+            {
+                this.ErrorMessage = "そろそろ遊ぶのはやめてください。";
+                executeTryCount = 0;
+                return;
+            }
 
             try
             {
@@ -51,7 +61,13 @@ namespace FelicaCashingSystemV2.Windows
 
             catch (FormatException)
             {
-                this.ErrorMessage = "金額は、数値で指定してください。";
+                this.ErrorMessage = "金額は、整数で指定してください。";
+                return;
+            }
+
+            catch (OverflowException)
+            {
+                this.ErrorMessage = "金額が大きすぎます。";
                 return;
             }
 
@@ -61,8 +77,9 @@ namespace FelicaCashingSystemV2.Windows
                 return;
             }
 
+            this.executeTryCount = 0;
             this.ShowConfirmDialog(
-                "本当に 「 " + this.Money + " 」 円でよろしいですか?",
+                "本当に 「 " + money.ToCommaStringAbs() + " 」 円でよろしいですか?",
                 "金額確認",
                 (result) =>
                 {

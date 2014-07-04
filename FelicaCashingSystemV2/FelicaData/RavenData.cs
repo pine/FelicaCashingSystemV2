@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Raven.Client;
 using Raven.Client.Embedded;
+using System.Diagnostics;
 
 namespace FelicaData
 {
@@ -17,6 +18,11 @@ namespace FelicaData
         /// </summary>
         private Dictionary<Type, bool> changedFlags = new Dictionary<Type, bool>();
 
+        /// <summary>
+        /// データベースを初期化します。
+        /// </summary>
+        /// <param name="connectionStringName"></param>
+        /// <exception cref="FelicaData.DatabaseException">データベースの初期化に失敗した場合</exception>
         protected RavenData(string connectionStringName)
         {
             this.DocumentStore = new EmbeddableDocumentStore
@@ -24,7 +30,15 @@ namespace FelicaData
                 ConnectionStringName = connectionStringName
             };
 
-            this.DocumentStore.Initialize(); // 初期化は時間が掛かる
+            try
+            {
+                this.DocumentStore.Initialize(); // 初期化は時間が掛かる
+            }
+            catch (InvalidOperationException e)
+            {
+                Debug.WriteLine(e);
+                throw new DatabaseException("データベースの初期化に失敗しました。");
+            }
         }
 
         protected T Create<T>(T data)
