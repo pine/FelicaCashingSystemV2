@@ -16,7 +16,7 @@ namespace FelicaCashingSystemV2
         public static BitmapSource ToBitmapSource(this System.Drawing.Bitmap bitmap)
         {
             var hBitmap = bitmap.GetHbitmap();
-
+            
             BitmapSource source;
             try
             {

@@ -97,7 +97,6 @@ namespace FelicaCashingSystemV2.Windows
         public ICommand SaveBasicProfileCommand { get; private set; }
         private void SaveBasicProfile(PasswordBox[] passwordBoxes)
         {
-
             this.ErrorMessage = string.Empty;
 
             if (string.IsNullOrWhiteSpace(this.Name))
@@ -154,11 +153,15 @@ namespace FelicaCashingSystemV2.Windows
         private void SelectFile()
         {
             Debug.WriteLine("SelectFile");
-            this.ErrorMessage = "";
-            
-            var result= this.ShowOpenFileDialog();
-            
-            if (result != null)
+            this.ErrorMessage = string.Empty;
+
+            var filter = Properties.Settings.Default.ImageFileFilter; // 画像ファイル
+            var result = this.ShowOpenFileDialog(filter);
+
+            // キャンセルされた場合
+            if (result == null) { return; }
+
+            try
             {
                 using (var stream = new FileStream(result.FileName, FileMode.Open, FileAccess.Read))
                 {
@@ -174,11 +177,22 @@ namespace FelicaCashingSystemV2.Windows
                     {
                         Debug.WriteLine(e.Message);
                         this.ErrorMessage = "対応していない画像形式です。";
+                        return;
                     }
                 }
             }
+
+            catch (Exception)
+            {
+                this.ErrorMessage = "ファイルの読み込みに失敗しました。";
+                return;
+            }
+            
         }
 
+        /// <summary>
+        /// 設定したアバターを保存するコマンドです。
+        /// </summary>
         public ICommand SaveAvatarCommand { get; private set; }
         private void SaveAvatar()
         {
@@ -198,7 +212,6 @@ namespace FelicaCashingSystemV2.Windows
             App.Current.UpdateUser();
 
             this.ShowMessageBox("アバターを更新しました。", "保存成功");
-
             this.NewAvatar = null;
         }
     }

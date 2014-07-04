@@ -26,5 +26,8 @@
     <Setting Name="AvatarSize" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">96</Value>
     </Setting>
+    <Setting Name="ImageFileFilter" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">画像ファイル|*.jpg;*.png;*.gif;*.bmp;*.tiff|すべてのファイル|*.*</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
