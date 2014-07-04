@@ -78,10 +78,14 @@
     <Compile Include="Views\MainBuyView.xaml.cs">
       <DependentUpon>MainBuyView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\SideProfileViewModel.cs" />
     <Compile Include="Views\RegisterNewView.xaml.cs">
       <DependentUpon>RegisterNewView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RegisterNewViewModel.cs" />
+    <Compile Include="Views\SideProfileView.xaml.cs">
+      <DependentUpon>SideProfileView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\LoginWindowViewModel.cs" />
     <Compile Include="Windows\ProfileWindow.xaml.cs">
       <DependentUpon>ProfileWindow.xaml</DependentUpon>
@@ -124,6 +128,10 @@
     <Page Include="Views\RegisterNewView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SideProfileView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Windows\InformationWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

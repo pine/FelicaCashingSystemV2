@@ -20,35 +20,11 @@
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        
+
         <Grid Margin="0,0,15,0" Grid.Column="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-            </Grid.RowDefinitions>
-
-            
-            <TextBlock TextAlignment="Center" Grid.Row="0">
-                <TextBlock Text="{Binding Name}"/>
-                <TextBlock Text="さん"/>
-            </TextBlock>
-
-            <TextBlock TextAlignment="Center" FontSize="17" Grid.Row="1">
-                <TextBlock.Foreground>
-                    <SolidColorBrush Color="{Binding Money,Converter={StaticResource MinusToColorConverter}}"/>
-                </TextBlock.Foreground>
-                
-                <TextBlock Text="{Binding Money,StringFormat=#\,0}"/>
-                <TextBlock Text="円"/>
-            </TextBlock>
-            
-            <Image Source="{Binding AvatarSource}" Style="{StaticResource AvatarImage}" Grid.Row="3"/>
-            
-            
+            <localViews:SideProfileView/>
         </Grid>
-        
+
         <ScrollViewer Grid.Column="1">
             <TabControl>
                 <TabItem Header="ホーム">
