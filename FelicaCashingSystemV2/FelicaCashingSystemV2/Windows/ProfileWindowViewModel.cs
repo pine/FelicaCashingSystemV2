@@ -15,7 +15,7 @@ using WpfCommonds;
 
 namespace FelicaCashingSystemV2.Windows
 {
-    class ProfileWindowViewModel : FelicaViewModelBase
+    class ProfileWindowViewModel : MetroWindowViewModelBase
     {
         private FelicaData.User user = App.Current.User.Clone();
 

@@ -6,18 +6,33 @@
                       Height="450" Width="670"
                       WindowStartupLocation="CenterScreen"
                       Style="{StaticResource BasicWindow}">
-    <StackPanel Style="{StaticResource ContentRoot}">
-        <TextBlock Style="{StaticResource Heading1}">ユーザー登録</TextBlock>
-        <TabControl>
+    <Grid Style="{StaticResource ContentRoot}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <TextBlock Style="{StaticResource Heading1}"
+                   Text="ユーザー登録"
+                   Grid.Row="0"/>
+        
+        <TabControl Grid.Row="1">
             <TabItem Header="新規登録">
-                <localViews:RegisterNewView/>
+                <ScrollViewer>
+                    <localViews:RegisterNewView/>
+                </ScrollViewer>
             </TabItem>
+                
             <TabItem Header="カードの関連付け">
-                <localViews:CardAssociationInfoView/>
+                <ScrollViewer>
+                    <localViews:CardAssociationInfoView/>
+                </ScrollViewer>
             </TabItem>
+            <!--
             <TabItem Header="利用規約">
                 <localViews:ReadonlyTextFileView Source=".\Texts\Rules.txt"/>
             </TabItem>
+            -->
         </TabControl>
-    </StackPanel>
+    </Grid>
 </controls:MetroWindow>

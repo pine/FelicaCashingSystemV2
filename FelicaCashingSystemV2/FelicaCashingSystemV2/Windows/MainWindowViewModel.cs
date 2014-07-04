@@ -14,5 +14,21 @@ namespace FelicaCashingSystemV2.Windows
 {
     class MainWindowViewModel : MoneyViewModel
     {
+
+        public MainWindowViewModel()
+        {
+            this.MainBuyCommand = new DelegateCommand<int>(this.MainBuy);
+        }
+
+        public ICommand MainBuyCommand
+        {
+            get;
+            private set;
+        }
+
+        private void MainBuy(int money)
+        {
+            this.Buy(money, false);
+        }
     }
 }

@@ -20,22 +20,32 @@
         <TextBlock Text="システム情報"
                    Style="{StaticResource Heading1}"
                    Grid.Row="0"/>
-        
-        <ScrollViewer Grid.Row="1">
-            <TabControl>
-                <TabItem Header="バージョン">
+
+        <TabControl Grid.Row="1">
+            <TabItem Header="バージョン">
+                <ScrollViewer>
                     <localViews:VersionInformationView/>
-                </TabItem>
-                <TabItem Header="更新情報">
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="更新情報">
+                <ScrollViewer>
                     <localViews:ReadonlyTextFileView Source="Texts\UpdateHistory.txt"/>
-                </TabItem>
-                <TabItem Header="謝辞">
-                    <localViews:ReadonlyTextFileView Source="Texts\Thanks.txt"/>
-                </TabItem>
-                <TabItem Header="利用規約">
+                </ScrollViewer>
+            </TabItem>
+
+            <!--
+            <TabItem Header="利用規約">
+                <ScrollViewer>
                     <localViews:ReadonlyTextFileView Source="Texts\Rules.txt"/>
-                </TabItem>
-            </TabControl>
-        </ScrollViewer>
+                </ScrollViewer>
+            </TabItem>
+            -->
+            
+            <TabItem Header="謝辞">
+                <ScrollViewer>
+                    <localViews:ReadonlyTextFileView Source="Texts\Thanks.txt"/>
+                </ScrollViewer>
+            </TabItem>
+        </TabControl>
     </Grid>
 </controls:MetroWindow>

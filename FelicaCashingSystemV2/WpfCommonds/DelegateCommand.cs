@@ -121,6 +121,11 @@ namespace WpfCommonds
                 {
                     return (T)result;
                 }
+
+                else
+                {
+                    return default(T);
+                }
             }
 
             return (T)parameter;

@@ -45,21 +45,6 @@ namespace WpfCommonds
                 propertyExpression.Select(ex => ((MemberExpression)ex.Body).Member.Name).ToArray());
         }
 
-        /// <summary>
-        /// メッセージボックスを表示する
-        /// </summary>
-        /// <param name="message"></param>
-        /// <param name="title"></param>
-        public void ShowMessageBox(string message, string title = null)
-        {
-            Messenger.Default.Send(
-                this,
-                new DialogMessage
-                {
-                    Title = title,
-                    Message = message
-                });
-        }
 
         /// <summary>
         /// ファイルを開くダイアログを表示する
@@ -85,6 +70,12 @@ namespace WpfCommonds
             }
 
             return null;
+        }
+
+        public void RegisterMessenger<T>(MessengerDelegate<T> d)
+            where T: MessageBase
+        {
+            Messenger.Default.Register<T>(this, d);
         }
     }
 }

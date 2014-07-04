@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
 
@@ -12,27 +13,21 @@ namespace WpfCommonds
     [ValueConversion(typeof(string), typeof(Color))]
     public class MinusToColorConverter : IValueConverter
     {
-        public static readonly Color Color = Colors.Red;
+        public static readonly Color RedColor = Colors.Red;
+        public static readonly Color NormalColor = SystemColors.ControlTextColor;
 
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            var color = MinusToColorConverter.Color;
-
-            if (parameter is Color)
-            {
-                color = (Color)parameter;
-            }
-
             var intValue = System.Convert.ToInt32(value);
 
             if (intValue < 0)
             {
-                return color;
+                return RedColor;
             }
 
             else
             {
-                return null;
+                return NormalColor;
             }
         }
 

@@ -24,5 +24,6 @@ namespace FelicaCashingSystemV2.Views
         {
             InitializeComponent();
         }
+
     }
 }

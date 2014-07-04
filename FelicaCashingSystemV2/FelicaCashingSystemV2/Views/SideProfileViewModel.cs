@@ -2,7 +2,7 @@
 
 namespace FelicaCashingSystemV2.Views
 {
-    class SideProfileViewModel : FelicaViewModelBase
+    class SideProfileViewModel : MetroWindowViewModelBase
     {
         public SideProfileViewModel()
         {

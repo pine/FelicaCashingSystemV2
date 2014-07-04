@@ -30,10 +30,11 @@ namespace FelicaCashingSystemV2.Windows
             this.DataContext = new ProfileWindowViewModel();
             this.SetDialogMessageReceiver();
             this.SetOpenFileDialogReceiver();
-
-            this.SelectAvatarTab();
         }
 
+        /// <summary>
+        /// アバタータブを開く
+        /// </summary>
         public void SelectAvatarTab()
         {
             this.tabControl.SelectedItem = this.tabItemAvatar;

@@ -66,14 +66,18 @@
     <Compile Include="BitmapSerializer.cs" />
     <Compile Include="BitmapSizeResizer.cs" />
     <Compile Include="BitmapToBitmapSourceConverter.cs" />
+    <Compile Include="CommaSeparatedIntegerExtension.cs" />
     <Compile Include="Controls\SettingButton.xaml.cs">
       <DependentUpon>SettingButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ProfileButton.xaml.cs">
       <DependentUpon>ProfileButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FelicaViewModelBase.cs" />
-    <Compile Include="DialogMessageReceiver.cs" />
+    <Compile Include="MetroDialogMessage.cs" />
+    <Compile Include="MetroWindowViewModelBase.cs" />
+    <Compile Include="MetroDialogMessageReceiver.cs" />
+    <Compile Include="Windows\MainWindowMessage.cs" />
+    <Compile Include="Windows\SelectingMoneyMessage.cs" />
     <Compile Include="MouseButtonEventArgsUtility.cs" />
     <Compile Include="PasswordBoxUtility.cs" />
     <Compile Include="Views\MainBuyView.xaml.cs">
@@ -95,6 +99,9 @@
     <Compile Include="NotifyIcon.cs" />
     <Compile Include="MoneyViewModel.cs" />
     <Compile Include="Windows\ProfileWindowViewModel.cs" />
+    <Compile Include="Windows\SelectingMoneyWindow.xaml.cs">
+      <DependentUpon>SelectingMoneyWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\RegisterWindow.xaml.cs">
       <DependentUpon>RegisterWindow.xaml</DependentUpon>
     </Compile>
@@ -110,6 +117,7 @@
       <DependentUpon>VersionInformationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\VersionInformationViewModel.cs" />
+    <Compile Include="Windows\SelectingMoneyWindowViewModel.cs" />
     <Page Include="Controls\SettingButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -167,6 +175,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Windows\SelectingMoneyWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Windows\RegisterWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

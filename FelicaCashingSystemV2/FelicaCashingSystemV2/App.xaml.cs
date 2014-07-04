@@ -60,7 +60,8 @@ namespace FelicaCashingSystemV2
         public void ShowDialog<T>(
             bool isSingle = false,
             bool isBlocking = true,
-            Action<T> beforeAction = null
+            Action<T> beforeAction = null,
+            Action<T> afterAction = null
             )
             where T: Window, new()
         {
@@ -83,6 +84,11 @@ namespace FelicaCashingSystemV2
                 {                    
                     window.ShowDialog();
                     this.windows.Remove(window);
+
+                    if (afterAction != null)
+                    {
+                        afterAction(window);
+                    }
                 }
 
                 else
@@ -166,6 +172,15 @@ namespace FelicaCashingSystemV2
             }
         }
 
+        public void ShowSelectingMoneyWindow(Action<int> cb)
+        {
+            this.ShowDialog<Windows.SelectingMoneyWindow>(
+                afterAction: (window) =>
+                {
+                    cb(window.Money);
+                });
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -239,7 +254,7 @@ namespace FelicaCashingSystemV2
                 this.UserData.CreateUser(new FelicaData.User
                 {
                     Id = 1,
-                    Name = "Tester User",
+                    Name = "テスト用ユーザー",
                     Email = "tester@tester.jp",
                     IsAdmin = true,
                     Password = "tester"

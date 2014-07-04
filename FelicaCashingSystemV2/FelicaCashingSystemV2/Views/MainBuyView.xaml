@@ -8,7 +8,11 @@
              d:DesignHeight="300" d:DesignWidth="700">
     <UserControl.Resources>
         <Style TargetType="{x:Type controls:Tile}"
-               BasedOn="{StaticResource MainTile}"/>
+               BasedOn="{StaticResource MainTile}">
+            <Setter Property="Command" Value="{Binding BuyCommand}"/>
+            <Setter Property="CommandParameter" Value="{Binding Count,RelativeSource={x:Static RelativeSource.Self}}"/>
+            <Setter Property="Title" Value="購入"/>
+        </Style>
     </UserControl.Resources>
     
     <WrapPanel>
@@ -16,6 +20,6 @@
         <controls:Tile Count="110" />
         <controls:Tile Count="150" />
         <controls:Tile Count="350"/>
-        <controls:Tile Count="..."/>
+        <controls:Tile Count="..." CommandParameter="-1"/>
     </WrapPanel>
 </UserControl>

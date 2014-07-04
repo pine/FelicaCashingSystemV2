@@ -25,27 +25,51 @@
             <localViews:SideProfileView/>
         </Grid>
 
-        <ScrollViewer Grid.Column="1">
-            <TabControl>
-                <TabItem Header="ホーム">
-                    <WrapPanel>
-                        <controls:Tile Title="購入"
-                                       Count="110"
-                                       Style="{StaticResource MainTile}"
-                                       CommandParameter="110"
-                                       Command="{Binding BuyCommand}"/>
-                    </WrapPanel>
-                </TabItem>
-                <TabItem Header="購入">
-                    <localViews:MainBuyView/>
-                </TabItem>
-                <TabItem Header="入金">
-                </TabItem>
-                <TabItem Header="出金">
-                </TabItem>
-                <TabItem Header="履歴">
-                </TabItem>
-            </TabControl>
-        </ScrollViewer>
+
+        <TabControl Grid.Column="1">
+            <TabItem Header="ホーム">
+                <ScrollViewer>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Button Grid.Row="0"
+                                IsDefault="True"
+                                CommandParameter="110"
+                                Command="{Binding MainBuyCommand}"/>
+                    
+                        <WrapPanel Grid.Row="1">
+                            <controls:Tile Title="購入"
+                                           Count="110"
+                                           Style="{StaticResource MainTile}"
+                                           CommandParameter="110"
+                                           Command="{Binding BuyCommand}"/>
+                        </WrapPanel>
+                    </Grid>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="購入">
+                <ScrollViewer>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                    
+                        <!-- 最初のボタンがデフォルトボタンになってしまう対策 -->
+                        <Button IsDefault="True" Grid.Row="0"/>
+                        <localViews:MainBuyView Grid.Row="1"/>
+                    </Grid>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="入金">
+            </TabItem>
+            <TabItem Header="出金">
+            </TabItem>
+            <TabItem Header="履歴">
+            </TabItem>
+        </TabControl>
     </Grid>
 </controls:MetroWindow>

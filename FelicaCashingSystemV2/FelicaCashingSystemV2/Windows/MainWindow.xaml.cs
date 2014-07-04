@@ -23,6 +23,7 @@ namespace FelicaCashingSystemV2.Windows
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
+        
         public MainWindow()
         {
             InitializeComponent();

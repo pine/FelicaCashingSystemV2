@@ -50,6 +50,8 @@
     <Compile Include="IOpenFileDialogResult.cs" />
     <Compile Include="MessageBase.cs" />
     <Compile Include="Messenger.cs" />
+    <Compile Include="MessengerViewModelExtension.cs" />
+    <Compile Include="MessengerWindowExtension.cs" />
     <Compile Include="MinusToColorConverter.cs" />
     <Compile Include="OpenFileDialogMessage.cs" />
     <Compile Include="OpenFileDialogMessageReceiver.cs" />

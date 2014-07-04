@@ -18,7 +18,7 @@ namespace WpfCommonds
                 );
         }
 
-        private static void ShowOpenFileDialog(OpenFileDialogMessage message, Window window)
+        private static void ShowOpenFileDialog(OpenFileDialogMessage message)
         {
             var ofd = new OpenFileDialog();
 
