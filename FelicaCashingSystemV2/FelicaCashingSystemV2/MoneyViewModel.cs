@@ -14,9 +14,10 @@ namespace FelicaCashingSystemV2
         public MoneyViewModel()
         {
             this.BuyCommand = new DelegateCommand<int>(this.Buy);
+            this.ChargeCommand = new DelegateCommand<int>(this.Charge);
         }
 
-        public ICommand BuyCommand { get; set; }
+        public ICommand BuyCommand { get; private set; }
         private void Buy(int money)
         {
             Debug.WriteLine("Buy money = " + money.ToString());
@@ -38,8 +39,6 @@ namespace FelicaCashingSystemV2
                         "「 " + money + " 」 円の商品を購入しました。\n" +
                         "残高は 「 " + App.Current.User.Money + " 」 円です。",
                         "購入成功");
-
-                    
                 }
                 else
                 {
@@ -48,5 +47,13 @@ namespace FelicaCashingSystemV2
                 }
             }
         }
+
+        public ICommand ChargeCommand { get; private set; }
+        private void Charge(int money)
+        {
+        }
+
+        public ICommand WithdrawCommand { get; private set; }
+        private void Withdraw(int money) { }
     }
 }

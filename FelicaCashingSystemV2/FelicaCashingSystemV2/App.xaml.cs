@@ -59,7 +59,8 @@ namespace FelicaCashingSystemV2
 
         public void ShowDialog<T>(
             bool isSingle = false,
-            bool isBlocking = true
+            bool isBlocking = true,
+            Action<T> beforeAction = null
             )
             where T: Window, new()
         {
@@ -72,6 +73,11 @@ namespace FelicaCashingSystemV2
 
                 var window = new T();
                 this.windows.Add(window);
+
+                if (beforeAction != null)
+                {
+                    beforeAction(window);
+                }
 
                 if (isBlocking)
                 {                    
@@ -145,6 +151,18 @@ namespace FelicaCashingSystemV2
             if (this.User != null)
             {
                 this.ShowDialog<Windows.ProfileWindow>();
+            }
+        }
+
+        public void ShowProfileWindowWithAvatar()
+        {
+            if (this.User != null)
+            {
+                this.ShowDialog<Windows.ProfileWindow>(
+                    beforeAction: (window) =>
+                    {
+                        window.SelectAvatarTab();
+                    });
             }
         }
 

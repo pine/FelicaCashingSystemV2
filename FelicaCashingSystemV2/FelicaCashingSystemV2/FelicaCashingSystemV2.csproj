@@ -74,6 +74,7 @@
     </Compile>
     <Compile Include="FelicaViewModelBase.cs" />
     <Compile Include="DialogMessageReceiver.cs" />
+    <Compile Include="MouseButtonEventArgsUtility.cs" />
     <Compile Include="PasswordBoxUtility.cs" />
     <Compile Include="Views\MainBuyView.xaml.cs">
       <DependentUpon>MainBuyView.xaml</DependentUpon>

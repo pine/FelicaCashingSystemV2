@@ -25,5 +25,14 @@ namespace FelicaCashingSystemV2.Views
             InitializeComponent();
             this.DataContext = new SideProfileViewModel();
         }
+
+        private void Image_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            // double clicked
+            if (e.IsDoubleClicked())
+            {
+                App.Current.ShowProfileWindowWithAvatar();
+            }
+        }
     }
 }

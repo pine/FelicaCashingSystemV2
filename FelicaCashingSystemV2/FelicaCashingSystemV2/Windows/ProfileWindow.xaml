@@ -19,7 +19,7 @@
                    Grid.Row="0"/>
         
         <ScrollViewer Grid.Row="1">
-            <TabControl>
+            <TabControl x:Name="tabControl">
                 <TabItem Header="基本情報">
                     <WrapPanel>
                         <TextBlock Text="他のユーザーが使用しているユーザー名には変更できません。"/>
@@ -112,7 +112,7 @@
                         </Grid>
                     </WrapPanel>
                 </TabItem>
-                <TabItem Header="アバター">
+                <TabItem Header="アバター" x:Name="tabItemAvatar">
                     <TabItem.Resources>
                         <Style TargetType="{x:Type Image}">
                             <Setter Property="Width" Value="{Binding Path=AvatarSize,Source={x:Static properties:Settings.Default}}"/>
@@ -177,10 +177,13 @@
                         </Grid>
                     </ScrollViewer>
                 </TabItem>
+                
+                <!--
                 <TabItem Header="連絡先">
                 </TabItem>
                 <TabItem Header="ドミトリー">
                 </TabItem>
+                -->
             </TabControl>
         </ScrollViewer>
     </Grid>

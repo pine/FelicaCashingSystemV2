@@ -10,11 +10,6 @@ namespace FelicaCashingSystemV2.Views
             App.Current.UserChanged += App_UserChanged;
         }
 
-        private void App_UserChanged(object sender, FelicaData.User e)
-        {
-            this.User = e;
-        }
-
         private FelicaData.NullableUser user = new FelicaData.NullableUser();
         private FelicaData.User User
         {
@@ -55,6 +50,11 @@ namespace FelicaCashingSystemV2.Views
 
                 return null;
             }
+        }
+
+        private void App_UserChanged(object sender, FelicaData.User e)
+        {
+            this.User = e;
         }
     }
 }

@@ -29,6 +29,9 @@
                 <TextBlock Text="円"/>
             </TextBlock>
 
-        <Image Source="{Binding AvatarSource}" Style="{StaticResource AvatarImage}" Grid.Row="3"/>
+        <Image Source="{Binding AvatarSource}"
+               Style="{StaticResource AvatarImage}"
+               
+               Grid.Row="3" MouseDown="Image_MouseDown"/>
     </Grid>
 </UserControl>
