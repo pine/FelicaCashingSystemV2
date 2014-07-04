@@ -11,12 +11,12 @@ using System.Windows;
 
 namespace FelicaCashingSystemV2
 {
-    public static class MetroWindowDialogMessageReceiver
+    public static class DialogMessageReceiver
     {
         public static void SetDialogMessageReceiver(this MetroWindow window)
         {
             Messenger.Default.Register<DialogMessage>(
-                window, MetroWindowDialogMessageReceiver.ShowMessage);
+                window, DialogMessageReceiver.ShowMessage);
         }
 
         private static void ShowMessage(DialogMessage message, Window window)

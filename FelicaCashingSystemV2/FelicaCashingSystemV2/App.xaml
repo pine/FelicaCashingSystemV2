@@ -20,6 +20,7 @@
 
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
             <commons:DualPasswordBoxMultiConverter x:Key="DualPasswordBoxMultiConverter"/>
+            <commons:MinusToColorConverter x:Key="MinusToColorConverter"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

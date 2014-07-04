@@ -40,6 +40,7 @@ namespace FelicaData
         protected void Update<T>(T data)
             where T : RavenModel
         {
+            if (data.Id == 0) { throw new ArgumentException("Id is 0", "data"); }
             this.Store(data);
         }
 

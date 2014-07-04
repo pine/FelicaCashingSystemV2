@@ -88,6 +88,11 @@ namespace FelicaData
 
         public void UpdateUser(User user)
         {
+            if (user == null) { throw new ArgumentNullException("user"); }
+
+            var sameUser = this.GetUserByName(user.Name);
+            if (sameUser != null && user.Id != sameUser.Id) { throw new DatabaseException("既に同じ名前のユーザーが存在します。"); }
+
             this.Update(user);
         }
 

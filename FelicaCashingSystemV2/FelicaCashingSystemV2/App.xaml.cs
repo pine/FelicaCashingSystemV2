@@ -71,8 +71,6 @@ namespace FelicaCashingSystemV2
                 }
 
                 var window = new T();
-                window.Topmost = true;
-
                 this.windows.Add(window);
 
                 if (isBlocking)
@@ -83,6 +81,7 @@ namespace FelicaCashingSystemV2
 
                 else
                 {
+                    window.Topmost = true;
                     window.Show();
                     window.Topmost = false;
                     window.Activate();
@@ -221,6 +220,7 @@ namespace FelicaCashingSystemV2
             {
                 this.UserData.CreateUser(new FelicaData.User
                 {
+                    Id = 1,
                     Name = "Tester User",
                     Email = "tester@tester.jp",
                     IsAdmin = true,

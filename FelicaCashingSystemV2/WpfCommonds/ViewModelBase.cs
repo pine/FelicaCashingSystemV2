@@ -52,13 +52,39 @@ namespace WpfCommonds
         /// <param name="title"></param>
         public void ShowMessageBox(string message, string title = null)
         {
-            Messenger.Default.Send<DialogMessage>(
+            Messenger.Default.Send(
                 this,
                 new DialogMessage
                 {
                     Title = title,
                     Message = message
                 });
+        }
+
+        /// <summary>
+        /// ファイルを開くダイアログを表示する
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <returns>開いたファイルのパスを返す</returns>
+        public IOpenFileDialogResult ShowOpenFileDialog(string filter = null)
+        {
+            var message = new OpenFileDialogMessage
+            {
+                Filter = filter
+            };
+
+            Messenger.Default.Send(
+                this,
+                message
+                );
+
+            // OK
+            if (message.UserClickedOk)
+            {
+                return message;   
+            }
+
+            return null;
         }
     }
 }

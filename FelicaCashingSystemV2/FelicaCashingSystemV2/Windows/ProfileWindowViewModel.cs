@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -152,17 +153,27 @@ namespace FelicaCashingSystemV2.Windows
         public ICommand SelectFileCommand { get; private set; }
         private void SelectFile()
         {
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.FileName = "";
-            ofd.DefaultExt = "*.*";
-            if (ofd.ShowDialog() == true)
+            Debug.WriteLine("SelectFile");
+            this.ErrorMessage = "";
+            
+            var result= this.ShowOpenFileDialog();
+            
+            if (result != null)
             {
-                using (var stream = ofd.OpenFile())
+                using (var stream = new FileStream(result.FileName, FileMode.Open, FileAccess.Read))
                 {
-                    using (var bitmap = new Bitmap(stream))
+                    try
                     {
-                        var resizedImage = BitmapSizeResizer.ResizeSquared(bitmap, Properties.Settings.Default.AvatarSize);
-                        this.NewAvatar = resizedImage;
+                        using (var bitmap = new Bitmap(stream))
+                        {
+                            var resizedImage = BitmapSizeResizer.ResizeSquared(bitmap, Properties.Settings.Default.AvatarSize);
+                            this.NewAvatar = resizedImage;
+                        }
+                    }
+                    catch (ArgumentException e)
+                    {
+                        Debug.WriteLine(e.Message);
+                        this.ErrorMessage = "対応していない画像形式です。";
                     }
                 }
             }

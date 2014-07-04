@@ -29,10 +29,20 @@
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Text="{Binding Name}" TextAlignment="Left" Grid.Row="0"/>
-            <TextBlock Text="さん" TextAlignment="Right" Grid.Row="1"/>
             
-            <TextBlock TextAlignment="Center" Text="{Binding Money}" Grid.Row="2"/>
+            <TextBlock TextAlignment="Center" Grid.Row="0">
+                <TextBlock Text="{Binding Name}"/>
+                <TextBlock Text="さん"/>
+            </TextBlock>
+
+            <TextBlock TextAlignment="Center" FontSize="17" Grid.Row="1">
+                <TextBlock.Foreground>
+                    <SolidColorBrush Color="{Binding Money,Converter={StaticResource MinusToColorConverter}}"/>
+                </TextBlock.Foreground>
+                
+                <TextBlock Text="{Binding Money,StringFormat=#\,0}"/>
+                <TextBlock Text="円"/>
+            </TextBlock>
             
             <Image Source="{Binding AvatarSource}" Style="{StaticResource AvatarImage}" Grid.Row="3"/>
             

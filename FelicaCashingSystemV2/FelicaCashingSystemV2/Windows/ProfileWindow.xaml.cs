@@ -29,6 +29,7 @@ namespace FelicaCashingSystemV2.Windows
 
             this.DataContext = new ProfileWindowViewModel();
             this.SetDialogMessageReceiver();
+            this.SetOpenFileDialogReceiver();
         }
     }
 }
