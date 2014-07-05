@@ -27,7 +27,7 @@
                     <localViews:VersionInformationView/>
                 </ScrollViewer>
             </TabItem>
-            <TabItem Header="更新情報">
+            <TabItem Header="更新">
                 <ScrollViewer>
                     <localViews:ReadonlyTextFileView Source="Texts\UpdateHistory.txt"/>
                 </ScrollViewer>
