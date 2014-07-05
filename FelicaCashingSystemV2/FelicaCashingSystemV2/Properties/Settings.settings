@@ -29,5 +29,11 @@
     <Setting Name="ImageFileFilter" Type="System.String" Scope="Application">
       <Value Profile="(Default)">画像ファイル|*.jpg;*.png;*.gif;*.bmp;*.tiff|すべてのファイル|*.*</Value>
     </Setting>
+    <Setting Name="RobotClubUri" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://www.ugs.kochi-tech.ac.jp/robot/lobby/main_lobby.htm</Value>
+    </Setting>
+    <Setting Name="FelicaUri" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://www.sony.co.jp/Products/felica/</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

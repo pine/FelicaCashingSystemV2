@@ -17,8 +17,7 @@ namespace FelicaCashingSystemV2.Views
             set
             {
                 this.user.User = value;
-                this.OnPropertyChanged("Name");
-                this.OnPropertyChanged("Money");
+                this.OnPropertyChanged("Name", "Money", "IsAdmin");
                 this.OnPropertyChanged("AvatarSource");
             }
         }
@@ -36,6 +35,14 @@ namespace FelicaCashingSystemV2.Views
             get
             {
                 return this.user.Money;
+            }
+        }
+
+        public bool IsAdmin
+        {
+            get
+            {
+                return this.user.IsAdmin;
             }
         }
 

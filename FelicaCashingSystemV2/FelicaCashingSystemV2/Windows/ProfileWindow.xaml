@@ -17,14 +17,15 @@
         <TextBlock Text="プロフィール"
                    Style="{StaticResource Heading1}" 
                    Grid.Row="0"/>
-        
-        <ScrollViewer Grid.Row="1">
-            <TabControl x:Name="tabControl">
-                <TabItem Header="基本情報">
+
+        <TabControl x:Name="tabControl"
+                    Grid.Row="1">
+            <TabItem Header="基本情報">
+                <ScrollViewer>
                     <WrapPanel>
                         <TextBlock Text="他のユーザーが使用しているユーザー名には変更できません。"/>
                         <TextBlock Text="パスワード欄は、パスワードを変更する場合のみ入力してください。"/>
-                        
+
                         <Grid Margin="40">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto"/>
@@ -111,24 +112,43 @@
                             </Button>
                         </Grid>
                     </WrapPanel>
-                </TabItem>
-                <TabItem Header="アバター" x:Name="tabItemAvatar">
-                    <TabItem.Resources>
-                        <Style TargetType="{x:Type Image}">
-                            <Setter Property="Width" Value="{Binding Path=AvatarSize,Source={x:Static properties:Settings.Default}}"/>
-                            <Setter Property="Height" Value="{Binding Path=AvatarSize,Source={x:Static properties:Settings.Default}}"/>
-                        </Style>
-                    </TabItem.Resources>
-                    
-                    <ScrollViewer>
-                        <Grid Margin="40">
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="アバター" x:Name="tabItemAvatar">
+                <TabItem.Resources>
+                    <Style TargetType="{x:Type Image}">
+                        <Setter Property="Width" Value="{Binding Path=AvatarSize,Source={x:Static properties:Settings.Default}}"/>
+                        <Setter Property="Height" Value="{Binding Path=AvatarSize,Source={x:Static properties:Settings.Default}}"/>
+                    </Style>
+                </TabItem.Resources>
+
+                <ScrollViewer>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Grid.Row="0">
+                            <TextBlock Text="JPEG, GIF, PNG, BMP, TIFF 形式の画像ファイルに対応しています。"/>
+
+                            <TextBlock>
+                                    <TextBlock Text ="画像は自動的に"/>
+                                    <TextBlock Text="{Binding Path=AvatarSize,Source={x:Static properties:Settings.Default}}"/>
+                                    <TextBlock Text="x"/>
+                                    <TextBlock Text="{Binding Path=AvatarSize,Source={x:Static properties:Settings.Default}}"/>
+                                    <TextBlock Text="ピクセルにリサイズされて保存されます。"/>
+                                </TextBlock>
+                        </StackPanel>
+
+                        <Grid Margin="40" Grid.Row="1">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="auto"/>
                             </Grid.RowDefinitions>
-                            
+
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto"/>
                                 <ColumnDefinition Width="auto"/>
@@ -142,14 +162,14 @@
                                         Grid.Row="1" Grid.Column="0">
                                 <Image Source="{Binding AvatarSource}"/>
                             </StackPanel>
-                            
+
                             <Grid Margin="30,10,30,0"
                                   Grid.Row="1" Grid.Column="1">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="auto"/>
                                     <RowDefinition Height="auto"/>
                                 </Grid.RowDefinitions>
-                                
+
                                 <Image Source="{Binding NewAvatarSource}"
                                        Grid.Row="0"/>
                                 <Button Content="ファイルを選択する"
@@ -173,18 +193,18 @@
                                     Grid.ColumnSpan="2"
                                     Command="{Binding SaveAvatarCommand}"
                                     />
-                            
+
                         </Grid>
-                    </ScrollViewer>
-                </TabItem>
-                
-                <!--
+                    </Grid>
+                </ScrollViewer>
+            </TabItem>
+
+            <!--
                 <TabItem Header="連絡先">
                 </TabItem>
                 <TabItem Header="ドミトリー">
                 </TabItem>
                 -->
-            </TabControl>
-        </ScrollViewer>
+        </TabControl>
     </Grid>
 </controls:MetroWindow>

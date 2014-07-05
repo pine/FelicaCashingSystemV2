@@ -40,6 +40,11 @@
                 </ScrollViewer>
             </TabItem>
             -->
+            <TabItem Header="ライセンス">
+                <ScrollViewer>
+                    <localViews:ReadonlyTextFileView Source="Texts\License.txt"/>
+                </ScrollViewer>
+            </TabItem>
             
             <TabItem Header="謝辞">
                 <ScrollViewer>

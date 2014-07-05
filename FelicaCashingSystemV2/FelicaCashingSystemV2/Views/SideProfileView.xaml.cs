@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,6 +34,28 @@ namespace FelicaCashingSystemV2.Views
             {
                 App.Current.ShowProfileWindowWithAvatar();
             }
+        }
+
+        
+        private void Image_DoubleClicked(MouseButtonEventArgs e, string uri)
+        {
+            if (e.IsDoubleClicked())
+            {
+                Task.Run(() =>
+                {
+                    Process.Start(uri);
+                });
+            }
+        }
+
+        private void imageRobotClub_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            this.Image_DoubleClicked(e, Properties.Settings.Default.RobotClubUri);
+        }
+
+        private void imageFelica_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            this.Image_DoubleClicked(e, Properties.Settings.Default.FelicaUri);
         }
     }
 }
