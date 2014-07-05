@@ -33,6 +33,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\FelicaIcon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="MahApps.Metro">
       <HintPath>..\packages\MahApps.Metro.0.13.1.0\lib\net45\MahApps.Metro.dll</HintPath>
@@ -76,6 +79,12 @@
     <Compile Include="MetroDialogMessage.cs" />
     <Compile Include="MetroWindowViewModelBase.cs" />
     <Compile Include="MetroDialogMessageReceiver.cs" />
+    <Compile Include="Views\UserListView.xaml.cs">
+      <DependentUpon>UserListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CardAssociationView.xaml.cs">
+      <DependentUpon>CardAssociationView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\MainWindowMessage.cs" />
     <Compile Include="Windows\SelectingMoneyMessage.cs" />
     <Compile Include="MouseButtonEventArgsUtility.cs" />
@@ -127,6 +136,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\SystemInformationButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UserListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\CardAssociationView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -11,8 +11,8 @@ using System.Windows;
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("FelicaCashingSystemV2.Windows")]
-[assembly: AssemblyCopyright("Copyright ©  2014 MIZUNE Pine")]
+[assembly: AssemblyProduct("FelicaCashingSystemV2")]
+[assembly: AssemblyCopyright("Copyright ©  2013-2014 MIZUNE Pine")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

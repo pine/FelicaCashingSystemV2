@@ -38,14 +38,6 @@ namespace FelicaCashingSystemV2.Views
             }
         }
 
-        public bool IsAdmin
-        {
-            get
-            {
-                return this.user.IsAdmin;
-            }
-        }
-
         public ImageSource AvatarSource
         {
             get

@@ -25,7 +25,6 @@
             <localViews:SideProfileView/>
         </Grid>
 
-
         <TabControl Grid.Column="1">
             <TabItem Header="ホーム">
                 <ScrollViewer>
@@ -69,6 +68,12 @@
             <TabItem Header="出金">
             </TabItem>
             <TabItem Header="履歴">
+            </TabItem>
+            
+            <TabItem Header="ユーザ一覧">
+                <ScrollViewer>
+                    <localViews:UserListView/>
+                </ScrollViewer>
             </TabItem>
         </TabControl>
     </Grid>

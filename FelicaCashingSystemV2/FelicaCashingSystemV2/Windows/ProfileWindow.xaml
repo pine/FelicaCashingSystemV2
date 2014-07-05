@@ -199,6 +199,12 @@
                 </ScrollViewer>
             </TabItem>
 
+            <TabItem Header="カード関連付け">
+                <ScrollViewer>
+                    <localViews:CardAssociationView/>
+                </ScrollViewer>
+            </TabItem>
+            
             <!--
                 <TabItem Header="連絡先">
                 </TabItem>
