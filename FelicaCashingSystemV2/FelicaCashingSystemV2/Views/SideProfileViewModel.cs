@@ -1,4 +1,5 @@
 ﻿using System.Windows.Media;
+using WpfCommonds;
 
 namespace FelicaCashingSystemV2.Views
 {

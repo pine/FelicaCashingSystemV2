@@ -49,7 +49,8 @@
                 </StackPanel.Resources>
             
                 <Image Source="{Binding AvatarSource}"
-                       MouseDown="Image_MouseDown"/>
+                       MouseDown="Image_MouseDown"
+                       Visibility="{Binding AvatarSource,Converter={StaticResource NullToVisibilityConverter}}"/>
 
                 <Image x:Name="imageFelica"
                        Source="/Resources/FelicaImage.png" 

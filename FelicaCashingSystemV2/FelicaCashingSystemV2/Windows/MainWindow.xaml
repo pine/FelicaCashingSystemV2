@@ -70,7 +70,7 @@
             <TabItem Header="履歴">
             </TabItem>
             
-            <TabItem Header="ユーザ一覧">
+            <TabItem Header="一覧">
                 <ScrollViewer>
                     <localViews:UserListView/>
                 </ScrollViewer>

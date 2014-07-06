@@ -23,6 +23,7 @@ namespace FelicaCashingSystemV2.Views
         public UserListView()
         {
             InitializeComponent();
+            this.DataContext = new UserListViewModel();
         }
 
     }

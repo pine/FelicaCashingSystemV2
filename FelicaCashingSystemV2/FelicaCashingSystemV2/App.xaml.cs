@@ -181,6 +181,17 @@ namespace FelicaCashingSystemV2
                 });
         }
 
+        public void ShowAdministeringUserWindow(FelicaData.User administeringUser)
+        {
+            if (this.User == null) { return; }
+            if (!this.User.IsAdmin) { return; }
+            if (administeringUser == null) { return; }
+            if (this.User.Id == administeringUser.Id) { return; }
+
+            this.ShowDialog<Windows.AdministeringUserWindow>(
+                );
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -271,6 +282,19 @@ namespace FelicaCashingSystemV2
                     Name = "テスト用ユーザー",
                     Email = "tester@tester.jp",
                     IsAdmin = true,
+                    Password = "tester"
+                });
+            }
+            catch (Exception) { }
+
+            try
+            {
+                this.UserData.CreateUser(new FelicaData.User
+                {
+                    Id = 2,
+                    Name = "テスト用ユーザー (非管理者)",
+                    Email = "tester@tester.jp",
+                    IsAdmin = false,
                     Password = "tester"
                 });
             }

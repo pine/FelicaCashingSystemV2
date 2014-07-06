@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
 
-namespace FelicaCashingSystemV2
+namespace WpfCommonds
 {
     public static class BitmapToBitmapSourceConverter
     {
@@ -17,7 +17,7 @@ namespace FelicaCashingSystemV2
         {
             var hBitmap = bitmap.GetHbitmap();
             
-            BitmapSource source;
+            BitmapSource source = null;
             try
             {
                 source = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(

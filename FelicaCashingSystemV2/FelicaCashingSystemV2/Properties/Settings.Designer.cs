@@ -114,5 +114,14 @@ namespace FelicaCashingSystemV2.Properties {
                 return ((string)(this["FelicaUri"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("32")]
+        public string ThumbnailAvatarSize {
+            get {
+                return ((string)(this["ThumbnailAvatarSize"]));
+            }
+        }
     }
 }
