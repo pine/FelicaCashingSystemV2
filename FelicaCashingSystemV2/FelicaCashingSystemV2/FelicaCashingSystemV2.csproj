@@ -66,9 +66,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="BitmapSerializer.cs" />
     <Compile Include="BitmapSizeResizer.cs" />
-    <Compile Include="BitmapToBitmapSourceConverter.cs" />
     <Compile Include="CommaSeparatedIntegerExtension.cs" />
     <Compile Include="Controls\SettingButton.xaml.cs">
       <DependentUpon>SettingButton.xaml</DependentUpon>
@@ -84,6 +82,10 @@
     </Compile>
     <Compile Include="Views\CardAssociationView.xaml.cs">
       <DependentUpon>CardAssociationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserListViewModel.cs" />
+    <Compile Include="Windows\AdministeringUserWindow.xaml.cs">
+      <DependentUpon>AdministeringUserWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\MainWindowMessage.cs" />
     <Compile Include="Windows\SelectingMoneyMessage.cs" />
@@ -156,6 +158,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SideProfileView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\AdministeringUserWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

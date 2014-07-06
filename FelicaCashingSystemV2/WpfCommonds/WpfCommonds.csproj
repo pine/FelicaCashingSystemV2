@@ -34,6 +34,7 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -43,6 +44,10 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BindingProxy.cs" />
+    <Compile Include="BitmapSerializer.cs" />
+    <Compile Include="BitmapToBitmapSourceConverter.cs" />
+    <Compile Include="ByteArrayToImageSourceConverter.cs" />
     <Compile Include="DelegateCommand.cs" />
     <Compile Include="DialogMessage.cs" />
     <Compile Include="DualPasswordBoxMultiConverter.cs" />
@@ -53,6 +58,7 @@
     <Compile Include="MessengerViewModelExtension.cs" />
     <Compile Include="MessengerWindowExtension.cs" />
     <Compile Include="MinusToColorConverter.cs" />
+    <Compile Include="NullToVisibilityConverter.cs" />
     <Compile Include="OpenFileDialogMessage.cs" />
     <Compile Include="OpenFileDialogMessageReceiver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

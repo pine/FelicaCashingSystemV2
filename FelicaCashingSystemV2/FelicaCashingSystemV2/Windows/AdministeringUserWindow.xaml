@@ -1,0 +1,34 @@
+﻿<controls:MetroWindow x:Class="FelicaCashingSystemV2.Windows.AdministeringUserWindow"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+                      xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      xmlns:behaviours="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
+                      xmlns:localViews="clr-namespace:FelicaCashingSystemV2.Views"
+                      Height="450" Width="650"                      
+                      WindowStartupLocation="CenterScreen"
+                      ShowMaxRestoreButton="False"
+                      ShowMinButton="False"
+                      Style="{StaticResource BasicWindow}">
+    
+    <Grid Style="{StaticResource ContentRoot}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="ユーザー管理"
+                   Style="{StaticResource Heading1}"
+                   Grid.Row="0"/>
+
+        <TextBlock Grid.Row="1">未実装</TextBlock>
+        <!--
+        <TabControl Grid.Row="1">
+            <TabItem Header="バージョン">
+                <ScrollViewer>
+                    <localViews:VersionInformationView/>
+                </ScrollViewer>
+            </TabItem>
+        </TabControl>-->
+    </Grid>
+</controls:MetroWindow>

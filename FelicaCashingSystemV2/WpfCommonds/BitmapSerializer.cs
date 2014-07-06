@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing.Imaging;
 
-namespace FelicaCashingSystemV2
+namespace WpfCommonds
 {
     public static class BitmapSerializer
     {

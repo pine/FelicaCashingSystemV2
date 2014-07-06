@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WpfCommonds;
 
 namespace FelicaCashingSystemV2.Windows
 {
@@ -23,6 +24,7 @@ namespace FelicaCashingSystemV2.Windows
         public RegisterWindow()
         {
             InitializeComponent();
+            this.SetEscClosableWindow();
         }
     }
 }
