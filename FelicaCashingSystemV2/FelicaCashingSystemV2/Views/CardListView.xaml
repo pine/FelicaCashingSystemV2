@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="FelicaCashingSystemV2.Views.CardListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:commons="clr-namespace:WpfCommonds;assembly=WpfCommonds"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <commons:BindingProxy x:Key="Proxy"
+                              Data="{Binding}"/>
+    </UserControl.Resources>
+    
+    <StackPanel Orientation="Vertical">
+        <DataGrid ItemsSource="{Binding Cards}" 
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="False"
+                  CanUserDeleteRows="False"
+                  IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="カード名"
+                                    Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="UID"
+                                    Binding="{Binding Uid}"/>
+                <DataGridTemplateColumn Header="削除">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="削除" 
+                                    Command="{Binding Data.DeleteCardCommand,Source={StaticResource Proxy}}"
+                                    CommandParameter="{Binding}">
+                                
+                                <!-- ログインに使ったカードを除く -->
+                                <Button.Visibility>
+                                    <MultiBinding Converter="{StaticResource EqualsToVisibilityConverter}">
+                                        <Binding Path="Id"/>
+                                        <Binding Path="Data.CurrentCardId" Source="{StaticResource Proxy}"/>
+                                    </MultiBinding>
+                                </Button.Visibility>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        
+    </StackPanel>
+</UserControl>

@@ -6,6 +6,7 @@
                       xmlns:behaviours="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
                       xmlns:localControls="clr-namespace:FelicaCashingSystemV2.Controls"
                       Height="400" Width="600"
+                      ShowMaxRestoreButton="False"
                       WindowStartupLocation="CenterScreen"
                       Style="{StaticResource BasicWindow}">
     

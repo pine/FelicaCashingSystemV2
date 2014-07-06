@@ -21,6 +21,7 @@ namespace FelicaCashingSystemV2.Views
         void App_UserChanged(object sender, FelicaData.User e)
         {
             this.Users = App.Current.UserData.GetUsers();
+            this.OnPropertyChanged("CurrentUserId");
         }
 
         private List<FelicaData.User> users = App.Current.UserData.GetUsers();
@@ -31,6 +32,19 @@ namespace FelicaCashingSystemV2.Views
             {
                 this.users = value;
                 this.OnPropertyChanged("Users");
+            }
+        }
+
+        public int CurrentUserId
+        {
+            get
+            {
+                if (App.Current.User != null)
+                {
+                    return App.Current.User.Id;
+                }
+
+                return 0;
             }
         }
 

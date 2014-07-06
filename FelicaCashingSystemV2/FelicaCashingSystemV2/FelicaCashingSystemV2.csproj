@@ -77,15 +77,29 @@
     <Compile Include="MetroDialogMessage.cs" />
     <Compile Include="MetroWindowViewModelBase.cs" />
     <Compile Include="MetroDialogMessageReceiver.cs" />
+    <Compile Include="Views\CardAssociationStartView.xaml.cs">
+      <DependentUpon>CardAssociationStartView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CardAssociationStartViewModel.cs" />
+    <Compile Include="Views\CardListViewModel.cs" />
     <Compile Include="Views\UserListView.xaml.cs">
       <DependentUpon>UserListView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\CardAssociationView.xaml.cs">
-      <DependentUpon>CardAssociationView.xaml</DependentUpon>
+    <Compile Include="Views\CardListView.xaml.cs">
+      <DependentUpon>CardListView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserListViewModel.cs" />
     <Compile Include="Windows\AdministeringUserWindow.xaml.cs">
       <DependentUpon>AdministeringUserWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\AssociationWindow.xaml.cs">
+      <DependentUpon>AssociationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\AssociationWaitingWindow.xaml.cs">
+      <DependentUpon>AssociationWaitingWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\SettingWindow.xaml.cs">
+      <DependentUpon>SettingWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\MainWindowMessage.cs" />
     <Compile Include="Windows\SelectingMoneyMessage.cs" />
@@ -129,6 +143,7 @@
     </Compile>
     <Compile Include="Views\VersionInformationViewModel.cs" />
     <Compile Include="Windows\SelectingMoneyWindowViewModel.cs" />
+    <Compile Include="Windows\SettingWindowModel.cs" />
     <Page Include="Controls\SettingButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -141,11 +156,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\CardAssociationStartView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\UserListView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\CardAssociationView.xaml">
+    <Page Include="Views\CardListView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -162,6 +181,18 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Windows\AdministeringUserWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\AssociationWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\AssociationWaitingWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\SettingWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -5,7 +5,9 @@
                       xmlns:localControls="clr-namespace:FelicaCashingSystemV2.Controls"
                       xmlns:localViews="clr-namespace:FelicaCashingSystemV2.Views"
                       xmlns:properties="clr-namespace:FelicaCashingSystemV2.Properties"
-                      Height="600" Width="600"
+                      Height="600" Width="700"
+                      ShowMaxRestoreButton="False"
+                      ShowMinButton="False"
                       WindowStartupLocation="CenterScreen"
                       Style="{StaticResource BasicWindow}" >
     <Grid Style="{StaticResource ContentRoot}">
@@ -199,9 +201,16 @@
                 </ScrollViewer>
             </TabItem>
 
-            <TabItem Header="カード関連付け">
+            <TabItem Header="カード">
                 <ScrollViewer>
-                    <localViews:CardAssociationView/>
+                    <StackPanel>
+                        <TextBlock Text="カード一覧" Style="{StaticResource Heading2}"/>
+                        <TextBlock>ログインに利用したカードは削除できません。</TextBlock>
+                        <localViews:CardListView Margin="0,20,0,30"/>
+                        
+                        <TextBlock Text="カード関連付け" Style="{StaticResource Heading2}"/>
+                        <localViews:CardAssociationStartView/>
+                    </StackPanel>
                 </ScrollViewer>
             </TabItem>
             

@@ -11,7 +11,7 @@
         <controls:WindowCommands>
             <localControls:SystemInformationButton Click="SystemInformationButton_Click"/>
             <localControls:ProfileButton Click="ProfileButton_Click"/>
-            <localControls:SettingButton Visibility="{Binding IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+            <localControls:SettingButton Click="SettingButton_Click"/>
         </controls:WindowCommands>
     </controls:MetroWindow.RightWindowCommands>
     

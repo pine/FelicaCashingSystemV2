@@ -41,8 +41,15 @@
                     </Style>
                 </DataGridTextColumn.ElementStyle>
             </DataGridTextColumn>
-            <DataGridCheckBoxColumn Header="管理者"
-                                    Binding="{Binding IsAdmin}"/>
+            <DataGridTextColumn Header="管理者"
+                                Binding="{Binding IsAdmin,Converter={StaticResource BooleanToCircleNullStringConverter}}">
+                <DataGridTextColumn.ElementStyle>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Setter Property="TextAlignment" Value="Center"/>
+                    </Style>
+                </DataGridTextColumn.ElementStyle>
+            </DataGridTextColumn>
+                
             
             <DataGridTemplateColumn Header="管理"
                                     Visibility="{Binding Data.IsAdmin,Converter={StaticResource BooleanToVisibilityConverter},Source={StaticResource Proxy}}">
@@ -50,7 +57,16 @@
                     <DataTemplate>
                         <Button Content="管理"
                                 Command="{Binding Data.AdministerCommand,Source={StaticResource Proxy}}"
-                                CommandParameter="{Binding}"/>
+                                CommandParameter="{Binding}">
+                            
+                            <!-- 自分自身を除く -->
+                            <Button.Visibility>
+                                <MultiBinding Converter="{StaticResource EqualsToVisibilityConverter}">
+                                    <Binding Path="Id"/>
+                                    <Binding Path="Data.CurrentUserId" Source="{StaticResource Proxy}"/>
+                                </MultiBinding>
+                            </Button.Visibility>
+                        </Button>
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>

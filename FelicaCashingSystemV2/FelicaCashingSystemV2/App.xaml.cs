@@ -16,11 +16,15 @@ namespace FelicaCashingSystemV2
         private SynchronizedCollection<Window> windows
             = new SynchronizedCollection<Window>();
         private FelicaSharp.EasyFelicaReader felica = null;
+        private bool associationStarted = false;
 
         public FelicaSharp.EasyFelicaCardSetEventHandlerArgs UnregisteredCard { get; private set; }
-        
-        public FelicaData.Card Card { get; private set; }
+
+        private FelicaData.DatabaseManager DatabaseManager { get; set; }
         public FelicaData.UserData UserData { get; private set; }
+
+        public FelicaData.Card Card { get; private set; }
+        
         public FelicaMail.Mailer Mailer { get; private set; }
 
         private FelicaData.User user = null;
@@ -192,6 +196,44 @@ namespace FelicaCashingSystemV2
                 );
         }
 
+        public void ShowSettingWindow()
+        {
+            if (this.User == null) { return; }
+
+            this.ShowDialog<Windows.SettingWindow>();
+        }
+
+        public void ShowAssociationWaitingWindow(FelicaData.User user)
+        {
+            this.CloseAllWindows();
+
+            this.associationStarted = true;
+            this.User = user;
+            this.ShowWindow<Windows.AssociationWaitingWindow>();
+        }
+
+        public void ShowAssociationWindow(FelicaData.User user)
+        {
+            this.CloseAllWindows();
+
+            this.User = user;
+            this.ShowWindow<Windows.AssociationWindow>();
+        }
+
+        public void StartAssociating()
+        {
+            if (this.User == null) { return; }
+            if (this.associationStarted) { return; }
+
+            this.ShowAssociationWaitingWindow(this.User);
+        }
+
+        public void EndAssociating()
+        {
+            this.User = null;
+            this.associationStarted = false;
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -231,6 +273,7 @@ namespace FelicaCashingSystemV2
             }
 
             this.User = null;
+            this.associationStarted = false;
         }
 
         protected virtual void OnUserChanged(FelicaData.User user)
@@ -247,19 +290,29 @@ namespace FelicaCashingSystemV2
             this.notifyIcon.Click += this.notifyIcon_Click;
             this.notifyIcon.ExitClick += this.notifyIcon_ExitClick;
 
+#if DEBUG
+            this.ShowBalloonTip(
+                "起動中",
+                "Felica Cashing Sytem V2 をデバッグモードで起動しています。しばらくお待ちください。",
+                NotifyIcon.ToolTipIcon.Warning,
+                30 * 1000
+                );
+#else
             this.ShowBalloonTip(
                 "起動中",
                 "Felica Cashing Sytem V2 を起動しています。しばらくお待ちください。",
                 NotifyIcon.ToolTipIcon.Info,
                 30 * 1000
                 );
+#endif
 
             this.felica = new FelicaSharp.EasyFelicaReader();
             this.felica.FelicaCardSet += felica_FelicaCardSet;
 
             try
             {
-                this.UserData = new FelicaData.UserData();
+                this.DatabaseManager = new FelicaData.DatabaseManager("Database");
+                this.UserData = new FelicaData.UserData(this.DatabaseManager);
             }
             catch (FelicaData.DatabaseException dbe)
             {
@@ -299,6 +352,35 @@ namespace FelicaCashingSystemV2
                 });
             }
             catch (Exception) { }
+
+            try
+            {
+                this.UserData.CreateCard(new FelicaData.Card
+                {
+                    UserId = 1,
+                    Name = "最初に登録したカード",
+                    Uid = "TEST-UID-1"
+                });
+            }
+            catch (Exception ee)
+            {
+                Debug.WriteLine(ee.Message);
+            }
+            
+            try
+            {
+                this.UserData.CreateCard(new FelicaData.Card
+                {
+                    UserId = 1,
+                    Name = "ミールカード",
+                    Uid = "TEST-UID-2"
+                });
+            }
+            catch (Exception ee)
+            {
+                Debug.WriteLine(ee.Message);
+            }
+
 #endif
 
             this.Mailer = new FelicaMail.Mailer();
@@ -333,7 +415,7 @@ namespace FelicaCashingSystemV2
                     NotifyIcon.ToolTipIcon.Warning
                     );
             }
-            
+
             Debug.WriteLine("Startup succeed");
         }
 
@@ -344,7 +426,7 @@ namespace FelicaCashingSystemV2
             if (this.notifyIcon != null) { this.notifyIcon.Dispose(); }
             if (this.felica != null) { this.felica.Dispose(); }
 
-            if (this.UserData != null) { this.UserData.Dispose(); }
+            if (this.DatabaseManager != null) { this.DatabaseManager.Dispose(); }
 
         }
 
@@ -372,6 +454,15 @@ namespace FelicaCashingSystemV2
             Debug.WriteLine("Idm = " + e.Idm + ", Pmm = " + e.Pmm);
 
             this.Card = this.UserData.GetCard(e.Idm);
+
+            // 関連付け
+            // 既にカードが登録されていないこと
+            if (this.associationStarted && this.User != null && this.Card == null)
+            {
+                this.ShowAssociationWindow(this.User);
+                return;
+            }
+
             this.User = null;
 
             // カードが存在する場合
@@ -403,7 +494,6 @@ namespace FelicaCashingSystemV2
                 // 登録ウィンドウを表示
                 this.ShowRegisterWindow(e);
             }
-
         }
 
     }

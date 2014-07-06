@@ -43,5 +43,10 @@ namespace FelicaCashingSystemV2.Windows
         {
             App.Current.ShowProfileWindow();
         }
+
+        private void SettingButton_Click(object sender, RoutedEventArgs e)
+        {
+            App.Current.ShowSettingWindow();
+        }
     }
 }

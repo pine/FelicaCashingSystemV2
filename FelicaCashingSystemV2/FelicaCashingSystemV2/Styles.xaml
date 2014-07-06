@@ -18,13 +18,19 @@
     
     <Style x:Key="ContentBody">
     </Style>
-    
+
     <Style x:Key="Heading1" TargetType="{x:Type TextBlock}">
         <Setter Property="Foreground" Value="{StaticResource AccentColorBrush}"/>
         <Setter Property="FontSize" Value="30"/>
         <Setter Property="Margin" Value="0,0,0,10"/>
     </Style>
     
+    <Style x:Key="Heading2" TargetType="{x:Type TextBlock}">
+        <Setter Property="Foreground" Value="{StaticResource AccentColorBrush}"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="Margin" Value="0,0,0,10"/>
+    </Style>
+
     <Style x:Key="ErrorMessageText" TargetType="{x:Type TextBlock}">
         <Setter Property="Foreground" Value="Red"/>
     </Style>

@@ -108,7 +108,7 @@ namespace FelicaCashingSystemV2.Views
                     },
                     new FelicaData.Card
                     {
-                        Name = "デフォルト",
+                        Name = "最初に登録したカード",
                         Uid = cardUid
                     });
             }

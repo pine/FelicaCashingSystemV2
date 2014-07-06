@@ -4,6 +4,8 @@
 GitHub:
 https://github.com/pine613/FelicaCashingSystemV2
 
+----------
+
 The MIT License (MIT)
 
 Copyright (c) 2013-2014

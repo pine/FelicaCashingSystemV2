@@ -1,0 +1,22 @@
+﻿<controls:MetroWindow x:Class="FelicaCashingSystemV2.Windows.AssociationWaitingWindow"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      xmlns:localViews="clr-namespace:FelicaCashingSystemV2.Views"
+                      Height="340" Width="540"
+                      ShowMaxRestoreButton="False"
+                      ShowMinButton="False"
+                      WindowStartupLocation="CenterScreen"
+                      Style="{StaticResource BasicWindow}" Closed="MetroWindow_Closed">
+    <Grid Style="{StaticResource ContentRoot}">
+        <TextBlock Text="カード関連付け"
+                   Style="{StaticResource Heading1}"/>
+        <TextBlock HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   TextAlignment="Center"
+                   FontSize="16">
+            カードの関連付けを行います。<LineBreak/>
+            新規に登録したいカードを、カードリーダーにあててください。
+        </TextBlock>
+    </Grid>
+</controls:MetroWindow>

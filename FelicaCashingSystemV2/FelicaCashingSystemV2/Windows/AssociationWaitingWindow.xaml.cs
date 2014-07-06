@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MahApps.Metro.Controls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,25 +11,25 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfCommonds;
 
-namespace FelicaCashingSystemV2.Views
+namespace FelicaCashingSystemV2.Windows
 {
     /// <summary>
-    /// VersionInformationView.xaml の相互作用ロジック
+    /// RegisterWindow.xaml の相互作用ロジック
     /// </summary>
-    public partial class CardAssociationView : UserControl
+    public partial class AssociationWaitingWindow : MetroWindow
     {
-        public CardAssociationView()
+        public AssociationWaitingWindow()
         {
             InitializeComponent();
-            this.DataContext = new VersionInformationViewModel();
+            this.SetEscClosableWindow();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void MetroWindow_Closed(object sender, EventArgs e)
         {
-            App.Current.ShowLoginWindow();
+            App.Current.EndAssociating();
         }
     }
 }

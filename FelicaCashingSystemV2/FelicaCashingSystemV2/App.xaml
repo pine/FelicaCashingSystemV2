@@ -23,6 +23,8 @@
             <commons:MinusToColorConverter x:Key="MinusToColorConverter"/>
             <commons:ByteArrayToImageSourceConverter x:Key="ByteArrayToImageSourceConverter"/>
             <commons:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
+            <commons:BooleanToStringConverter x:Key="BooleanToCircleNullStringConverter" TrueValue="○" FalseValue=""/>
+            <commons:EqualsToVisibilityConverter x:Key="EqualsToVisibilityConverter"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
