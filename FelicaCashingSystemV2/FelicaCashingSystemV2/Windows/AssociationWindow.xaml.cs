@@ -25,11 +25,9 @@ namespace FelicaCashingSystemV2.Windows
         {
             InitializeComponent();
             this.SetEscClosableWindow();
-        }
 
-        private void MetroWindow_Closed(object sender, EventArgs e)
-        {
-
+            this.DataContext = new AssociationWindowViewModel();
+            this.SetDialogMessageReceiver();
         }
     }
 }

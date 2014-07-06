@@ -98,6 +98,7 @@
     <Compile Include="Windows\AssociationWaitingWindow.xaml.cs">
       <DependentUpon>AssociationWaitingWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\AssociationWindowViewModel.cs" />
     <Compile Include="Windows\SettingWindow.xaml.cs">
       <DependentUpon>SettingWindow.xaml</DependentUpon>
     </Compile>
