@@ -32,6 +32,7 @@
                     </Style>
                 </DataGridTextColumn.ElementStyle>
             </DataGridTextColumn>
+            
             <DataGridTextColumn Header="金額"
                                 Binding="{Binding Money,StringFormat=#\,0}">
                 <DataGridTextColumn.ElementStyle>
@@ -55,6 +56,7 @@
                     </Style>
                 </DataGridTextColumn.ElementStyle>
             </DataGridTextColumn>
+            
             <DataGridTextColumn Header="日時"
                                 Binding="{Binding CreatedAt,StringFormat=\{0:yyyy/dd/MM HH:mm:ss\}}">
                 <DataGridTextColumn.ElementStyle>
