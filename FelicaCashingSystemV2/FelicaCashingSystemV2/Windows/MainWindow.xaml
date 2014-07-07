@@ -11,7 +11,7 @@
         <controls:WindowCommands>
             <localControls:SystemInformationButton Click="SystemInformationButton_Click"/>
             <localControls:ProfileButton Click="ProfileButton_Click"/>
-            <localControls:SettingButton Click="SettingButton_Click"/>
+            <localControls:SettingButton Click="SettingButton_Click" Visibility="{Binding IsAdmin,Converter={StaticResource BooleanToVisibilityConverter}}"/>
         </controls:WindowCommands>
     </controls:MetroWindow.RightWindowCommands>
     
@@ -45,6 +45,21 @@
                                            Style="{StaticResource MainTile}"
                                            CommandParameter="110"
                                            Command="{Binding BuyCommand}"/>
+                            <controls:Tile Title="購入"
+                                           Count="30"
+                                           Style="{StaticResource MainTile}"
+                                           CommandParameter="30"
+                                           Command="{Binding BuyCommand}"/>
+                            <controls:Tile Title="購入"
+                                           Count="350"
+                                           Style="{StaticResource MainTile}"
+                                           CommandParameter="350"
+                                           Command="{Binding BuyCommand}"/>
+                            <controls:Tile Title="チャージ"
+                                           Count="1000"
+                                           Style="{StaticResource MainTile}"
+                                           CommandParameter="1000"
+                                           Command="{Binding ChargeCommand}"/>
                         </WrapPanel>
                     </Grid>
                 </ScrollViewer>
@@ -64,8 +79,32 @@
                 </ScrollViewer>
             </TabItem>
             <TabItem Header="入金">
+                <ScrollViewer>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- 最初のボタンがデフォルトボタンになってしまう対策 -->
+                        <Button IsDefault="True" Grid.Row="0"/>
+                        <localViews:MainChargeView Grid.Row="1"/>
+                    </Grid>
+                </ScrollViewer>
             </TabItem>
             <TabItem Header="出金">
+                <ScrollViewer>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- 最初のボタンがデフォルトボタンになってしまう対策 -->
+                        <Button IsDefault="True" Grid.Row="0"/>
+                        <localViews:MainWithdrawView Grid.Row="1"/>
+                    </Grid>
+                </ScrollViewer>
             </TabItem>
             <TabItem Header="履歴">
             </TabItem>

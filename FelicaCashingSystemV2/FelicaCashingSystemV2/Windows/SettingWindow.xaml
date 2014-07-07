@@ -5,7 +5,7 @@
                       xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       xmlns:behaviours="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
                       xmlns:localViews="clr-namespace:FelicaCashingSystemV2.Views"
-                      Height="450" Width="650"                      
+                      Height="600" Width="650"                      
                       WindowStartupLocation="CenterScreen"
                       ShowMaxRestoreButton="False"
                       ShowMinButton="False"
@@ -20,16 +20,26 @@
         <TextBlock Text="設定"
                    Style="{StaticResource Heading1}"
                    Grid.Row="0"/>
-
-        <TextBlock Grid.Row="1">未実装</TextBlock>
-        <!--
+        
         <TabControl Grid.Row="1">
             <TabItem Header="購入" Visibility="{Binding IsAdmin,Converter={StaticResource BooleanToVisibilityConverter}}">
                 <ScrollViewer Visibility="{Binding IsAdmin,Converter={StaticResource BooleanToVisibilityConverter}}">
-                    <localViews:VersionInformationView/>
+                    <localViews:PageSettingView PageType="Buying"/>
+                </ScrollViewer>
+            </TabItem>
+
+            <TabItem Header="入金" Visibility="{Binding IsAdmin,Converter={StaticResource BooleanToVisibilityConverter}}">
+                <ScrollViewer Visibility="{Binding IsAdmin,Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <localViews:PageSettingView PageType="Charging"/>
+                </ScrollViewer>
+            </TabItem>
+            
+            <TabItem Header="出金" Visibility="{Binding IsAdmin,Converter={StaticResource BooleanToVisibilityConverter}}">
+                <ScrollViewer Visibility="{Binding IsAdmin,Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <localViews:PageSettingView PageType="Withdrawing"/>
                 </ScrollViewer>
             </TabItem>
         </TabControl>
-        -->
+        
     </Grid>
 </controls:MetroWindow>

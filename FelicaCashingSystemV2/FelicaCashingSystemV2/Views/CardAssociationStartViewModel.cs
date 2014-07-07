@@ -18,7 +18,16 @@ namespace FelicaCashingSystemV2.Views
         public ICommand AssociationStartCommand { get; private set; }
         private void AssociationStart()
         {
-            App.Current.StartAssociating();
+            this.ShowConfirmDialog(
+                "カードの関連付けを行いますか?",
+                "関連付け",
+                (result) =>
+                {
+                    if (result == MahApps.Metro.Controls.Dialogs.MessageDialogResult.Affirmative)
+                    {
+                        App.Current.StartAssociating();
+                    }
+                });
         }
     }
 }

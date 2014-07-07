@@ -19,13 +19,24 @@ namespace FelicaCashingSystemV2.Views
     /// <summary>
     /// VersionInformationView.xaml の相互作用ロジック
     /// </summary>
-    public partial class CardAssociationStartView : UserControl
+    public partial class PageSettingView : UserControl
     {
-        public CardAssociationStartView()
+        private PageSettingViewModel vm = new PageSettingViewModel();
+
+        public PageSettingView()
         {
             InitializeComponent();
-            this.DataContext = new CardAssociationStartViewModel();
-            this.SetDialogMessageReceiver();   
+
+            this.DataContext = vm;
+            this.SetDialogMessageReceiver(false);
+        }
+
+        public FelicaData.UiPageType PageType
+        {
+            set
+            {
+                vm.PageType = value;
+            }
         }
     }
 }

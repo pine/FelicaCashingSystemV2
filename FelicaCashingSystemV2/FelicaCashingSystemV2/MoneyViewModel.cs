@@ -11,21 +11,53 @@ namespace FelicaCashingSystemV2
 {
     class MoneyViewModel : MetroWindowViewModelBase
     {
-        public MoneyViewModel()
+        private readonly FelicaData.UiPageType pageType;
+
+        public MoneyViewModel(FelicaData.UiPageType pageType)
         {
+            this.pageType = pageType;
+
+            this.UpdateMoneyTiles();
+            App.Current.UiData.Changed += this.UiData_Changed;
+
             this.BuyCommand = new DelegateCommand<int>(this.Buy);
             this.ChargeCommand = new DelegateCommand<int>(this.Charge);
+            this.WithdrawCommand = new DelegateCommand<int>(this.Withdraw);
         }
 
-        /// <summary>
-        /// 購入処理のロックオブジェクト
-        /// </summary>
-        private object buyingLockObj = new object();
+        private void UiData_Changed(object sender, Type e)
+        {
+            this.UpdateMoneyTiles();
+        }
 
-        /// <summary>
-        /// 購入処理中かどうか
-        /// </summary>
-        private bool isBuying = false;
+        protected virtual void UpdateMoneyTiles()
+        {
+            if (this.pageType != FelicaData.UiPageType.Unknown)
+            {
+                var page = App.Current.UiData.GetPage(this.pageType);
+
+                if (page != null && page.MoneyTiles != null)
+                {
+                    var list = page.MoneyTiles.ToList();
+                    list.Add(-1); // etc
+
+                    this.MoneyTiles = list; // Update
+                    return;
+                }
+            }
+        }
+
+        private List<int> moneyTiles = null;
+        public List<int> MoneyTiles
+        {
+            get { return this.moneyTiles; }
+            set
+            {
+                this.moneyTiles = value;
+                this.OnPropertyChanged("MoneyTiles");
+            }
+        }
+
 
         public ICommand BuyCommand { get; private set; }
 
@@ -36,33 +68,143 @@ namespace FelicaCashingSystemV2
 
         protected void Buy(int money, bool isAnimation)
         {
-            lock (buyingLockObj)
+            this.MoneyExecute(
+                money,
+                () => this.GetExecuteMax(FelicaData.UiPageType.Buying),
+                isAnimation,
+                "購入",
+                (newMoney) =>
+                {
+                    return "「 " + newMoney.ToCommaStringAbs() + " 」 円の商品を購入しました。\n" +
+                            "残高は 「 " + (App.Current.User.Money - newMoney).ToCommaString() + " 」 円です。";
+                },
+                "購入に失敗しました",
+                (newMoney) =>
+                {
+                    return App.Current.UserData.Buy(App.Current.User.Id, newMoney);
+                });
+        }
+
+        public ICommand ChargeCommand { get; private set; }
+        private void Charge(int money)
+        {
+            this.MoneyExecute(
+                money,
+                () => this.GetExecuteMax(FelicaData.UiPageType.Charging),
+                true,
+                "チャージ",
+                (newMoney) =>
+                {
+                    return "「 " + newMoney.ToCommaStringAbs() + " 」 円をチャージしました。\n" +
+                            "残高は 「 " + (App.Current.User.Money + newMoney).ToCommaString() + " 」 円です。";
+                },
+                "チャージに失敗しました",
+                (newMoney) =>
+                {
+                    return App.Current.UserData.Charge(App.Current.User.Id, newMoney);
+                });
+        }
+
+        public ICommand WithdrawCommand { get; private set; }
+        private void Withdraw(int money) 
+        {
+            this.MoneyExecute(
+                money,
+                () => this.GetExecuteMax(FelicaData.UiPageType.Withdrawing),
+                true,
+                "出金",
+                (newMoney) =>
+                {
+                    return "「 " + newMoney.ToCommaStringAbs() + " 」 円を引き出しました。\n" +
+                            "残高は 「 " + (App.Current.User.Money - newMoney).ToCommaString() + " 」 円です。";
+                },
+                "出金に失敗しました",
+                (newMoney) =>
+                {
+                    return App.Current.UserData.Withdraw(App.Current.User.Id, newMoney);
+                });
+        }
+
+        /// <summary>
+        /// 金額を選択する。
+        /// </summary>
+        private void SelectMoney(int max, Action<int> cb)
+        {
+            Debug.WriteLine("SelectMoney");
+            App.Current.ShowSelectingMoneyWindow(max, cb);
+        }
+
+        /// <summary>
+        /// 取引の最大値を取得する
+        /// </summary>
+        /// <param name="pageType"></param>
+        private int GetExecuteMax(FelicaData.UiPageType pageType)
+        {
+            var page = App.Current.UiData.GetPage(pageType);
+            return page.MaxMoney;
+        }
+
+        /// <summary>
+        /// 金銭処理のロックオブジェクト
+        /// </summary>
+        private object executingLockObject = new object();
+
+        /// <summary>
+        /// 金銭処理中かどうか
+        /// </summary>
+        private bool isExecuting = false;
+
+        /// <summary>
+        /// 金銭処理を行うメソッド
+        /// </summary>
+        /// <param name="money"></param>
+        /// <param name="isAnimation"></param>
+        /// <param name="actionName"></param>
+        /// <param name="succeedMessage">成功メッセージを生成するデリゲート、引数は処理金額</param>
+        /// <param name="errorMessage"></param>
+        /// <param name="moneyAction">実際の処理を行うデリゲート</param>
+        private void MoneyExecute(
+            int money,
+            Func<int> max,
+            bool isAnimation,
+            string actionName,
+            Func<int, string> succeedMessage,
+            string errorMessage,
+            Func<int, bool> moneyAction)
+        {
+            // 複数同時並行は禁止
+            lock (executingLockObject)
             {
-                if (this.isBuying) { return; }
-                this.isBuying = true;
+                if (this.isExecuting) { return; }
+                this.isExecuting = true;
 
-                Debug.WriteLine("Buy money = " + money.ToString());
-
+                // エラー
                 if (money <= 0 && money != -1)
                 {
-                    this.isBuying = false;
+                    this.isExecuting = false;
                     throw new ArgumentOutOfRangeException("money");
                 }
 
                 // 購入金額選択
                 if (money == -1)
                 {
-                    this.SelectMoney((newMoney) =>
+                    this.SelectMoney(max(), (newMoney) =>
                     {
-                        Debug.WriteLine("SelectMoney succeed: money = " + newMoney);
-
                         if (newMoney > 0)
                         {
-                            this.Buy(newMoney); // 非同期処理なため、デッドロックはしない
+                            // SelectMoney が非同期処理なため、デッドロックはしない
+                            this.MoneyExecute(
+                                newMoney,
+                                max,
+                                isAnimation,
+                                actionName,
+                                succeedMessage,
+                                errorMessage,
+                                moneyAction);
                         }
                     });
 
-                    this.isBuying = false;
+                    this.isExecuting = false;
                     return;
                 }
 
@@ -70,33 +212,29 @@ namespace FelicaCashingSystemV2
                 if (App.Current.User != null)
                 {
                     this.ShowMessageBox(
-                            "「 " + money.ToCommaStringAbs() + " 」 円の商品を購入しました。\n" +
-                            "残高は 「 " + (App.Current.User.Money - money).ToCommaString() + " 」 円です。",
-                            "購入成功",
+                            succeedMessage(money),
+                            actionName + "成功",
                             isAnimation,
                             () =>
                             {
-                                this.isBuying = false;
+                                this.isExecuting = false;
                             });
 
                     Task.Run(() =>
                     {
-                        if (App.Current.UserData.Buy(App.Current.User.Id, money))
+                        if (moneyAction(money))
                         {
-                            Debug.WriteLine("Buying succeed");
                             App.Current.UpdateUser();
                         }
                         else
                         {
-                            Debug.WriteLine("Buying error");
-
                             this.ShowMessageBox(
-                                "商品の購入でエラーが発生しました。正しく処理されているか、履歴を確認してください。",
-                                "購入失敗",
+                                errorMessage,
+                                actionName + "失敗",
                                 isAnimation,
                                 () =>
                                 {
-                                    this.isBuying = false;
+                                    this.isExecuting = false;
                                 });
                         }
                     });
@@ -104,40 +242,5 @@ namespace FelicaCashingSystemV2
             }
         }
 
-        public ICommand ChargeCommand { get; private set; }
-        private void Charge(int money)
-        {
-            if (money < 0) { throw new ArgumentOutOfRangeException("money"); }
-            if (money == 0) { return; }
-
-            this.ChargeOrWithdraw(money);
-        }
-
-        public ICommand WithdrawCommand { get; private set; }
-        private void Withdraw(int money) 
-        {
-            if (money <= 0) { throw new ArgumentOutOfRangeException("money"); }
-            if (money == 0) { return; }
-
-            this.ChargeOrWithdraw(-money);
-        }
-
-        /// <summary>
-        /// 入金及び出勤の処理
-        /// </summary>
-        /// <param name="money"></param>
-        protected void ChargeOrWithdraw(int money)
-        {
-
-        }
-
-        /// <summary>
-        /// 金額を選択する。
-        /// </summary>
-        private void SelectMoney(Action<int> cb)
-        {
-            Debug.WriteLine("SelectMoney");
-            App.Current.ShowSelectingMoneyWindow(cb);  
-        }
     }
 }

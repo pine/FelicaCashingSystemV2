@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="FelicaCashingSystemV2.Views.PageSettingView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:commons="clr-namespace:WpfCommonds;assembly=WpfCommonds"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <Style TargetType="{x:Type TextBox}"
+                       BasedOn="{StaticResource {x:Type TextBox}}"
+                       x:Key="MoneyTextArea">
+            <Setter Property="AcceptsReturn" Value="True"/>
+            <Setter Property="Width" Value="300"/>
+            <Setter Property="Height" Value="150"/>
+            <Setter Property="Margin" Value="0,10,0,10"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+        </Style>
+
+        <Style TargetType="{x:Type Button}"
+                       BasedOn="{StaticResource {x:Type Button}}"
+                       x:Key="SaveButton">
+            <Setter Property="Margin" Value="0,25,0,0"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+        </Style>
+    </UserControl.Resources>
+    
+    <StackPanel HorizontalAlignment="Left">
+        <TextBlock Style="{StaticResource Heading2}">自由入力限度額</TextBlock>
+        <TextBlock>自由入力できる金額の限度額を設定します。0 は無制限です。</TextBlock>
+
+        <StackPanel Orientation="Horizontal"
+                                    Margin="15,15,15,30">
+            <TextBlock VerticalAlignment="Center"
+                       Margin="0,0,15,0">金額</TextBlock>
+            <TextBox Width="200"
+                     Text="{Binding MaxMoney,UpdateSourceTrigger=PropertyChanged}"/>
+        </StackPanel>
+
+        <TextBlock Style="{StaticResource Heading2}">金額一覧</TextBlock>
+        <TextBlock>
+            表示されている金額の一覧を設定します。自然数を改行区切りで、入力してください。<LineBreak/>
+            入力された順に、表示されます。自由入力は自動的に最後の項目として追加されます。
+        </TextBlock>
+
+        <TextBox Style="{StaticResource MoneyTextArea}"
+                 Text="{Binding MoneyList,UpdateSourceTrigger=PropertyChanged}"/>
+
+        <TextBlock Style="{StaticResource ErrorMessageText}"
+                   Text="{Binding ErrorMessage}"/>
+
+        <Button Content="設定を保存"
+                Style="{StaticResource SaveButton}"
+                Command="{Binding SaveCommand}"/>
+    </StackPanel>
+</UserControl>

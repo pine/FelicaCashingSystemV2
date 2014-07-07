@@ -22,9 +22,9 @@ namespace FelicaCashingSystemV2
 
         private FelicaData.DatabaseManager DatabaseManager { get; set; }
         public FelicaData.UserData UserData { get; private set; }
+        public FelicaData.UiData UiData { get; private set; }
 
         public FelicaData.Card Card { get; private set; }
-        
         public FelicaMail.Mailer Mailer { get; private set; }
 
         private FelicaData.User user = null;
@@ -39,7 +39,7 @@ namespace FelicaCashingSystemV2
         }
 
         public event EventHandler<FelicaData.User> UserChanged;
-
+        
         public static new App Current {
             get
             {
@@ -176,9 +176,12 @@ namespace FelicaCashingSystemV2
             }
         }
 
-        public void ShowSelectingMoneyWindow(Action<int> cb)
+        public void ShowSelectingMoneyWindow(int max, Action<int> cb)
         {
             this.ShowDialog<Windows.SelectingMoneyWindow>(
+                beforeAction: (window) =>{
+                    window.MaxMoney = max;
+                },
                 afterAction: (window) =>
                 {
                     cb(window.Money);
@@ -313,6 +316,11 @@ namespace FelicaCashingSystemV2
             {
                 this.DatabaseManager = new FelicaData.DatabaseManager("Database");
                 this.UserData = new FelicaData.UserData(this.DatabaseManager);
+                this.UiData = new FelicaData.UiData(this.DatabaseManager);
+
+//                var page = this.UiData.GetPage(FelicaData.UiPageType.Buying);
+//                page.MoneyTiles = new[] { 1000, 500, 100 };
+//                this.UiData.SavePage(page);
             }
             catch (FelicaData.DatabaseException dbe)
             {

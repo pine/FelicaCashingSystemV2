@@ -13,6 +13,7 @@ namespace FelicaCashingSystemV2.Windows
             InitializeComponent();
             this.SetEscClosableWindow();
 
+            Messenger.Default.Unregister<DialogMessage>(typeof(Views.PageSettingViewModel));
             this.DataContext = new SettingWindowModel();
         }
     }

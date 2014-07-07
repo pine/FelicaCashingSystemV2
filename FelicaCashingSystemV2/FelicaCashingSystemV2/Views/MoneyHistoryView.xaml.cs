@@ -12,20 +12,19 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WpfCommonds;
 
 namespace FelicaCashingSystemV2.Views
 {
     /// <summary>
     /// VersionInformationView.xaml の相互作用ロジック
     /// </summary>
-    public partial class CardAssociationStartView : UserControl
+    public partial class MoneyHistoryView : UserControl
     {
-        public CardAssociationStartView()
+        public MoneyHistoryView()
         {
             InitializeComponent();
-            this.DataContext = new CardAssociationStartViewModel();
-            this.SetDialogMessageReceiver();   
+            this.DataContext = new UserListViewModel();
         }
+
     }
 }

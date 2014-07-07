@@ -15,7 +15,7 @@ namespace FelicaCashingSystemV2.Windows
     class MainWindowViewModel : MoneyViewModel
     {
 
-        public MainWindowViewModel()
+        public MainWindowViewModel() : base(FelicaData.UiPageType.Home)
         {
             this.MainBuyCommand = new DelegateCommand<int>(this.MainBuy);
         }
@@ -30,5 +30,7 @@ namespace FelicaCashingSystemV2.Windows
         {
             this.Buy(money, false);
         }
+
+
     }
 }

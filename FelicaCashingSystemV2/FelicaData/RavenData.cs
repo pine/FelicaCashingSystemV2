@@ -151,7 +151,7 @@ namespace FelicaData
 
         #region Changed Event
 
-        public EventHandler<Type> Changed;
+        public event EventHandler<Type> Changed;
 
         protected void OnChanged(Type type)
         {

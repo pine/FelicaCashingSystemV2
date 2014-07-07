@@ -23,7 +23,8 @@ namespace FelicaCashingSystemV2.Views
         public MainBuyView()
         {
             InitializeComponent();
+            this.DataContext = new MainBuyViewModel();
+            this.SetDialogMessageReceiver();
         }
-
     }
 }

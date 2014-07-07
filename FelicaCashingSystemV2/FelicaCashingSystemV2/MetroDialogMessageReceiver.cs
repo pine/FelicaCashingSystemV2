@@ -15,9 +15,13 @@ namespace FelicaCashingSystemV2
 {
     public static class MetroDialogMessageReceiver
     {
-        public static void SetDialogMessageReceiver(this FrameworkElement element)
+        public static void SetDialogMessageReceiver(this FrameworkElement element, bool isUnregistred = true)
         {
-            Messenger.Default.Unregister<MetroDialogMessage>(element.GetType());
+            if (isUnregistred)
+            {
+                Messenger.Default.Unregister<MetroDialogMessage>(element.GetType());
+            }
+
             Messenger.Default.Register<MetroDialogMessage, MessageDialogResult>(
                 element,
                 (message, cb) => {

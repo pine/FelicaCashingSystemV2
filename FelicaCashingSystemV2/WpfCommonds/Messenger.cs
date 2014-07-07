@@ -81,9 +81,9 @@ namespace WpfCommonds
             });
         }
 
-        public void Unregister<T>(Type type)
+        public void Unregister<TMessage>(Type viewOrViewModel)
         {
-            list.RemoveAll(x => x.Type == typeof(T) && (x.View.GetType() == type || x.ViewModel.GetType() == type));
+            list.RemoveAll(x => x.Type == typeof(TMessage) && (x.View.GetType() == viewOrViewModel || x.ViewModel.GetType() == viewOrViewModel));
         }
 
         public void Send<T>(ViewModelBase sender, T message)

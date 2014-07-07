@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="FelicaCashingSystemV2.Views.MainBuyView"
+﻿<UserControl x:Class="FelicaCashingSystemV2.Views.MainChargeView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -16,9 +16,9 @@
              ScrollViewer.HorizontalScrollBarVisibility="Disabled">
         <ListBox.ItemTemplate>
             <DataTemplate>
-                <controls:Tile Title="購入"
+                <controls:Tile Title="チャージ"
                                Count="{Binding Converter={StaticResource TileMoneyToStringConverter}}"
-                               Command="{Binding Data.BuyCommand,Source={StaticResource Proxy}}"
+                               Command="{Binding Data.ChargeCommand,Source={StaticResource Proxy}}"
                                CommandParameter="{Binding}"
                                Style="{StaticResource MainTile}"/>
             </DataTemplate>

@@ -27,6 +27,12 @@ namespace FelicaCashingSystemV2.Windows
             }
         }
 
+        public int MaxMoney
+        {
+            get;
+            set;
+        }
+
         private string errorMessage = string.Empty;
         public string ErrorMessage
         {
@@ -74,6 +80,12 @@ namespace FelicaCashingSystemV2.Windows
             if (money <= 0)
             {
                 this.ErrorMessage = "金額は 「 1 」 円以上を指定してください。";
+                return;
+            }
+
+            if (this.MaxMoney != 0 && money > this.MaxMoney)
+            {
+                this.ErrorMessage = "金額は 「 " + this.MaxMoney.ToCommaStringAbs() + " 」 円以下で指定してください。";
                 return;
             }
 

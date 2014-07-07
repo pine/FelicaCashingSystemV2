@@ -22,6 +22,58 @@ namespace FelicaData
             string comment = null
             )
         {
+            if (money < 0) { return false; }
+            return this.MoneyExecute(userId, -money, performerUserId, comment, true);
+        }
+
+        /// <summary>
+        /// チャージ処理
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="money"></param>
+        /// <returns></returns>
+        public bool Charge(
+            int userId,
+            int money,
+            int performerUserId = 0,
+            string comment = null
+            )
+        {
+            if (money < 0) { return false; }
+            return this.MoneyExecute(userId, money, performerUserId, comment, false);
+        }
+
+        /// <summary>
+        /// 出金処理
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="money"></param>
+        /// <returns></returns>
+        public bool Withdraw(
+            int userId,
+            int money,
+            int performerUserId = 0,
+            string comment = null
+            )
+        {
+            if (money < 0) { return false; }
+            return this.MoneyExecute(userId, -money, performerUserId, comment, false);
+        }
+
+        /// <summary>
+        /// 金銭処理
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="money"></param>
+        /// <returns></returns>
+        private bool MoneyExecute(
+            int userId,
+            int money,
+            int performerUserId = 0,
+            string comment = null,
+            bool isBuy = false
+            )
+        {
             try
             {
                 User performerUser = null;
@@ -55,10 +107,11 @@ namespace FelicaData
                         UserId = userId,
                         PerformerUserId = performerUserId,
                         Money = money,
-                        Comment = comment
+                        Comment = comment,
+                        IsBuy = isBuy
                     };
 
-                    user.Money -= money;
+                    user.Money += money;
 
                     this.UpdateUser(user);
                     this.CreateMoneyHistory(history);

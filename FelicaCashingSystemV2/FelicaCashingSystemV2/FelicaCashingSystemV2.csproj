@@ -77,11 +77,28 @@
     <Compile Include="MetroDialogMessage.cs" />
     <Compile Include="MetroWindowViewModelBase.cs" />
     <Compile Include="MetroDialogMessageReceiver.cs" />
+    <Compile Include="TileMoneyToStringConverter.cs" />
     <Compile Include="Views\CardAssociationStartView.xaml.cs">
       <DependentUpon>CardAssociationStartView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CardAssociationStartViewModel.cs" />
+    <Compile Include="Views\PageSettingView.xaml.cs">
+      <DependentUpon>PageSettingView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CardListViewModel.cs" />
+    <Compile Include="Views\MainWithdrawView.xaml.cs">
+      <DependentUpon>MainWithdrawView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainWithdrawViewModel.cs" />
+    <Compile Include="Views\MainChargeViewModel.cs" />
+    <Compile Include="Views\MainChargeView.xaml.cs">
+      <DependentUpon>MainChargeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainBuyViewModel.cs" />
+    <Compile Include="Views\MoneyHistoryView.xaml.cs">
+      <DependentUpon>MoneyHistoryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PageSettingViewModel.cs" />
     <Compile Include="Views\UserListView.xaml.cs">
       <DependentUpon>UserListView.xaml</DependentUpon>
     </Compile>
@@ -158,6 +175,22 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\CardAssociationStartView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\PageSettingView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\MainWithdrawView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\MainChargeView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\MoneyHistoryView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -21,12 +21,15 @@ namespace FelicaCashingSystemV2.Windows
     /// </summary>
     public partial class SelectingMoneyWindow : MetroWindow
     {
+        private SelectingMoneyWindowViewModel vm =
+            new SelectingMoneyWindowViewModel();
+
         public SelectingMoneyWindow()
         {
             InitializeComponent();
             this.SetEscClosableWindow();
 
-            this.DataContext = new SelectingMoneyWindowViewModel();
+            this.DataContext = vm;
             this.SetDialogMessageReceiver();
 
             this.RegisterMessenger<SelectingMoneyMessage>(message =>
@@ -44,6 +47,17 @@ namespace FelicaCashingSystemV2.Windows
         /// 選択された金額。入力が正しく終了しなかった場合は 0 が格納される。
         /// </summary>
         public int Money { get; private set; }
+
+        /// <summary>
+        /// 選択可能な最大値
+        /// </summary>
+        public int MaxMoney 
+        {
+            set
+            {
+                this.vm.MaxMoney = value;
+            }
+        }
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
