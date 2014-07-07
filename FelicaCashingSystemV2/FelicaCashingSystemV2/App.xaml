@@ -20,6 +20,7 @@
             </ResourceDictionary.MergedDictionaries>
 
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+            <commons:BooleanToInverseVisibilityConverter x:Key="BooleanToInverseVisibilityConverter"/>
             <local:TileMoneyToStringConverter x:Key="TileMoneyToStringConverter"/>
             <commons:DualPasswordBoxMultiConverter x:Key="DualPasswordBoxMultiConverter"/>
             <commons:MinusToColorConverter x:Key="MinusToColorConverter"/>

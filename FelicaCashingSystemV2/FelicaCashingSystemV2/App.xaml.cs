@@ -55,6 +55,19 @@ namespace FelicaCashingSystemV2
             }
         }
 
+        public void UpdateCard()
+        {
+            if (this.Card != null)
+            {
+                this.Card = this.UserData.GetCard(this.Card.Id);
+            }
+
+            else if (this.UnregisteredCard != null)
+            {
+                this.Card = this.UserData.GetCard(this.UnregisteredCard.Idm);
+            }
+        }
+
         protected void ShowWindow<T>()
             where T: Window, new()
         {
@@ -215,11 +228,14 @@ namespace FelicaCashingSystemV2
             this.ShowWindow<Windows.AssociationWaitingWindow>();
         }
 
-        public void ShowAssociationWindow(FelicaData.User user)
+        public void ShowAssociationWindow(
+            FelicaData.User user,
+            FelicaSharp.EasyFelicaCardSetEventHandlerArgs unregisteredCard)
         {
             this.CloseAllWindows();
 
             this.User = user;
+            this.UnregisteredCard = unregisteredCard;
             this.ShowWindow<Windows.AssociationWindow>();
         }
 
@@ -233,7 +249,6 @@ namespace FelicaCashingSystemV2
 
         public void EndAssociating()
         {
-            this.User = null;
             this.associationStarted = false;
         }
 
@@ -309,9 +324,6 @@ namespace FelicaCashingSystemV2
                 );
 #endif
 
-            this.felica = new FelicaSharp.EasyFelicaReader();
-            this.felica.FelicaCardSet += felica_FelicaCardSet;
-
             try
             {
                 this.DatabaseManager = new FelicaData.DatabaseManager("Database");
@@ -332,6 +344,7 @@ namespace FelicaCashingSystemV2
                     );
 
                 this.Shutdown(1);
+                return;
             }
 
 #if DEBUG
@@ -402,6 +415,10 @@ namespace FelicaCashingSystemV2
                 settings.SmtpPassword
                 );
 
+
+            this.felica = new FelicaSharp.EasyFelicaReader();
+            this.felica.FelicaCardSet += felica_FelicaCardSet;
+
             try
             {
                 this.felica.Connect();
@@ -461,13 +478,15 @@ namespace FelicaCashingSystemV2
             Debug.WriteLine("felica_FelicaCardSet");
             Debug.WriteLine("Idm = " + e.Idm + ", Pmm = " + e.Pmm);
 
+            if (this.UserData == null) { return; }
+
             this.Card = this.UserData.GetCard(e.Idm);
 
             // 関連付け
             // 既にカードが登録されていないこと
             if (this.associationStarted && this.User != null && this.Card == null)
             {
-                this.ShowAssociationWindow(this.User);
+                this.ShowAssociationWindow(this.User, e);
                 return;
             }
 

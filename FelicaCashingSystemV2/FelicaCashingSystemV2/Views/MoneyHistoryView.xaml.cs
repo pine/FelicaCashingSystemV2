@@ -23,7 +23,8 @@ namespace FelicaCashingSystemV2.Views
         public MoneyHistoryView()
         {
             InitializeComponent();
-            this.DataContext = new UserListViewModel();
+            this.DataContext = new MoneyHistoryViewModel();
+            this.SetDialogMessageReceiver();
         }
 
     }

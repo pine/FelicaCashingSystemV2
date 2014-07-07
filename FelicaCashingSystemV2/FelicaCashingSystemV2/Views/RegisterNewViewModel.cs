@@ -134,6 +134,7 @@ namespace FelicaCashingSystemV2.Views
             });
 
             // 登録したユーザーでログイン
+            App.Current.UpdateCard();
             App.Current.ShowMainWindow(registeredUser);
         }
     }

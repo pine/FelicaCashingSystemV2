@@ -29,5 +29,10 @@ namespace FelicaCashingSystemV2.Windows
             this.DataContext = new AssociationWindowViewModel();
             this.SetDialogMessageReceiver();
         }
+
+        private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.PART_CardName.Focus();
+        }
     }
 }

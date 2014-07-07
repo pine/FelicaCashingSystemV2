@@ -78,10 +78,12 @@
     <Compile Include="MetroWindowViewModelBase.cs" />
     <Compile Include="MetroDialogMessageReceiver.cs" />
     <Compile Include="TileMoneyToStringConverter.cs" />
+    <Compile Include="UserIdToUserNameConverter.cs" />
     <Compile Include="Views\CardAssociationStartView.xaml.cs">
       <DependentUpon>CardAssociationStartView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CardAssociationStartViewModel.cs" />
+    <Compile Include="Views\MoneyHistoryViewModel.cs" />
     <Compile Include="Views\PageSettingView.xaml.cs">
       <DependentUpon>PageSettingView.xaml</DependentUpon>
     </Compile>

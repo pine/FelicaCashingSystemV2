@@ -47,6 +47,7 @@
     <Compile Include="BindingProxy.cs" />
     <Compile Include="BitmapSerializer.cs" />
     <Compile Include="BitmapToBitmapSourceConverter.cs" />
+    <Compile Include="BooleanToInverseVisibilityConverter.cs" />
     <Compile Include="BooleanToStringConverter.cs" />
     <Compile Include="ByteArrayToImageSourceConverter.cs" />
     <Compile Include="BooleanToValueConverter.cs" />

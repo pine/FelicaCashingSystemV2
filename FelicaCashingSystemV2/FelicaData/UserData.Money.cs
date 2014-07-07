@@ -129,9 +129,16 @@ namespace FelicaData
             return false; // 例外発生
         }
 
+        public MoneyHistory GetMoneyHistory(int id)
+        {
+            return this.Query<MoneyHistory>(x => x.Id == id).FirstOrDefault();
+        }
+
         public MoneyHistory CreateMoneyHistory(MoneyHistory history)
         {
             var user = this.GetUser(history.UserId);
+
+            history.CreatedAt = DateTime.Now;
 
             if (user != null)
             {
@@ -146,5 +153,34 @@ namespace FelicaData
             return this.Query<MoneyHistory>(h => h.UserId == userId);
         }
 
+        public void Cancel(MoneyHistory history)
+        {
+            var sameIdHistory = this.GetMoneyHistory(history.Id);
+            var sameUser = this.GetUser(history.UserId);
+
+            if (sameIdHistory == null)
+            {
+                throw new DatabaseException("無効な履歴です。");
+            }
+
+            if (sameIdHistory.IsCancel)
+            {
+                throw new DatabaseException("既にキャンセルされています。");
+            }
+
+            if (sameUser == null)
+            {
+                throw new DatabaseException("ユーザーが存在しません。");
+            }
+
+            // バリデーション通過
+
+            sameUser.Money -= history.Money; // 取り消し (逆の処理)
+            sameIdHistory.IsCancel = true;
+
+            // 更新
+            this.UpdateUser(sameUser);
+            this.Update(sameIdHistory);
+        }
     }
 }

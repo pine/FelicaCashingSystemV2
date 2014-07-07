@@ -35,15 +35,15 @@ namespace FelicaCashingSystemV2
             if (this.pageType != FelicaData.UiPageType.Unknown)
             {
                 var page = App.Current.UiData.GetPage(this.pageType);
+                var list = new List<int>();
 
                 if (page != null && page.MoneyTiles != null)
                 {
-                    var list = page.MoneyTiles.ToList();
-                    list.Add(-1); // etc
-
-                    this.MoneyTiles = list; // Update
-                    return;
+                    list.AddRange(page.MoneyTiles);
                 }
+
+                list.Add(-1); // etc
+                this.MoneyTiles = list; // Update
             }
         }
 

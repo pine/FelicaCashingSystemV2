@@ -56,7 +56,7 @@
                                            CommandParameter="350"
                                            Command="{Binding BuyCommand}"/>
                             <controls:Tile Title="チャージ"
-                                           Count="1000"
+                                           Count="1,000"
                                            Style="{StaticResource MainTile}"
                                            CommandParameter="1000"
                                            Command="{Binding ChargeCommand}"/>
@@ -107,6 +107,7 @@
                 </ScrollViewer>
             </TabItem>
             <TabItem Header="履歴">
+                <localViews:MoneyHistoryView/>
             </TabItem>
             
             <TabItem Header="一覧">

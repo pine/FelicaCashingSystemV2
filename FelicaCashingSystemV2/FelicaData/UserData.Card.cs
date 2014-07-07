@@ -93,6 +93,30 @@ namespace FelicaData
             this.Delete(card);
         }
 
+        /// <summary>
+        /// カードを既存ユーザーに関連付ける
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="card"></param>
+        public Card Assoate(Card card)
+        {
+            var sameIdUser = this.GetUser(card.UserId);
+
+            if (sameIdUser == null)
+            {
+                throw new DatabaseException("ユーザーが存在しません");
+            }
+
+            var sameUidCard = this.GetCard(card.Uid);
+
+            if (sameUidCard != null)
+            {
+                throw new DatabaseException("カードが既に登録されています。");
+            }
+
+            return this.CreateCard(card);
+        }
+
         #endregion
     }
 }

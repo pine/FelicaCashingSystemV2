@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace FelicaData
 {
+    [Serializable]
     public class MoneyHistory : RavenModel
     {
         public MoneyHistory()
@@ -15,11 +16,17 @@ namespace FelicaData
             this.Comment = string.Empty;
         }
 
+        public MoneyHistory Clone()
+        {
+            return (MoneyHistory)this.MemberwiseClone();
+        }
+
         public int UserId { get; set; }
         public int PerformerUserId { get; set; }
         public bool IsCancel { get; set; }
         public bool IsBuy { get; set; }
         public int Money { get; set; }
         public string Comment { get; set; }
+        public DateTime CreatedAt { get; set; }
     }
 }

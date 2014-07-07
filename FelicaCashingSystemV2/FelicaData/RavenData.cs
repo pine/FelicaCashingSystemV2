@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Raven.Client;
 using Raven.Client.Embedded;
 using System.Diagnostics;
+using Raven.Abstractions.Indexing;
 
 namespace FelicaData
 {
@@ -96,8 +97,8 @@ namespace FelicaData
             {
                 var result = session.Query<T>()
                     .Customize(x => x.WaitForNonStaleResultsAsOfLastWrite()) // 書き込みを待機
-                    .OrderBy(x => x.Id)
                     .Where(predicate)
+                    .OrderBy(x => x.Id)
                     .ToList();
 
                 // 変更を書き込み済み

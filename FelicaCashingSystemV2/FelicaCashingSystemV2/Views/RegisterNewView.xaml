@@ -32,7 +32,7 @@
                      Grid.Row="0"
                      Margin="10,5"
                      Width="250"
-                     Text="{Binding UserName}"/>
+                     Text="{Binding UserName,UpdateSourceTrigger=PropertyChanged}"/>
 
             <TextBlock Grid.Column="0"
                        Grid.Row="1"
@@ -44,7 +44,7 @@
                      Grid.Row="1"
                      Margin="10,5"
                      Width="250"
-                     Text="{Binding Email}"/>
+                     Text="{Binding Email,UpdateSourceTrigger=PropertyChanged}"/>
 
             <TextBlock Grid.Column="0"
                        Grid.Row="2"

@@ -30,5 +30,17 @@ namespace WpfCommonds
             }
             return source;
         }
+
+        public static BitmapSource ToBitmapSource(this byte[] imageData)
+        {
+            var bitmap = imageData.ToBitmap();
+
+            if (bitmap != null)
+            {
+                return bitmap.ToBitmapSource();
+            }
+
+            return null;
+        }
     }
 }

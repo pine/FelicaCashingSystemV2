@@ -7,7 +7,7 @@
                       ShowMaxRestoreButton="False"
                       ShowMinButton="False"
                       WindowStartupLocation="CenterScreen"
-                      Style="{StaticResource BasicWindow}">
+                      Style="{StaticResource BasicWindow}" Loaded="MetroWindow_Loaded">
     <Grid Style="{StaticResource ContentRoot}">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -27,7 +27,8 @@
                             Margin="0,0,0,30">
                     <Image Style="{StaticResource AvatarImage}"
                            Margin="0,0,15,0"
-                           Visibility="{Binding AvatorSource,Converter={StaticResource NullToVisibilityConverter}}"/>
+                           Source="{Binding AvatarSource}"
+                           Visibility="{Binding AvatarSource,Converter={StaticResource NullToVisibilityConverter}}"/>
                     <StackPanel Orientation="Vertical">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Margin="0,0,10,0">名前</TextBlock>
@@ -41,6 +42,7 @@
                                     <SolidColorBrush Color="{Binding Money,Converter={StaticResource MinusToColorConverter}}"/>
                                 </TextBlock.Foreground>
                             </TextBlock>
+                            <TextBlock>円</TextBlock>
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>
@@ -51,12 +53,19 @@
                 <StackPanel Orientation="Horizontal"
                             Margin="0,10,0,35">
                     <TextBlock VerticalAlignment="Center" Margin="0,0,10,0">カード名</TextBlock>
-                    <TextBox Text="{Binding CardName}"
+                    <TextBox x:Name="PART_CardName"
+                             Text="{Binding CardName,UpdateSourceTrigger=PropertyChanged}"
                              VerticalAlignment="Center" Width="200"/>
                 </StackPanel>
                 
+                <TextBlock Margin="0,0,0,10" 
+                           Style="{StaticResource ErrorMessageText}"
+                           Text="{Binding ErrorMessage}"/>
+                
                 <Button Content="関連付ける"
-                        HorizontalAlignment="Right"/>
+                        HorizontalAlignment="Right"
+                        Command="{Binding AssosiateCommand}"
+                        IsDefault="True"/>
             </StackPanel>
         </ScrollViewer>
     </Grid>

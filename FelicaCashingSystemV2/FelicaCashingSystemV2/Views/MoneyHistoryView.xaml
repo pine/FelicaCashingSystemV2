@@ -4,32 +4,31 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:commons="clr-namespace:WpfCommonds;assembly=WpfCommonds"
+             xmlns:local="clr-namespace:FelicaCashingSystemV2"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
              x:Name="viewUserList">
-    <DataGrid ItemsSource="{Binding Users}" 
+    <UserControl.Resources>
+        <commons:BindingProxy x:Key="Proxy" Data="{Binding}"/>
+        <local:UserIdToUserNameConverter x:Key="UserIdToUserNameConverter"/>
+    </UserControl.Resources>
+    
+    <DataGrid ItemsSource="{Binding MoneyHistories}" 
               AutoGenerateColumns="False"
               CanUserAddRows="False"
               CanUserDeleteRows="False"
+              CanUserSortColumns="False"
               IsReadOnly="True">
         <DataGrid.Resources>
             <commons:BindingProxy x:Key="Proxy" Data="{Binding}"/>
         </DataGrid.Resources>
 
         <DataGrid.Columns>
-            <DataGridTemplateColumn Header="画像">
-                <DataGridTemplateColumn.CellTemplate>
-                    <DataTemplate>
-                        <Image Source="{Binding Avatar,Converter={StaticResource ByteArrayToImageSourceConverter}}"
-                               Style="{StaticResource ThumbnailAvatarImage}"/>
-                    </DataTemplate>
-                </DataGridTemplateColumn.CellTemplate>
-            </DataGridTemplateColumn>
-            <DataGridTextColumn Header="名前"
-                                Binding="{Binding Name}"/>
+            <DataGridTextColumn Header="実行者"
+                                Binding="{Binding UserId,Converter={StaticResource UserIdToUserNameConverter}}"/>
+            
             <DataGridTextColumn Header="金額"
-                                Binding="{Binding Money,StringFormat=#\,0}"
-                                SortDirection="Ascending">
+                                Binding="{Binding Money,StringFormat=#\,0}">
                 <DataGridTextColumn.ElementStyle>
                     <Style TargetType="{x:Type TextBlock}">
                         <Setter Property="TextAlignment" Value="Right"/>
@@ -41,32 +40,28 @@
                     </Style>
                 </DataGridTextColumn.ElementStyle>
             </DataGridTextColumn>
-            <DataGridTextColumn Header="管理者"
-                                Binding="{Binding IsAdmin,Converter={StaticResource BooleanToCircleNullStringConverter}}">
+
+            <DataGridTextColumn Header="購入"
+                                Binding="{Binding IsBuy,Converter={StaticResource BooleanToCircleNullStringConverter}}">
                 <DataGridTextColumn.ElementStyle>
                     <Style TargetType="{x:Type TextBlock}">
-                        <Setter Property="TextAlignment" Value="Center"/>
+                        <Setter Property="HorizontalAlignment" Value="Center"/>
                     </Style>
                 </DataGridTextColumn.ElementStyle>
             </DataGridTextColumn>
-                
-            
-            <DataGridTemplateColumn Header="管理"
-                                    Visibility="{Binding Data.IsAdmin,Converter={StaticResource BooleanToVisibilityConverter},Source={StaticResource Proxy}}">
+            <DataGridTextColumn Header="日時"
+                                Binding="{Binding CreatedAt,StringFormat=\{0:yyyy/dd/MM HH:mm:ss\}}"/>
+
+            <DataGridTemplateColumn Header="キャンセル">
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>
-                        <Button Content="管理"
-                                Command="{Binding Data.AdministerCommand,Source={StaticResource Proxy}}"
-                                CommandParameter="{Binding}">
-                            
-                            <!-- 自分自身を除く -->
-                            <Button.Visibility>
-                                <MultiBinding Converter="{StaticResource EqualsToVisibilityConverter}">
-                                    <Binding Path="Id"/>
-                                    <Binding Path="Data.CurrentUserId" Source="{StaticResource Proxy}"/>
-                                </MultiBinding>
-                            </Button.Visibility>
-                        </Button>
+                        <Grid>
+                            <Button Content="キャンセル"
+                                    Command="{Binding Data.CancelCommand,Source={StaticResource Proxy}}"
+                                    CommandParameter="{Binding}"
+                                    Visibility="{Binding IsCancel,Converter={StaticResource BooleanToInverseVisibilityConverter}}"/>
+                            <TextBlock Visibility="{Binding IsCancel,Converter={StaticResource BooleanToVisibilityConverter}}">キャンセル済み</TextBlock>
+                        </Grid>
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
