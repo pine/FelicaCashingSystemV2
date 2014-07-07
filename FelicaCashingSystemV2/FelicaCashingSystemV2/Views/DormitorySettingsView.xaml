@@ -1,0 +1,73 @@
+﻿<UserControl x:Class="FelicaCashingSystemV2.Views.DormitorySettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:localViews="clr-namespace:FelicaCashingSystemV2.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="700">
+    <StackPanel>
+        <TextBlock Text="門限超過届けの自動発行システムで用いる情報を設定できます。"/>
+
+        <Grid Margin="40">
+            <Grid.Resources>
+                <Style TargetType="{x:Type TextBox}"
+                       BasedOn="{StaticResource {x:Type TextBox}}">
+                    <Setter Property="Margin" Value="10,5"/>
+                    <Setter Property="HorizontalAlignment" Value="Left"/>
+                </Style>
+            </Grid.Resources>
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Column="0"
+                       Grid.Row="0"
+                       Text="代表者名"
+                       Style="{StaticResource FormLabel}"/>
+
+            <TextBox Text="{Binding LeaderName}"
+                     Grid.Column="1"
+                     Grid.Row="0"
+                     Width="250"/>
+
+            <TextBlock Grid.Column="0"
+                       Grid.Row="1"
+                       Text="代表者の電話番号"
+                       Style="{StaticResource FormLabel}"/>
+            
+            <TextBox Text="{Binding LeaderPhoneNumber}"
+                     Grid.Column="1"
+                     Grid.Row="1"
+                     Width="250"/>
+            
+            <TextBlock Grid.Column="0"
+                       Grid.Row="2"
+                       Text="門限超過の理由"
+                       Style="{StaticResource FormLabel}"/>
+
+            <TextBox Text="{Binding LeaderPhoneNumber}"
+                     Grid.Column="1"
+                     Grid.Row="2"
+                     Width="400"
+                     Height="80"/>
+            
+            <Button Content="変更を保存"
+                    Grid.Row="3"
+                    Grid.ColumnSpan="2"
+                    HorizontalAlignment="Right"
+                    Margin="0,25,0,0"
+                    IsDefault="True"
+                    Command="{Binding SaveCommand}"/>
+        </Grid>
+    </StackPanel>
+</UserControl>

@@ -56,8 +56,8 @@ namespace FelicaCashingSystemV2.Views
 
             this.ShowConfirmDialog(
                 "「 " + history.CreatedAt.ToString("yyyy/MM/dd HH:mm") + " 」 に行われた" +
-                "「 " + history.Money.ToCommaStringAbs() + " 」 円の取引をキャンセルしてよろしいですか?",
-                "本当にキャンセルしますか?",
+                " 「 " + history.Money.ToCommaStringAbs() + " 」 円の取引をキャンセルしてよろしいですか?",
+                "本当にキャンセルしますか ?",
                 (result) =>
                 {
                     // OK でない場合は処理しない

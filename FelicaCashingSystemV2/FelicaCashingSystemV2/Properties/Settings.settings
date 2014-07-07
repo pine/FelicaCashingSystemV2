@@ -35,5 +35,11 @@
     <Setting Name="FelicaUri" Type="System.String" Scope="Application">
       <Value Profile="(Default)">http://www.sony.co.jp/Products/felica/</Value>
     </Setting>
+    <Setting Name="LeaderName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="LeaderPhoneName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

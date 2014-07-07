@@ -39,6 +39,13 @@
                     <localViews:PageSettingView PageType="Withdrawing"/>
                 </ScrollViewer>
             </TabItem>
+
+            <TabItem Header="門限超過届" 
+                     Visibility="{Binding IsAdmin,Converter={StaticResource BooleanToVisibilityConverter}}">
+                <ScrollViewer Visibility="{Binding IsAdmin,Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <localViews:DormitorySettingsView/>
+                </ScrollViewer>
+            </TabItem>
         </TabControl>
         
     </Grid>

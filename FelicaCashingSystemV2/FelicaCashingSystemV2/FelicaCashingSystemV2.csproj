@@ -83,6 +83,7 @@
       <DependentUpon>CardAssociationStartView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CardAssociationStartViewModel.cs" />
+    <Compile Include="Views\DormitorySettingsViewModel.cs" />
     <Compile Include="Views\MoneyHistoryViewModel.cs" />
     <Compile Include="Views\PageSettingView.xaml.cs">
       <DependentUpon>PageSettingView.xaml</DependentUpon>
@@ -108,6 +109,9 @@
       <DependentUpon>CardListView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserListViewModel.cs" />
+    <Compile Include="Views\DormitorySettingsView.xaml.cs">
+      <DependentUpon>DormitorySettingsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\AdministeringUserWindow.xaml.cs">
       <DependentUpon>AdministeringUserWindow.xaml</DependentUpon>
     </Compile>
@@ -213,6 +217,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SideProfileView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\DormitorySettingsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
