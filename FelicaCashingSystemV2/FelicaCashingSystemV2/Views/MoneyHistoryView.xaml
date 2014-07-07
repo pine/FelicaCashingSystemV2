@@ -25,12 +25,18 @@
 
         <DataGrid.Columns>
             <DataGridTextColumn Header="実行者"
-                                Binding="{Binding UserId,Converter={StaticResource UserIdToUserNameConverter}}"/>
-            
+                                Binding="{Binding UserId,Converter={StaticResource UserIdToUserNameConverter}}">
+                <DataGridTextColumn.ElementStyle>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Setter Property="Margin" Value="5,2,10,2"/>
+                    </Style>
+                </DataGridTextColumn.ElementStyle>
+            </DataGridTextColumn>
             <DataGridTextColumn Header="金額"
                                 Binding="{Binding Money,StringFormat=#\,0}">
                 <DataGridTextColumn.ElementStyle>
                     <Style TargetType="{x:Type TextBlock}">
+                        <Setter Property="Margin" Value="5,2,5,2"/>
                         <Setter Property="TextAlignment" Value="Right"/>
                         <Setter Property="Foreground">
                             <Setter.Value>
@@ -50,7 +56,13 @@
                 </DataGridTextColumn.ElementStyle>
             </DataGridTextColumn>
             <DataGridTextColumn Header="日時"
-                                Binding="{Binding CreatedAt,StringFormat=\{0:yyyy/dd/MM HH:mm:ss\}}"/>
+                                Binding="{Binding CreatedAt,StringFormat=\{0:yyyy/dd/MM HH:mm:ss\}}">
+                <DataGridTextColumn.ElementStyle>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Setter Property="Margin" Value="5,2,10,2"/>
+                    </Style>
+                </DataGridTextColumn.ElementStyle>
+            </DataGridTextColumn>
 
             <DataGridTemplateColumn Header="キャンセル">
                 <DataGridTemplateColumn.CellTemplate>
@@ -59,8 +71,13 @@
                             <Button Content="キャンセル"
                                     Command="{Binding Data.CancelCommand,Source={StaticResource Proxy}}"
                                     CommandParameter="{Binding}"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
                                     Visibility="{Binding IsCancel,Converter={StaticResource BooleanToInverseVisibilityConverter}}"/>
-                            <TextBlock Visibility="{Binding IsCancel,Converter={StaticResource BooleanToVisibilityConverter}}">キャンセル済み</TextBlock>
+                            <TextBlock TextAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Visibility="{Binding IsCancel,Converter={StaticResource BooleanToVisibilityConverter}}"
+                                       Text="キャンセル済み"/>
                         </Grid>
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
