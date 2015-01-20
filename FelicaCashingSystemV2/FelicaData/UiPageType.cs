@@ -12,6 +12,7 @@ namespace FelicaData
         Buying,
         Charging,
         Withdrawing,
-        Unknown
+        Unknown,
+        Administering
     }
 }

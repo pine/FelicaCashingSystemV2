@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="500">
     <StackPanel MinWidth="200">
         <TextBlock Text="ユーザー登録するには、名前とメールアドレス、パスワードを入力してください。"/>
         
@@ -69,7 +69,7 @@
                             Grid.ColumnSpan="2"
                             Grid.Row="4"
                             IsDefault="True"
-                            Content="新規登録"
+                            Content="利用規約に同意して登録"
                             HorizontalAlignment="Right"
                             Margin="0,20,10,0"
                             Command="{Binding RegisterCommand}"

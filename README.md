@@ -15,10 +15,10 @@ Felica Cashing System V2
 
 ## 利用しているライブラリ
 - .NET Framework 4.5
-  - Windows Forms
+  - Windows Forms (一部のみ)
   - WPF
 - MashApps.Metro
-- RavenDB
+- [RavenDB](http://ravendb.net)
 - iTextSharp
 - Adobe Acrobat 7.0 Browser Control Type Library 1.0
 - PC/SC (WinScard.dll)
@@ -31,5 +31,5 @@ Felica Cashing System V2
 起動には、Adobe Reader と PaSoRi のドライバが必要です。
 
 ## 関係するプロジェクト
-- FelicaSharp<br />
+- [FelicaSharp](https://github.com/pine613/FelicaSharp)<br />
   カードリーダー (PaSoRi) を C# から利用するためのライブラリ

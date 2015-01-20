@@ -25,7 +25,7 @@
 
         <DataGrid.Columns>
             <DataGridTextColumn Header="実行者"
-                                Binding="{Binding UserId,Converter={StaticResource UserIdToUserNameConverter}}">
+                                Binding="{Binding PerformerUserId,Converter={StaticResource UserIdToUserNameConverter}}">
                 <DataGridTextColumn.ElementStyle>
                     <Style TargetType="{x:Type TextBlock}">
                         <Setter Property="Margin" Value="5,2,10,2"/>
@@ -70,16 +70,26 @@
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>
                         <Grid>
-                            <Button Content="キャンセル"
-                                    Command="{Binding Data.CancelCommand,Source={StaticResource Proxy}}"
-                                    CommandParameter="{Binding}"
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Center"
-                                    Visibility="{Binding IsCancel,Converter={StaticResource BooleanToInverseVisibilityConverter}}"/>
-                            <TextBlock TextAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       Visibility="{Binding IsCancel,Converter={StaticResource BooleanToVisibilityConverter}}"
-                                       Text="キャンセル済み"/>
+                            <!-- キャンセル可能 -->
+                            <Grid Visibility="{Binding Converter={StaticResource MoneyHistoryToCanCancelVisibilityConverter}}">
+                                <Button Content="キャンセル"
+                                        Command="{Binding Data.CancelCommand,Source={StaticResource Proxy}}"
+                                        CommandParameter="{Binding}"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"/>
+                            </Grid>
+                            
+                            <!-- キャンセル不可能 -->
+                            <Grid Visibility="{Binding Converter={StaticResource MoneyHistoryToCannotCancelVisibilityConverter}}">
+                                <TextBlock TextAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           Visibility="{Binding IsCancel,Converter={StaticResource BooleanToVisibilityConverter}}"
+                                           Text="キャンセル済み"/>
+                                <TextBlock TextAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           Visibility="{Binding IsCancel,Converter={StaticResource BooleanToInverseVisibilityConverter}}"
+                                           Text="キャンセル不可"/>
+                            </Grid>
                         </Grid>
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>

@@ -28,11 +28,12 @@
                     <localViews:CardAssociationInfoView/>
                 </ScrollViewer>
             </TabItem>
-            <!--
+            
             <TabItem Header="利用規約">
-                <localViews:ReadonlyTextFileView Source=".\Texts\Rules.txt"/>
+                <ScrollViewer>
+                    <localViews:ReadonlyTextFileView Source=".\Texts\Rules.txt"/>
+                </ScrollViewer>
             </TabItem>
-            -->
         </TabControl>
     </Grid>
 </controls:MetroWindow>

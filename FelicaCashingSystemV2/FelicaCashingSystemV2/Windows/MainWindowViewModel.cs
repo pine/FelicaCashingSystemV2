@@ -30,7 +30,5 @@ namespace FelicaCashingSystemV2.Windows
         {
             this.Buy(money, false);
         }
-
-
     }
 }

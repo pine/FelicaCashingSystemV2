@@ -20,8 +20,11 @@
             </ResourceDictionary.MergedDictionaries>
 
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
-            <commons:BooleanToInverseVisibilityConverter x:Key="BooleanToInverseVisibilityConverter"/>
             <local:TileMoneyToStringConverter x:Key="TileMoneyToStringConverter"/>
+            <local:MoneyHistoryToCanCancelVisibilityConverter x:Key="MoneyHistoryToCanCancelVisibilityConverter"/>
+            <local:MoneyHistoryToCannotCancelVisibilityConverter x:Key="MoneyHistoryToCannotCancelVisibilityConverter"/>
+            
+            <commons:BooleanToInverseVisibilityConverter x:Key="BooleanToInverseVisibilityConverter"/>
             <commons:DualPasswordBoxMultiConverter x:Key="DualPasswordBoxMultiConverter"/>
             <commons:MinusToColorConverter x:Key="MinusToColorConverter"/>
             <commons:ByteArrayToImageSourceConverter x:Key="ByteArrayToImageSourceConverter"/>

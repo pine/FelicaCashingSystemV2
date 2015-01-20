@@ -13,7 +13,9 @@ namespace FelicaCashingSystemV2
     {
         private readonly FelicaData.UiPageType pageType;
 
-        public MoneyViewModel(FelicaData.UiPageType pageType)
+        public MoneyViewModel(
+            FelicaData.UiPageType pageType
+            )
         {
             this.pageType = pageType;
 
@@ -25,9 +27,66 @@ namespace FelicaCashingSystemV2
             this.WithdrawCommand = new DelegateCommand<int>(this.Withdraw);
         }
 
+        ~MoneyViewModel()
+        {
+            if (App.Current.UiData != null)
+            {
+                App.Current.UiData.Changed -= this.UiData_Changed;
+            }
+        }
+
         private void UiData_Changed(object sender, Type e)
         {
             this.UpdateMoneyTiles();
+        }
+
+        public event EventHandler<MoneyActionSucceededEventArgs> MoneyActionSucceeded;
+
+        private void OnMoneyActionSucceededEvent(
+            int userId,
+            int performerUserId,
+            int moneyDiff
+            )
+        {
+            var args = new MoneyActionSucceededEventArgs();
+
+            args.UserId = userId;
+            args.PerformerUserId = performerUserId;
+            args.MoneyDiff = moneyDiff;
+
+            this.OnMoneyActionSucceededEvent(args);
+        }
+
+        protected virtual void OnMoneyActionSucceededEvent(MoneyActionSucceededEventArgs e)
+        {
+            var handler = this.MoneyActionSucceeded;
+
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+
+        private FelicaData.User user = null;
+
+        /// <summary>
+        /// 処理対象のユーザーを表す
+        /// </summary>
+        protected virtual FelicaData.User User
+        {
+            get
+            {
+                if (this.user == null)
+                {
+                    return App.Current.User;
+                }
+
+                return user;
+            }
+            set
+            {
+                this.user = value;
+            }
         }
 
         protected virtual void UpdateMoneyTiles()
@@ -73,16 +132,29 @@ namespace FelicaCashingSystemV2
                 () => this.GetExecuteMax(FelicaData.UiPageType.Buying),
                 isAnimation,
                 "購入",
-                (newMoney) =>
-                {
-                    return "「 " + newMoney.ToCommaStringAbs() + " 」 円の商品を購入しました。\n" +
-                            "残高は 「 " + (App.Current.User.Money - newMoney).ToCommaString() + " 」 円です。";
-                },
+                this.GetBuyMessage,
                 "購入に失敗しました",
                 (newMoney) =>
                 {
-                    return App.Current.UserData.Buy(App.Current.User.Id, newMoney);
+                    if (App.Current.UserData.Buy(this.User.Id, newMoney, App.Current.User.Id))
+                    {
+                        this.OnMoneyActionSucceededEvent(this.User.Id, App.Current.User.Id, -newMoney);
+                        return true;
+                    }
+
+                    return false;
                 });
+        }
+
+        /// <summary>
+        /// 購入時のメッセージを返す
+        /// </summary>
+        /// <param name="money"></param>
+        /// <returns></returns>
+        protected virtual string GetBuyMessage(int money)
+        {
+            return "「 " + money.ToCommaStringAbs() + " 」 円の商品を購入しました。\n" +
+                    "残高は 「 " + (this.User.Money - money).ToCommaString() + " 」 円です。";
         }
 
         public ICommand ChargeCommand { get; private set; }
@@ -93,16 +165,29 @@ namespace FelicaCashingSystemV2
                 () => this.GetExecuteMax(FelicaData.UiPageType.Charging),
                 true,
                 "チャージ",
-                (newMoney) =>
-                {
-                    return "「 " + newMoney.ToCommaStringAbs() + " 」 円をチャージしました。\n" +
-                            "残高は 「 " + (App.Current.User.Money + newMoney).ToCommaString() + " 」 円です。";
-                },
+                this.GetChargeMessage,
                 "チャージに失敗しました",
                 (newMoney) =>
                 {
-                    return App.Current.UserData.Charge(App.Current.User.Id, newMoney);
+                    if (App.Current.UserData.Charge(this.User.Id, newMoney, App.Current.User.Id))
+                    {
+                        this.OnMoneyActionSucceededEvent(this.User.Id, App.Current.User.Id, newMoney);
+                        return true;
+                    }
+
+                    return false;
                 });
+        }
+
+        /// <summary>
+        /// チャージ時のメッセージを返す
+        /// </summary>
+        /// <param name="money"></param>
+        /// <returns></returns>
+        protected virtual string GetChargeMessage(int money)
+        {
+            return "「 " + money.ToCommaStringAbs() + " 」 円をチャージしました。\n" +
+                    "残高は 「 " + (this.User.Money + money).ToCommaString() + " 」 円です。";
         }
 
         public ICommand WithdrawCommand { get; private set; }
@@ -113,16 +198,28 @@ namespace FelicaCashingSystemV2
                 () => this.GetExecuteMax(FelicaData.UiPageType.Withdrawing),
                 true,
                 "出金",
-                (newMoney) =>
-                {
-                    return "「 " + newMoney.ToCommaStringAbs() + " 」 円を引き出しました。\n" +
-                            "残高は 「 " + (App.Current.User.Money - newMoney).ToCommaString() + " 」 円です。";
-                },
+                this.GetWithdrawMessage,
                 "出金に失敗しました",
                 (newMoney) =>
                 {
-                    return App.Current.UserData.Withdraw(App.Current.User.Id, newMoney);
+                    if (App.Current.UserData.Withdraw(this.User.Id, newMoney, App.Current.User.Id))
+                    {
+                        this.OnMoneyActionSucceededEvent(this.User.Id, App.Current.User.Id, -newMoney);
+                        return true;
+                    }
+
+                    return false;
                 });
+        }
+
+        /// <summary>
+        /// 引き出し時のメッセージを返す
+        /// </summary>
+        /// <param name="money"></param>
+        /// <returns></returns>
+        protected virtual string GetWithdrawMessage(int money){
+            return "「 " + money.ToCommaStringAbs() + " 」 円を引き出しました。\n" +
+                    "残高は 「 " + (this.User.Money - money).ToCommaString() + " 」 円です。";
         }
 
         /// <summary>
@@ -130,7 +227,6 @@ namespace FelicaCashingSystemV2
         /// </summary>
         private void SelectMoney(int max, Action<int> cb)
         {
-            Debug.WriteLine("SelectMoney");
             App.Current.ShowSelectingMoneyWindow(max, cb);
         }
 

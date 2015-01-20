@@ -201,6 +201,10 @@ namespace FelicaCashingSystemV2
                 });
         }
 
+        /// <summary>
+        /// ユーザーの管理ウィンドウを表示する
+        /// </summary>
+        /// <param name="administeringUser">管理対象のユーザー</param>
         public void ShowAdministeringUserWindow(FelicaData.User administeringUser)
         {
             if (this.User == null) { return; }
@@ -209,7 +213,11 @@ namespace FelicaCashingSystemV2
             if (this.User.Id == administeringUser.Id) { return; }
 
             this.ShowDialog<Windows.AdministeringUserWindow>(
-                );
+                beforeAction: window =>
+                {
+                    window.AdministeringUser = administeringUser;
+                });
+            
         }
 
         public void ShowSettingWindow()
@@ -409,6 +417,7 @@ namespace FelicaCashingSystemV2
             var settings = FelicaCashingSystemV2.Properties.Settings.Default;
             this.Mailer.Setup(
                 settings.MailFrom,
+                settings.MailFromName,
                 settings.SmtpHost,
                 settings.SmtpPort,
                 settings.SmtpUser,

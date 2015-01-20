@@ -12,7 +12,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("FelicaCashingSystemV2")]
-[assembly: AssemblyCopyright("Copyright ©  2013-2014 MIZUNE Pine")]
+[assembly: AssemblyCopyright("Copyright ©  2013-2015 Pine Mizune")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

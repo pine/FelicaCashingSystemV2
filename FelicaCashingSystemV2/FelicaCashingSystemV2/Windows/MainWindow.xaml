@@ -4,7 +4,7 @@
                       xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       xmlns:localControls="clr-namespace:FelicaCashingSystemV2.Controls"
                       xmlns:localViews="clr-namespace:FelicaCashingSystemV2.Views"
-                      Height="480" Width="700"
+                      Height="480" Width="750"
                       WindowStartupLocation="CenterScreen"
                       Style="{StaticResource BasicWindow}" >
     <controls:MetroWindow.RightWindowCommands>

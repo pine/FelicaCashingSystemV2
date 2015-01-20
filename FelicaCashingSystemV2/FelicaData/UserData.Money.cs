@@ -18,12 +18,11 @@ namespace FelicaData
         public bool Buy(
             int userId, 
             int money,
-            int performerUserId = 0,
-            string comment = null
+            int performerUserId = 0
             )
         {
             if (money < 0) { return false; }
-            return this.MoneyExecute(userId, -money, performerUserId, comment, true);
+            return this.MoneyExecute(userId, -money, performerUserId, true);
         }
 
         /// <summary>
@@ -35,12 +34,11 @@ namespace FelicaData
         public bool Charge(
             int userId,
             int money,
-            int performerUserId = 0,
-            string comment = null
+            int performerUserId = 0
             )
         {
             if (money < 0) { return false; }
-            return this.MoneyExecute(userId, money, performerUserId, comment, false);
+            return this.MoneyExecute(userId, money, performerUserId, false);
         }
 
         /// <summary>
@@ -52,12 +50,11 @@ namespace FelicaData
         public bool Withdraw(
             int userId,
             int money,
-            int performerUserId = 0,
-            string comment = null
+            int performerUserId = 0
             )
         {
             if (money < 0) { return false; }
-            return this.MoneyExecute(userId, -money, performerUserId, comment, false);
+            return this.MoneyExecute(userId, -money, performerUserId, false);
         }
 
         /// <summary>
@@ -70,7 +67,6 @@ namespace FelicaData
             int userId,
             int money,
             int performerUserId = 0,
-            string comment = null,
             bool isBuy = false
             )
         {
@@ -84,19 +80,12 @@ namespace FelicaData
                 if (performerUserId != 0)
                 {
                     performerUser = this.GetUser(performerUserId);
-
-                    // 他者の購入でコメントが存在しない場合
-                    if (string.IsNullOrWhiteSpace(comment))
-                    {
-                        return false;
-                    }
                 }
                 else
                 {
                     // 本人の購入
                     performerUserId = userId;
                     performerUser = user;
-                    comment = string.Empty;
                 }
 
                 if (user != null && performerUser != null)
@@ -107,7 +96,6 @@ namespace FelicaData
                         UserId = userId,
                         PerformerUserId = performerUserId,
                         Money = money,
-                        Comment = comment,
                         IsBuy = isBuy
                     };
 
@@ -171,6 +159,11 @@ namespace FelicaData
             if (sameUser == null)
             {
                 throw new DatabaseException("ユーザーが存在しません。");
+            }
+
+            if (sameIdHistory.PerformerUserId != sameIdHistory.UserId)
+            {
+                throw new DatabaseException("管理者による操作は取り消せません。");
             }
 
             // バリデーション通過

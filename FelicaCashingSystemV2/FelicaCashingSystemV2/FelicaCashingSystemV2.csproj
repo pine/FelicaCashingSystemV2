@@ -67,6 +67,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="BitmapSizeResizer.cs" />
+    <Compile Include="MoneyActionSucceededEventArgs.cs" />
+    <Compile Include="MoneyHistoryToCannotCancelVisibilityConverter.cs" />
     <Compile Include="CommaSeparatedIntegerExtension.cs" />
     <Compile Include="Controls\SettingButton.xaml.cs">
       <DependentUpon>SettingButton.xaml</DependentUpon>
@@ -77,8 +79,14 @@
     <Compile Include="MetroDialogMessage.cs" />
     <Compile Include="MetroWindowViewModelBase.cs" />
     <Compile Include="MetroDialogMessageReceiver.cs" />
+    <Compile Include="MoneyHistoryToCanCancelVisibilityConverter.cs" />
     <Compile Include="TileMoneyToStringConverter.cs" />
     <Compile Include="UserIdToUserNameConverter.cs" />
+    <Compile Include="Views\AdministeringMoneyView.xaml.cs">
+      <DependentUpon>AdministeringMoneyView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AdministeringMoneyViewModel.cs" />
+    <Compile Include="Views\AdministeringUserViewModel.cs" />
     <Compile Include="Views\CardAssociationStartView.xaml.cs">
       <DependentUpon>CardAssociationStartView.xaml</DependentUpon>
     </Compile>
@@ -102,6 +110,9 @@
       <DependentUpon>MoneyHistoryView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PageSettingViewModel.cs" />
+    <Compile Include="Views\AdministeringSideProfileView.xaml.cs">
+      <DependentUpon>AdministeringSideProfileView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserListView.xaml.cs">
       <DependentUpon>UserListView.xaml</DependentUpon>
     </Compile>
@@ -180,6 +191,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\AdministeringMoneyView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\CardAssociationStartView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -197,6 +212,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\MoneyHistoryView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\AdministeringSideProfileView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

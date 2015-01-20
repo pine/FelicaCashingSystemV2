@@ -61,7 +61,7 @@ namespace FelicaCashingSystemV2.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("robotclub_kut@yahoo.co.jp")]
+        [global::System.Configuration.DefaultSettingValueAttribute("robot@ugs.kochi-tech.ac.jp")]
         public string MailFrom {
             get {
                 return ((string)(this["MailFrom"]));
@@ -139,6 +139,15 @@ namespace FelicaCashingSystemV2.Properties {
         public int ThumbnailAvatarSize {
             get {
                 return ((int)(this["ThumbnailAvatarSize"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("ロボット倶楽部 もんじゅシステム")]
+        public string MailFromName {
+            get {
+                return ((string)(this["MailFromName"]));
             }
         }
     }

@@ -10,6 +10,15 @@ namespace FelicaData
     {
         public User User { get; set; }
 
+        public int Id
+        {
+            get
+            {
+                if (this.User == null) { return 0; }
+                return this.User.Id;
+            }
+        }
+
         public string Name 
         {
             get

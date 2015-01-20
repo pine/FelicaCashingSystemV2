@@ -20,8 +20,8 @@
             <DataGridTemplateColumn Header="画像">
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>
-                        <Image Source="{Binding Avatar,Converter={StaticResource ByteArrayToImageSourceConverter}}"
-                               Style="{StaticResource ThumbnailAvatarImage}"/>
+                        <commons:HighQualityImage Source="{Binding Avatar,Converter={StaticResource ByteArrayToImageSourceConverter}}"
+                                                  Style="{StaticResource ThumbnailAvatarImage}"/>
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>

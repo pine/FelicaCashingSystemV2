@@ -1,14 +1,17 @@
 ﻿Felica Cashing System V2 はオープンソースで開発されています。
 最新版のソースコードは GitHub より、誰でも閲覧可能です。
 
-GitHub:
+Version 1
+https://github.com/pine613/FelicaCashingSystem
+
+Version 2
 https://github.com/pine613/FelicaCashingSystemV2
 
 ----------
 
 The MIT License (MIT)
 
-Copyright (c) 2013-2014
+Copyright (c) 2013-2015 Pine Mizune
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

@@ -13,7 +13,6 @@ namespace FelicaData
         {
             this.IsCancel = false;
             this.Money = 0;
-            this.Comment = string.Empty;
         }
 
         public MoneyHistory Clone()
@@ -26,7 +25,6 @@ namespace FelicaData
         public bool IsCancel { get; set; }
         public bool IsBuy { get; set; }
         public int Money { get; set; }
-        public string Comment { get; set; }
         public DateTime CreatedAt { get; set; }
     }
 }

@@ -16,5 +16,14 @@ namespace FelicaMail
         {
             mailer.SendAsTemplate(to, @".\MailTemplates\Registered.txt", args);
         }
+
+        public static void SendAdminMoney(
+            this Mailer mailer,
+            string to,
+            AdminMoneyArgs args
+            )
+        {
+            mailer.SendAsTemplate(to, @".\MailTemplates\AdminMoney.txt", args);
+        }
     }
 }
