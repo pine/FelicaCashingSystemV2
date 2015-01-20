@@ -12,6 +12,13 @@ namespace FelicaCashingSystemV2
     /// </summary>
     public partial class App : Application
     {
+        public const string MUTEX_NAME = "FelicaCashingSystem_V2";
+        /// <summary>
+        /// 二重起動防止用の Mutex
+        /// </summary>
+        System.Threading.Mutex mutex =
+            new System.Threading.Mutex(false, MUTEX_NAME);
+
         private NotifyIcon notifyIcon = null;
         private SynchronizedCollection<Window> windows
             = new SynchronizedCollection<Window>();
@@ -312,6 +319,21 @@ namespace FelicaCashingSystemV2
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
+            // 二重起動を検出
+            if (!this.mutex.WaitOne(0, false))
+            {
+                // 二重起動検出
+                MessageBox.Show(
+                    "既に Felica Cashing System V2 は起動しています。同時に複数は起動できません",
+                    "起動失敗",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Stop
+                    );
+
+                this.Shutdown(1);
+                return;
+            }
+
             this.notifyIcon = new NotifyIcon(new Uri("pack://application:,,,/Resources/FelicaIcon.ico"));
             this.notifyIcon.Click += this.notifyIcon_Click;
             this.notifyIcon.ExitClick += this.notifyIcon_ExitClick;
@@ -337,10 +359,6 @@ namespace FelicaCashingSystemV2
                 this.DatabaseManager = new FelicaData.DatabaseManager("Database");
                 this.UserData = new FelicaData.UserData(this.DatabaseManager);
                 this.UiData = new FelicaData.UiData(this.DatabaseManager);
-
-//                var page = this.UiData.GetPage(FelicaData.UiPageType.Buying);
-//                page.MoneyTiles = new[] { 1000, 500, 100 };
-//                this.UiData.SavePage(page);
             }
             catch (FelicaData.DatabaseException dbe)
             {
@@ -367,7 +385,10 @@ namespace FelicaCashingSystemV2
                     Password = "tester"
                 });
             }
-            catch (Exception) { }
+            catch (Exception ee)
+            {
+                Debug.WriteLine(ee.Message);
+            }
 
             try
             {
@@ -380,7 +401,10 @@ namespace FelicaCashingSystemV2
                     Password = "tester"
                 });
             }
-            catch (Exception) { }
+            catch (Exception ee)
+            {
+                Debug.WriteLine(ee.Message);
+            }
 
             try
             {
@@ -462,6 +486,13 @@ namespace FelicaCashingSystemV2
 
             if (this.DatabaseManager != null) { this.DatabaseManager.Dispose(); }
 
+            // Mutex を開放する
+            if (this.mutex != null)
+            {
+                this.mutex.ReleaseMutex();
+                this.mutex.Dispose();
+                this.mutex = null;
+            }
         }
 
         private void notifyIcon_Click(object sender, EventArgs e)
