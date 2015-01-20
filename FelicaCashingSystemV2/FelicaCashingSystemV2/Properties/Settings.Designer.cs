@@ -132,5 +132,14 @@ namespace FelicaCashingSystemV2.Properties {
                 return ((string)(this["LeaderPhoneName"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("32")]
+        public int ThumbnailAvatarSize {
+            get {
+                return ((int)(this["ThumbnailAvatarSize"]));
+            }
+        }
     }
 }
