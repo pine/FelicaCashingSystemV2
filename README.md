@@ -33,3 +33,5 @@ Felica Cashing System V2
 ## 関係するプロジェクト
 - [FelicaSharp](https://github.com/pine613/FelicaSharp)<br />
   カードリーダー (PaSoRi) を C# から利用するためのライブラリ
+- [FelicaDataV2](https://github.com/pine613/FelicaDataV2)<br />
+  Felica Cashing System V2 のデータベースレイヤを担当するモジュール
