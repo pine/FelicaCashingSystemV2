@@ -35,3 +35,5 @@ Felica Cashing System V2
   カードリーダー (PaSoRi) を C# から利用するためのライブラリ
 - [FelicaDataV2](https://github.com/pine613/FelicaDataV2)<br />
   Felica Cashing System V2 のデータベースレイヤを担当するモジュール
+- [FelicaCashingSystemV2_Settings](https://github.com/RobotClubKut/FelicaCashingSystemV2_Settings)<br />
+  ロボット倶楽部で運用している Felica Cashing System V2 の設定 (非公開)
