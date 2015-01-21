@@ -1,19 +1,22 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FelicaCashingSystemV2", "FelicaCashingSystemV2\FelicaCashingSystemV2.csproj", "{C19067E0-C291-4BA4-8CF2-50712DD8BA88}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7C98FB7A-43A2-4D89-9C56-7EC70D93FB62} = {7C98FB7A-43A2-4D89-9C56-7EC70D93FB62}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FelicaSharp", "..\FelicaSharp\FelicaSharp\FelicaSharp.csproj", "{D7257530-BDEC-4C81-99CA-247CE1536390}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KutDormitoryReport", "..\KutDormitoryReport\KutDormitoryReport\KutDormitoryReport\KutDormitoryReport.csproj", "{5C904056-C232-44F3-8343-C171E9BA1B28}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FelicaData", "FelicaData\FelicaData.csproj", "{02BA654A-6D2C-4D5E-B60E-295B60AB0A98}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfCommonds", "WpfCommonds\WpfCommonds.csproj", "{8E74B1C5-150F-49CB-A13B-11F3ACD4C26A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FelicaMail", "FelicaMail\FelicaMail.csproj", "{23AA0057-FFFC-4D83-A79C-0BC309229BC9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FelicaData", "..\FelicaDataV2\FelicaData\FelicaData.csproj", "{7C98FB7A-43A2-4D89-9C56-7EC70D93FB62}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,12 +46,6 @@ Global
 		{5C904056-C232-44F3-8343-C171E9BA1B28}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5C904056-C232-44F3-8343-C171E9BA1B28}.Release|x86.ActiveCfg = Release|x86
 		{5C904056-C232-44F3-8343-C171E9BA1B28}.Release|x86.Build.0 = Release|x86
-		{02BA654A-6D2C-4D5E-B60E-295B60AB0A98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{02BA654A-6D2C-4D5E-B60E-295B60AB0A98}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{02BA654A-6D2C-4D5E-B60E-295B60AB0A98}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{02BA654A-6D2C-4D5E-B60E-295B60AB0A98}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{02BA654A-6D2C-4D5E-B60E-295B60AB0A98}.Release|Any CPU.Build.0 = Release|Any CPU
-		{02BA654A-6D2C-4D5E-B60E-295B60AB0A98}.Release|x86.ActiveCfg = Release|Any CPU
 		{8E74B1C5-150F-49CB-A13B-11F3ACD4C26A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8E74B1C5-150F-49CB-A13B-11F3ACD4C26A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E74B1C5-150F-49CB-A13B-11F3ACD4C26A}.Debug|x86.ActiveCfg = Debug|Any CPU
@@ -61,6 +58,12 @@ Global
 		{23AA0057-FFFC-4D83-A79C-0BC309229BC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{23AA0057-FFFC-4D83-A79C-0BC309229BC9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{23AA0057-FFFC-4D83-A79C-0BC309229BC9}.Release|x86.ActiveCfg = Release|Any CPU
+		{7C98FB7A-43A2-4D89-9C56-7EC70D93FB62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C98FB7A-43A2-4D89-9C56-7EC70D93FB62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C98FB7A-43A2-4D89-9C56-7EC70D93FB62}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7C98FB7A-43A2-4D89-9C56-7EC70D93FB62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C98FB7A-43A2-4D89-9C56-7EC70D93FB62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C98FB7A-43A2-4D89-9C56-7EC70D93FB62}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

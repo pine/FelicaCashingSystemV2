@@ -4,3 +4,6 @@
 [submodule "KutDormitoryReport"]
 	path = KutDormitoryReport
 	url = https://github.com/pine613/KutDormitoryReport.git
+[submodule "FelicaDataV2"]
+	path = FelicaDataV2
+	url = git@github.com:pine613/FelicaDataV2.git
