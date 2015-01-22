@@ -103,7 +103,7 @@ namespace FelicaCashingSystemV2.Views
                     {
                         Name = this.UserName,
                         Email = this.Email,
-                        Password = password,
+                        PlainPassword = password,
                         IsAdmin = isAdmin
                     },
                     new FelicaData.Card

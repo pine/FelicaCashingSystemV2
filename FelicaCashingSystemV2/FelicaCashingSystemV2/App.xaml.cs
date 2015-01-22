@@ -29,7 +29,6 @@ namespace FelicaCashingSystemV2
 
         private FelicaData.DatabaseManager DatabaseManager { get; set; }
         public FelicaData.CollectionManager Collections { get; set; }
-       // public FelicaData UiData { get; private set; }
 
         public FelicaData.Card Card { get; private set; }
         public FelicaMail.Mailer Mailer { get; private set; }
@@ -372,62 +371,7 @@ namespace FelicaCashingSystemV2
             }
 
 #if DEBUG
-            try
-            {
-                this.Collections.Users.CreateUser(new FelicaData.User
-                {
-                    Name = "テスト用ユーザー",
-                    Email = "tester@tester.jp",
-                    IsAdmin = true,
-                    Password = "tester"
-                });
-            }
-            catch (Exception ee)
-            {
-                Debug.WriteLine(ee.Message);
-            }
-
-            try
-            {
-                this.Collections.Users.CreateUser(new FelicaData.User
-                {
-                    Name = "テスト用ユーザー (非管理者)",
-                    Email = "tester@tester.jp",
-                    IsAdmin = false,
-                    Password = "tester"
-                });
-            }
-            catch (Exception ee)
-            {
-                Debug.WriteLine(ee.Message);
-            }
-
-            try
-            {
-                this.Collections.Cards.CreateCard(new FelicaData.Card
-                {
-                    Name = "最初に登録したカード",
-                    Uid = "TEST-UID-1"
-                });
-            }
-            catch (Exception ee)
-            {
-                Debug.WriteLine(ee.Message);
-            }
-            
-            try
-            {
-                this.Collections.Cards.CreateCard(new FelicaData.Card
-                {
-                    Name = "ミールカード",
-                    Uid = "TEST-UID-2"
-                });
-            }
-            catch (Exception ee)
-            {
-                Debug.WriteLine(ee.Message);
-            }
-
+            DebugSeed.Init();
 #endif
 
             this.Mailer = new FelicaMail.Mailer();
@@ -528,7 +472,15 @@ namespace FelicaCashingSystemV2
 
             if (this.Collections == null) { return; }
 
-            this.Card = this.Collections.Cards.GetCard(e.Idm);
+            try
+            {
+                this.Card = this.Collections.Cards.GetCardByPlainUid(e.Idm);
+            }
+            catch (FelicaData.DatabaseException ee)
+            {
+                Debug.WriteLine(ee);
+                return;
+            }
 
             // 関連付け
             // 既にカードが登録されていないこと
@@ -547,8 +499,15 @@ namespace FelicaCashingSystemV2
                     "CardId = " + this.Card.Id +
                     ", Name = " + this.Card.Name +
                     ", UserId = " + this.Card.UserId);
-
-                this.User = this.Collections.Users.GetUser(this.Card.UserId);
+                try
+                {
+                    this.User = this.Collections.Users.GetUser(this.Card.UserId);
+                }
+                catch (FelicaData.DatabaseException ee)
+                {
+                    Debug.WriteLine(ee);
+                    return;
+                }
             }
 
             // ユーザーが存在する場合

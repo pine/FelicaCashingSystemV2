@@ -214,12 +214,11 @@
                 </ScrollViewer>
             </TabItem>
             
-            <!--
-                <TabItem Header="連絡先">
-                </TabItem>
-                <TabItem Header="ドミトリー">
-                </TabItem>
-                -->
+            <TabItem Header="ドミトリー">
+                <ScrollViewer>
+                    <localViews:DormitoryProfileView/>
+                </ScrollViewer>
+            </TabItem>
         </TabControl>
     </Grid>
 </controls:MetroWindow>

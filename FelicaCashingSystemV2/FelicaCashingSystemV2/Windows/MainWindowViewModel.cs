@@ -43,7 +43,10 @@ namespace FelicaCashingSystemV2.Windows
         /// </summary>
         public void ShowDormitoryReport()
         {
-            App.Current.MainWindow.ShowDormitoryReportWindow();
+            if (!App.Current.MainWindow.ShowDormitoryReportWindow())
+            {
+                this.ShowMessageBox("門限超過届けの表示に失敗しました。", "エラー");
+            }
         }
     }
 }

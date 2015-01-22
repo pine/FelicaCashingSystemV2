@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,12 +20,13 @@ namespace FelicaCashingSystemV2.Views
     /// <summary>
     /// VersionInformationView.xaml の相互作用ロジック
     /// </summary>
-    public partial class DormitorySettingsView : UserControl
+    public partial class DormitoryProfileView : UserControl
     {
-        public DormitorySettingsView()
+        public DormitoryProfileView()
         {
             InitializeComponent();
-            this.DataContext = new DormitorySettingsViewModel();
+
+            this.DataContext = new DormitoryProfileViewModel();
             this.SetDialogMessageReceiver();
         }
     }

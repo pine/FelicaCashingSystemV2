@@ -20,8 +20,8 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="カード名"
                                     Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="UID"
-                                    Binding="{Binding Uid}"/>
+                <DataGridTextColumn Header="ID"
+                                    Binding="{Binding ShortUid}"/>
                 <DataGridTemplateColumn Header="削除">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

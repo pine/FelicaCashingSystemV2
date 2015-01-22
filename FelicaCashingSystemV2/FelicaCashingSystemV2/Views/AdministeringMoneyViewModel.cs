@@ -39,7 +39,10 @@ namespace FelicaCashingSystemV2.Views
                 MoneyDiff = e.MoneyDiff.ToCommaString()
             };
 
-            App.Current.Mailer.SendAdminMoney(user.Email, args);
+            Task.Run(() =>
+            {
+                App.Current.Mailer.SendAdminMoney(user.Email, args);
+            });
         }
 
         protected override string GetBuyMessage(int money)

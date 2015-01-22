@@ -42,6 +42,7 @@
                 </ScrollViewer>
             </TabItem>
             
+            <!--
             <TabItem Header="メール送信">
                 <ScrollViewer>
                     <TextBlock>管理者からのメール送信機能。未実装</TextBlock>
@@ -53,6 +54,7 @@
                     <TextBlock>管理者からのプロフィール変更機能。未実装</TextBlock>
                 </ScrollViewer>
             </TabItem>
+            -->
         </TabControl>
     </Grid>
 </controls:MetroWindow>

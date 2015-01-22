@@ -8,3 +8,7 @@
 	path = MahApps.Metro
 	url = https://github.com/pine613/MahApps.Metro.git
 	branch = felica_master
+[submodule "FelicaDataV2"]
+	path = FelicaDataV2
+	url = git@github.com:pine613/FelicaDataV2.git
+	branch = master

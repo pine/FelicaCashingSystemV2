@@ -7,6 +7,7 @@ using System.Windows;
 
 using RobotClub.DormitoryReport;
 using WpfCommonds;
+using System.Diagnostics;
 
 namespace FelicaCashingSystemV2
 {
@@ -17,16 +18,28 @@ namespace FelicaCashingSystemV2
     {
         private static MainForm form = null;
 
-        public static void ShowDormitoryReportWindow(this Window window)
+        public static bool ShowDormitoryReportWindow(this Window window)
         {
             var data = new DormitoryReportData();
-            data.Name = "宮永 咲";
+            var user = App.Current.User;
+            if (user == null) { return false; }
 
-            data.RoomNo = "A150";
-            data.PhoneNumber = "090-9999-9999";
-            data.LeaderName = "竹井 久";
-            data.LeaderPhoneNumber = "090-0000-0000";
-            data.Reason = "麻雀部の活動のため";
+            data.Name = user.Name;
+            data.RoomNo = user.DormitoryRoomNumber;
+            data.PhoneNumber = user.PhoneNumber;
+
+            try
+            {
+                var texts = App.Current.Collections.UiTexts;
+                data.LeaderName = texts.GetText(FelicaData.UiTextType.LeaderName);
+                data.LeaderPhoneNumber = texts.GetText(FelicaData.UiTextType.LeaderPhoneNumber);
+                data.Reason = texts.GetText(FelicaData.UiTextType.DormitoryReportReason);
+            }
+            catch (FelicaData.DatabaseException e)
+            {
+                Debug.WriteLine(e);
+                return false;
+            }
 
             if (form == null)
             {
@@ -37,6 +50,8 @@ namespace FelicaCashingSystemV2
 
             form.Show(data);
             form.ShowDialog();
+
+            return true;
         }
     }
 }

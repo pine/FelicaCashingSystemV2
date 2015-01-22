@@ -93,12 +93,18 @@ namespace FelicaCashingSystemV2
         {
             if (this.pageType != FelicaData.UiPageType.Unknown)
             {
-                var page = App.Current.Collections.UiPageSettings.GetUiPageSetting(this.pageType);
                 var list = new List<int>();
-
-                if (page != null && page.MoneyTiles != null)
+                try
                 {
-                    list.AddRange(page.MoneyTiles);
+                    var page = App.Current.Collections.UiPageSettings.GetUiPageSetting(this.pageType);
+
+                    if (page != null && page.MoneyTiles != null)
+                    {
+                        list.AddRange(page.MoneyTiles);
+                    }
+                }
+                catch (FelicaData.DatabaseException e) {
+                    Debug.WriteLine(e);
                 }
 
                 list.Add(-1); // etc

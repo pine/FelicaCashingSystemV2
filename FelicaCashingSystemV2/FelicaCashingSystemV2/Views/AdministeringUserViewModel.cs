@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,7 +27,15 @@ namespace FelicaCashingSystemV2.Views
         {
             if (this.AdministeringUser.Id != null)
             {
-                this.AdministeringUser = App.Current.Collections.Users.GetUser(this.AdministeringUser.Id);
+                try
+                {
+                    this.AdministeringUser = App.Current.Collections.Users.GetUser(this.AdministeringUser.Id);
+                }
+                catch (FelicaData.DatabaseException ee)
+                {
+                    Debug.WriteLine(ee);
+
+                }
             }
         }
 

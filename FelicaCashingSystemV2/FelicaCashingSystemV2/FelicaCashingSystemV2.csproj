@@ -67,6 +67,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="BitmapSizeResizer.cs" />
+    <Compile Include="DebugSeed.cs" />
     <Compile Include="DormitoryReportWindowHelper.cs" />
     <Compile Include="MoneyActionSucceededEventArgs.cs" />
     <Compile Include="MoneyHistoryToCannotCancelVisibilityConverter.cs" />
@@ -83,6 +84,9 @@
     <Compile Include="MoneyHistoryToCanCancelVisibilityConverter.cs" />
     <Compile Include="TileMoneyToStringConverter.cs" />
     <Compile Include="UserIdToUserNameConverter.cs" />
+    <Compile Include="Views\DormitoryProfileView.xaml.cs">
+      <DependentUpon>DormitoryProfileView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AdministeringMoneyView.xaml.cs">
       <DependentUpon>AdministeringMoneyView.xaml</DependentUpon>
     </Compile>
@@ -92,6 +96,7 @@
       <DependentUpon>CardAssociationStartView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CardAssociationStartViewModel.cs" />
+    <Compile Include="Views\DormitoryProfileViewModel.cs" />
     <Compile Include="Views\DormitorySettingsViewModel.cs" />
     <Compile Include="Views\MoneyHistoryViewModel.cs" />
     <Compile Include="Views\PageSettingView.xaml.cs">
@@ -190,6 +195,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\SystemInformationButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\DormitoryProfileView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

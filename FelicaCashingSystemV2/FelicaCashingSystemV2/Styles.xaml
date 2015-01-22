@@ -45,10 +45,16 @@
     <Style x:Key="FormHelperText"
            TargetType="TextBlock"
            BasedOn="{StaticResource {x:Type TextBlock}}">
-        <Setter Property="TextAlignment" Value="Right"/>
+        <Setter Property="TextAlignment" Value="Left"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
-
+    
+    <Style x:Key="FormTextBox"
+           TargetType="{x:Type TextBox}"
+           BasedOn="{StaticResource {x:Type TextBox}}">
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+    </Style>
+    
     <Style x:Key="TitleBarImageButtonText" TargetType="TextBlock">
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Margin" Value="4,0,0,0"/>

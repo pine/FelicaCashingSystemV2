@@ -55,7 +55,7 @@
                        Text="門限超過の理由"
                        Style="{StaticResource FormLabel}"/>
 
-            <TextBox Text="{Binding LeaderPhoneNumber}"
+            <TextBox Text="{Binding DormitoryReportReason}"
                      Grid.Column="1"
                      Grid.Row="2"
                      Width="400"

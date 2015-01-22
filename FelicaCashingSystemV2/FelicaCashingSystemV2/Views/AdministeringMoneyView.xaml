@@ -8,7 +8,18 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="500">
     <Grid>
-        <WrapPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <StackPanel Grid.Row="0"
+                    Orientation="Vertical"
+                    Margin="0,0,0,10">
+            <TextBlock Text="管理者による金額操作は、利用者へ逐一メールで送信され、履歴に残ります。"/>
+        </StackPanel>
+        
+        <WrapPanel Grid.Row="1">
             <controls:Tile Title=""
                            Count="購入"
                            Style="{StaticResource MainTile}"
