@@ -20,11 +20,11 @@ namespace FelicaCashingSystemV2.Views
 
         void App_UserChanged(object sender, FelicaData.User e)
         {
-            this.Users = App.Current.UserData.GetUsers();
+            this.Users = App.Current.Collections.Users.GetUsers();
             this.OnPropertyChanged("CurrentUserId");
         }
 
-        private List<FelicaData.User> users = App.Current.UserData.GetUsers();
+        private List<FelicaData.User> users = App.Current.Collections.Users.GetUsers();
         public List<FelicaData.User> Users
         {
             get { return this.users; }
@@ -35,7 +35,7 @@ namespace FelicaCashingSystemV2.Views
             }
         }
 
-        public int CurrentUserId
+        public string CurrentUserId
         {
             get
             {
@@ -44,7 +44,7 @@ namespace FelicaCashingSystemV2.Views
                     return App.Current.User.Id;
                 }
 
-                return 0;
+                return null;
             }
         }
 

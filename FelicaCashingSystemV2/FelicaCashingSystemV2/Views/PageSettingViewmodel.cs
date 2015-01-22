@@ -17,7 +17,7 @@ namespace FelicaCashingSystemV2.Views
 
         private void UpdatePageType()
         {
-            var page = App.Current.UiData.GetPage(this.pageType);
+            var page = App.Current.Collections.UiPageSettings.GetUiPageSetting(this.pageType);
 
             if (page != null)
             {
@@ -130,10 +130,10 @@ namespace FelicaCashingSystemV2.Views
             // 更新
             try
             {
-                var page = App.Current.UiData.GetPage(this.PageType);
+                var page = App.Current.Collections.UiPageSettings.GetUiPageSetting(this.PageType);
                 page.MoneyTiles = moneyListInt.ToArray();
                 page.MaxMoney = maxMoneyInt;
-                App.Current.UiData.SavePage(page);
+                App.Current.Collections.UiPageSettings.UpdateUiPageSetting(page);
             }
             catch (Exception e)
             {

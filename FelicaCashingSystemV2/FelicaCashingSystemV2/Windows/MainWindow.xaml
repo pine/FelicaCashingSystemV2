@@ -60,6 +60,10 @@
                                            Style="{StaticResource MainTile}"
                                            CommandParameter="1000"
                                            Command="{Binding ChargeCommand}"/>
+                            <controls:Tile Title="門限超過届け"
+                                           Count="印刷"
+                                           Style="{StaticResource MainTile}"
+                                           Command="{Binding ShowDormitoryReportCommand}"/>
                         </WrapPanel>
                     </Grid>
                 </ScrollViewer>

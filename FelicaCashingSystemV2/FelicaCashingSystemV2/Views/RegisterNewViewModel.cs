@@ -98,7 +98,7 @@ namespace FelicaCashingSystemV2.Views
             try
             {
                 // データベースに登録
-                registeredUser = App.Current.UserData.CreateUser(
+                registeredUser = App.Current.Collections.Users.CreateUser(
                     new FelicaData.User
                     {
                         Name = this.UserName,

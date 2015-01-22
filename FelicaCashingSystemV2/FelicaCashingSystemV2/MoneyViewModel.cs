@@ -20,7 +20,7 @@ namespace FelicaCashingSystemV2
             this.pageType = pageType;
 
             this.UpdateMoneyTiles();
-            App.Current.UiData.Changed += this.UiData_Changed;
+            App.Current.Collections.UiPageSettings.Changed += this.UiData_Changed;
 
             this.BuyCommand = new DelegateCommand<int>(this.Buy);
             this.ChargeCommand = new DelegateCommand<int>(this.Charge);
@@ -29,13 +29,13 @@ namespace FelicaCashingSystemV2
 
         ~MoneyViewModel()
         {
-            if (App.Current.UiData != null)
+            if (App.Current.Collections != null)
             {
-                App.Current.UiData.Changed -= this.UiData_Changed;
+                App.Current.Collections.UiPageSettings.Changed -= this.UiData_Changed;
             }
         }
 
-        private void UiData_Changed(object sender, Type e)
+        private void UiData_Changed(object sender, object e)
         {
             this.UpdateMoneyTiles();
         }
@@ -43,8 +43,8 @@ namespace FelicaCashingSystemV2
         public event EventHandler<MoneyActionSucceededEventArgs> MoneyActionSucceeded;
 
         private void OnMoneyActionSucceededEvent(
-            int userId,
-            int performerUserId,
+            string userId,
+            string performerUserId,
             int moneyDiff
             )
         {
@@ -93,7 +93,7 @@ namespace FelicaCashingSystemV2
         {
             if (this.pageType != FelicaData.UiPageType.Unknown)
             {
-                var page = App.Current.UiData.GetPage(this.pageType);
+                var page = App.Current.Collections.UiPageSettings.GetUiPageSetting(this.pageType);
                 var list = new List<int>();
 
                 if (page != null && page.MoneyTiles != null)
@@ -136,7 +136,7 @@ namespace FelicaCashingSystemV2
                 "購入に失敗しました",
                 (newMoney) =>
                 {
-                    if (App.Current.UserData.Buy(this.User.Id, newMoney, App.Current.User.Id))
+                    if (App.Current.Collections.Users.Buy(this.User.Id, newMoney, App.Current.User.Id))
                     {
                         this.OnMoneyActionSucceededEvent(this.User.Id, App.Current.User.Id, -newMoney);
                         return true;
@@ -169,7 +169,7 @@ namespace FelicaCashingSystemV2
                 "チャージに失敗しました",
                 (newMoney) =>
                 {
-                    if (App.Current.UserData.Charge(this.User.Id, newMoney, App.Current.User.Id))
+                    if (App.Current.Collections.Users.Charge(this.User.Id, newMoney, App.Current.User.Id))
                     {
                         this.OnMoneyActionSucceededEvent(this.User.Id, App.Current.User.Id, newMoney);
                         return true;
@@ -202,7 +202,7 @@ namespace FelicaCashingSystemV2
                 "出金に失敗しました",
                 (newMoney) =>
                 {
-                    if (App.Current.UserData.Withdraw(this.User.Id, newMoney, App.Current.User.Id))
+                    if (App.Current.Collections.Users.Withdraw(this.User.Id, newMoney, App.Current.User.Id))
                     {
                         this.OnMoneyActionSucceededEvent(this.User.Id, App.Current.User.Id, -newMoney);
                         return true;
@@ -236,7 +236,7 @@ namespace FelicaCashingSystemV2
         /// <param name="pageType"></param>
         private int GetExecuteMax(FelicaData.UiPageType pageType)
         {
-            var page = App.Current.UiData.GetPage(pageType);
+            var page = App.Current.Collections.UiPageSettings.GetUiPageSetting(pageType);
             return page.MaxMoney;
         }
 

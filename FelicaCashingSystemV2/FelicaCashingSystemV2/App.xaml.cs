@@ -28,8 +28,8 @@ namespace FelicaCashingSystemV2
         public FelicaSharp.EasyFelicaCardSetEventHandlerArgs UnregisteredCard { get; private set; }
 
         private FelicaData.DatabaseManager DatabaseManager { get; set; }
-        public FelicaData.UserData UserData { get; private set; }
-        public FelicaData.UiData UiData { get; private set; }
+        public FelicaData.CollectionManager Collections { get; set; }
+       // public FelicaData UiData { get; private set; }
 
         public FelicaData.Card Card { get; private set; }
         public FelicaMail.Mailer Mailer { get; private set; }
@@ -58,7 +58,7 @@ namespace FelicaCashingSystemV2
         {
             if (this.User != null)
             {
-                this.User = this.UserData.GetUser(this.User.Id);
+                this.User = this.Collections.Users.GetUser(this.User.Id);
             }
         }
 
@@ -66,12 +66,12 @@ namespace FelicaCashingSystemV2
         {
             if (this.Card != null)
             {
-                this.Card = this.UserData.GetCard(this.Card.Id);
+                this.Card = this.Collections.Cards.GetCard(this.Card.Id);
             }
 
             else if (this.UnregisteredCard != null)
             {
-                this.Card = this.UserData.GetCard(this.UnregisteredCard.Idm);
+                this.Card = this.Collections.Cards.GetCardByUid(this.UnregisteredCard.Idm);
             }
         }
 
@@ -105,7 +105,7 @@ namespace FelicaCashingSystemV2
                 }
 
                 if (isBlocking)
-                {                    
+                {
                     window.ShowDialog();
                     this.windows.Remove(window);
 
@@ -334,7 +334,7 @@ namespace FelicaCashingSystemV2
                 return;
             }
 
-            this.notifyIcon = new NotifyIcon(new Uri("pack://application:,,,/Resources/FelicaIcon.ico"));
+            this.notifyIcon = new NotifyIcon(WindowIcon.GetIcon());
             this.notifyIcon.Click += this.notifyIcon_Click;
             this.notifyIcon.ExitClick += this.notifyIcon_ExitClick;
 
@@ -342,23 +342,20 @@ namespace FelicaCashingSystemV2
             this.ShowBalloonTip(
                 "起動中",
                 "Felica Cashing Sytem V2 をデバッグモードで起動しています。しばらくお待ちください。",
-                NotifyIcon.ToolTipIcon.Warning,
-                30 * 1000
+                NotifyIcon.ToolTipIcon.Warning
                 );
 #else
             this.ShowBalloonTip(
                 "起動中",
                 "Felica Cashing Sytem V2 を起動しています。しばらくお待ちください。",
-                NotifyIcon.ToolTipIcon.Info,
-                30 * 1000
+                NotifyIcon.ToolTipIcon.Info
                 );
 #endif
 
             try
             {
-                this.DatabaseManager = new FelicaData.DatabaseManager("Database");
-                this.UserData = new FelicaData.UserData(this.DatabaseManager);
-                this.UiData = new FelicaData.UiData(this.DatabaseManager);
+                this.DatabaseManager = new FelicaData.DatabaseManager();
+                this.Collections = new FelicaData.CollectionManager(this.DatabaseManager);
             }
             catch (FelicaData.DatabaseException dbe)
             {
@@ -376,9 +373,8 @@ namespace FelicaCashingSystemV2
 #if DEBUG
             try
             {
-                this.UserData.CreateUser(new FelicaData.User
+                this.Collections.Users.CreateUser(new FelicaData.User
                 {
-                    Id = 1,
                     Name = "テスト用ユーザー",
                     Email = "tester@tester.jp",
                     IsAdmin = true,
@@ -392,9 +388,8 @@ namespace FelicaCashingSystemV2
 
             try
             {
-                this.UserData.CreateUser(new FelicaData.User
+                this.Collections.Users.CreateUser(new FelicaData.User
                 {
-                    Id = 2,
                     Name = "テスト用ユーザー (非管理者)",
                     Email = "tester@tester.jp",
                     IsAdmin = false,
@@ -408,9 +403,8 @@ namespace FelicaCashingSystemV2
 
             try
             {
-                this.UserData.CreateCard(new FelicaData.Card
+                this.Collections.Cards.CreateCard(new FelicaData.Card
                 {
-                    UserId = 1,
                     Name = "最初に登録したカード",
                     Uid = "TEST-UID-1"
                 });
@@ -422,9 +416,8 @@ namespace FelicaCashingSystemV2
             
             try
             {
-                this.UserData.CreateCard(new FelicaData.Card
+                this.Collections.Cards.CreateCard(new FelicaData.Card
                 {
-                    UserId = 1,
                     Name = "ミールカード",
                     Uid = "TEST-UID-2"
                 });
@@ -484,8 +477,6 @@ namespace FelicaCashingSystemV2
             if (this.notifyIcon != null) { this.notifyIcon.Dispose(); }
             if (this.felica != null) { this.felica.Dispose(); }
 
-            if (this.DatabaseManager != null) { this.DatabaseManager.Dispose(); }
-
             // Mutex を開放する
             if (this.mutex != null)
             {
@@ -518,9 +509,9 @@ namespace FelicaCashingSystemV2
             Debug.WriteLine("felica_FelicaCardSet");
             Debug.WriteLine("Idm = " + e.Idm + ", Pmm = " + e.Pmm);
 
-            if (this.UserData == null) { return; }
+            if (this.Collections == null) { return; }
 
-            this.Card = this.UserData.GetCard(e.Idm);
+            this.Card = this.Collections.Cards.GetCard(e.Idm);
 
             // 関連付け
             // 既にカードが登録されていないこと
@@ -540,7 +531,7 @@ namespace FelicaCashingSystemV2
                     ", Name = " + this.Card.Name +
                     ", UserId = " + this.Card.UserId);
 
-                this.User = this.UserData.GetUser(this.Card.UserId);
+                this.User = this.Collections.Users.GetUser(this.Card.UserId);
             }
 
             // ユーザーが存在する場合

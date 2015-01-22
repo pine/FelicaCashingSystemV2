@@ -25,8 +25,8 @@ namespace FelicaCashingSystemV2.Views
         /// <param name="e"></param>
         private void AdministeringMoneyViewModel_MoneyActionSucceeded(object sender, MoneyActionSucceededEventArgs e)
         {
-            var user = App.Current.UserData.GetUser(e.UserId);
-            var adminUser = App.Current.UserData.GetUser(e.PerformerUserId);
+            var user = App.Current.Collections.Users.GetUser(e.UserId);
+            var adminUser = App.Current.Collections.Users.GetUser(e.PerformerUserId);
 
             if (user == null) { return; }
             if (adminUser == null) { return; }

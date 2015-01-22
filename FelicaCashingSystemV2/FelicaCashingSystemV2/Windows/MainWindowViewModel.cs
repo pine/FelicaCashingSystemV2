@@ -18,6 +18,7 @@ namespace FelicaCashingSystemV2.Windows
         public MainWindowViewModel() : base(FelicaData.UiPageType.Home)
         {
             this.MainBuyCommand = new DelegateCommand<int>(this.MainBuy);
+            this.ShowDormitoryReportCommand = new DelegateCommand(this.ShowDormitoryReport);
         }
 
         public ICommand MainBuyCommand
@@ -29,6 +30,20 @@ namespace FelicaCashingSystemV2.Windows
         private void MainBuy(int money)
         {
             this.Buy(money, false);
+        }
+
+        public ICommand ShowDormitoryReportCommand
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// 門限超過届けを表示
+        /// </summary>
+        public void ShowDormitoryReport()
+        {
+            App.Current.MainWindow.ShowDormitoryReportWindow();
         }
     }
 }

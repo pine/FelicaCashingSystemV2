@@ -67,6 +67,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="BitmapSizeResizer.cs" />
+    <Compile Include="DormitoryReportWindowHelper.cs" />
     <Compile Include="MoneyActionSucceededEventArgs.cs" />
     <Compile Include="MoneyHistoryToCannotCancelVisibilityConverter.cs" />
     <Compile Include="CommaSeparatedIntegerExtension.cs" />
@@ -123,6 +124,7 @@
     <Compile Include="Views\DormitorySettingsView.xaml.cs">
       <DependentUpon>DormitorySettingsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WindowIcon.cs" />
     <Compile Include="Windows\AdministeringUserWindow.xaml.cs">
       <DependentUpon>AdministeringUserWindow.xaml</DependentUpon>
     </Compile>

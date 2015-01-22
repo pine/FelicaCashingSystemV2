@@ -9,7 +9,7 @@ namespace FelicaCashingSystemV2
 {
     class UserIdToUserNameConverter : IValueConverter
     {
-        private Dictionary<int, string> userNameCached = new Dictionary<int, string>();
+        private Dictionary<string, string> userNameCached = new Dictionary<string, string>();
 
         public UserIdToUserNameConverter()
         {
@@ -23,10 +23,10 @@ namespace FelicaCashingSystemV2
 
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            if (App.Current.UserData == null) { return null; }
+            if (App.Current.Collections == null) { return null; }
 
-            int userId = System.Convert.ToInt32(value);
-            if (userId == 0) { return null; }
+            string userId = value as string;
+            if (userId == null) { return null; }
 
             if (this.userNameCached.ContainsKey(userId))
             {
@@ -35,7 +35,7 @@ namespace FelicaCashingSystemV2
 
             else
             {
-                var user = App.Current.UserData.GetUser(userId);
+                var user = App.Current.Collections.Users.GetUser(userId);
 
                 if (user != null)
                 {

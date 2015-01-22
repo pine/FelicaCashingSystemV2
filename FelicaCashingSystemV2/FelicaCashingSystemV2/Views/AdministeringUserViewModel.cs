@@ -24,9 +24,9 @@ namespace FelicaCashingSystemV2.Views
         /// <param name="e"></param>
         protected void Current_UserChanged(object sender, FelicaData.User e)
         {
-            if (this.AdministeringUser.Id > 0)
+            if (this.AdministeringUser.Id != null)
             {
-                this.AdministeringUser = App.Current.UserData.GetUser(this.AdministeringUser.Id);
+                this.AdministeringUser = App.Current.Collections.Users.GetUser(this.AdministeringUser.Id);
             }
         }
 

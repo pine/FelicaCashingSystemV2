@@ -8,8 +8,8 @@ namespace FelicaCashingSystemV2
 {
     class MoneyActionSucceededEventArgs
     {
-        public int UserId;
-        public int PerformerUserId;
+        public string UserId;
+        public string PerformerUserId;
         public int MoneyDiff;
     }
 }

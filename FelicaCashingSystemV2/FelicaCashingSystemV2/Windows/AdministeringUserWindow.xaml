@@ -5,7 +5,7 @@
                       xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       xmlns:behaviours="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
                       xmlns:localViews="clr-namespace:FelicaCashingSystemV2.Views"
-                      Height="480" Width="800"                      
+                      Height="480" Width="750"                    
                       WindowStartupLocation="CenterScreen"
                       ShowMaxRestoreButton="False"
                       ShowMinButton="False"

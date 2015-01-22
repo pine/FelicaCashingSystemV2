@@ -33,7 +33,7 @@ namespace FelicaCashingSystemV2.Views
             }
         }
 
-        public int CurrentCardId
+        public string CurrentCardId
         {
             get
             {
@@ -42,7 +42,7 @@ namespace FelicaCashingSystemV2.Views
                     return App.Current.Card.Id;
                 }
 
-                return 0;
+                return null;
             }
         }
 
@@ -60,7 +60,7 @@ namespace FelicaCashingSystemV2.Views
                     {
                         try
                         {
-                            App.Current.UserData.DeleteCard(card);
+                            App.Current.Collections.Cards.DeleteCard(card.Id);
                             this.ShowMessageBox("カードの削除に成功しました。", "削除成功");
                         }
                         catch (FelicaData.DatabaseException e)
@@ -80,7 +80,7 @@ namespace FelicaCashingSystemV2.Views
         {
             if (App.Current.User != null)
             {
-                this.Cards = App.Current.UserData.GetCards(App.Current.User.Id);
+                this.Cards = App.Current.Collections.Cards.GetCardsByUserId(App.Current.User.Id);
             }
         }
     }

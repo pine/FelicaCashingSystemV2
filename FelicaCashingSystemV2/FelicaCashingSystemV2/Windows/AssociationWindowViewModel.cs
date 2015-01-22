@@ -102,7 +102,7 @@ namespace FelicaCashingSystemV2.Windows
 
             try
             {
-                App.Current.UserData.Assoate(new FelicaData.Card
+                App.Current.Collections.Cards.Assoate(new FelicaData.Card
                 {
                     Uid = App.Current.UnregisteredCard.Idm,
                     UserId = App.Current.User.Id,

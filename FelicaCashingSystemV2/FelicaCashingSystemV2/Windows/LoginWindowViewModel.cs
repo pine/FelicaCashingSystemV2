@@ -15,7 +15,7 @@ namespace FelicaCashingSystemV2.Windows
         public LoginWindowViewModel()
         {
             this.Users =
-                new ObservableCollection<FelicaData.User>(App.Current.UserData.GetUsers());
+                new ObservableCollection<FelicaData.User>(App.Current.Collections.Users.GetUsers());
 
             this.LoginCommand = new WpfCommonds.DelegateCommand<PasswordBox>(this.Login);
         }
@@ -39,9 +39,9 @@ namespace FelicaCashingSystemV2.Windows
             }
         }
 
-        private int userId = 0;
+        private string userId = null;
 
-        public int UserId
+        public string UserId
         {
             get { return this.userId; }
             set {

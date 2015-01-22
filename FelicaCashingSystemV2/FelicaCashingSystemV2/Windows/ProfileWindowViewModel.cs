@@ -142,7 +142,7 @@ namespace FelicaCashingSystemV2.Windows
                 this.user.Password = password;
             }
 
-            App.Current.UserData.UpdateUser(this.user);
+            App.Current.Collections.Users.UpdateUser(this.user);
             App.Current.UpdateUser();
             
             this.ShowMessageBox("プロフィールの基本情報を変更しました。", "変更完了");
@@ -208,7 +208,7 @@ namespace FelicaCashingSystemV2.Windows
             this.user.Avatar = this.NewAvatar.ToBytes();
             this.OnPropertyChanged("AvatarSource");
 
-            App.Current.UserData.UpdateUser(this.user);
+            App.Current.Collections.Users.UpdateUser(this.user);
             App.Current.UpdateUser();
 
             this.ShowMessageBox("アバターを更新しました。", "保存成功");

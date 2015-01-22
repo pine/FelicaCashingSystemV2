@@ -16,13 +16,7 @@ namespace FelicaCashingSystemV2.Views
             this.CancelCommand = new DelegateCommand<FelicaData.MoneyHistory>(this.Cancel);
 
             this.UpdateMoneyHistories();
-            App.Current.UserData.Changed += UserData_Changed;
-        }
-
-        void UserData_Changed(object sender, Type e)
-        {
-             this.UpdateMoneyHistories();
-        
+            App.Current.UserChanged += Current_UserChanged;
         }
 
         private void Current_UserChanged(object sender, FelicaData.User e)
@@ -32,7 +26,9 @@ namespace FelicaCashingSystemV2.Views
 
         private void UpdateMoneyHistories()
         {
-            var histories = App.Current.UserData.GetMoneyHistories(App.Current.User.Id);
+            if (App.Current.User == null) { return; }
+
+            var histories = App.Current.Collections.MoneyHistories.GetMoneyHistories(App.Current.User.Id);
             histories.Reverse();
             this.MoneyHistories = histories;
         }
@@ -65,7 +61,7 @@ namespace FelicaCashingSystemV2.Views
 
                     try
                     {
-                        App.Current.UserData.Cancel(history);
+                        App.Current.Collections.Users.Cancel(history);
                         this.ShowMessageBox("キャンセルに成功しました。キャンセルした分の、加算および減算は正常に行われました。", "キャンセル成功");
                         App.Current.UpdateUser();
                     }
