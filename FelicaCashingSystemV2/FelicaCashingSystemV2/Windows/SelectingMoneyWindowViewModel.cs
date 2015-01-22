@@ -27,10 +27,22 @@ namespace FelicaCashingSystemV2.Windows
             }
         }
 
+        private int maxMoney = 0;
         public int MaxMoney
         {
-            get;
-            set;
+            get
+            {
+                return this.maxMoney;
+            }
+            set
+            {
+                if (value < 0)
+                {
+                    this.ErrorMessage = "データベースの設定値が不正です。";
+                }
+
+                this.maxMoney = value;
+            }
         }
 
         private string errorMessage = string.Empty;
@@ -44,19 +56,15 @@ namespace FelicaCashingSystemV2.Windows
             }
         }
 
-        private int executeTryCount = 0;
-
         public ICommand ExecuteCommand { get; private set; }
         private void Execute()
         {
             int money = 0;
             this.ErrorMessage = string.Empty;
 
-            ++executeTryCount;
-            if (executeTryCount > 5)
+            if (this.MaxMoney < 0)
             {
-                this.ErrorMessage = "そろそろ遊ぶのはやめてください。";
-                executeTryCount = 0;
+                this.ErrorMessage = "データベースの設定値が不正です。";
                 return;
             }
 
@@ -89,7 +97,6 @@ namespace FelicaCashingSystemV2.Windows
                 return;
             }
 
-            this.executeTryCount = 0;
             this.ShowConfirmDialog(
                 "本当に 「 " + money.ToCommaStringAbs() + " 」 円でよろしいですか?",
                 "金額確認",

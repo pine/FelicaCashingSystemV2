@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,12 +36,20 @@ namespace FelicaCashingSystemV2
 
             else
             {
-                var user = App.Current.Collections.Users.GetUser(userId);
-
-                if (user != null)
+                try
                 {
-                    this.userNameCached[userId] = user.Name;
-                    return user.Name;
+                    var user = App.Current.Collections.Users.GetUser(userId);
+
+                    if (user != null)
+                    {
+                        this.userNameCached[userId] = user.Name;
+                        return user.Name;
+                    }
+                }
+                catch (FelicaData.DatabaseException e)
+                {
+                    Debug.WriteLine(e);
+                    return "データベースエラー";
                 }
             }
 

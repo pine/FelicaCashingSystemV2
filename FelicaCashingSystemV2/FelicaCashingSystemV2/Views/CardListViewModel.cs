@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using MahApps.Metro.Controls.Dialogs;
 using WpfCommonds;
+using System.Diagnostics;
 
 namespace FelicaCashingSystemV2.Views
 {
@@ -30,6 +31,17 @@ namespace FelicaCashingSystemV2.Views
             set {
                 this.cards = value;
                 this.OnPropertyChanged("Cards");
+            }
+        }
+
+        private string errorMessage = null;
+        public string ErrorMessage
+        {
+            get { return this.errorMessage; }
+            set
+            {
+                this.errorMessage = value;
+                this.OnPropertyChanged("ErrorMessage");
             }
         }
 
@@ -80,7 +92,15 @@ namespace FelicaCashingSystemV2.Views
         {
             if (App.Current.User != null)
             {
-                this.Cards = App.Current.Collections.Cards.GetCardsByUserId(App.Current.User.Id);
+                try
+                {
+                    this.Cards = App.Current.Collections.Cards.GetCardsByUserId(App.Current.User.Id);
+                }
+                catch (FelicaData.DatabaseException e)
+                {
+                    Debug.WriteLine(e);
+                    this.ErrorMessage = e.Message;
+                }
             }
         }
     }

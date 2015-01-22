@@ -43,5 +43,10 @@
             </DataGrid.Columns>
         </DataGrid>
         
+        <Grid Margin="0,15,0,5">
+            <TextBlock Text="{Binding ErrorMessage}"
+                       Style="{StaticResource ErrorMessageText}"
+                       Visibility="{Binding ErrorMessage,Converter={StaticResource NullToVisibilityConverter}}"/>
+        </Grid>
     </StackPanel>
 </UserControl>

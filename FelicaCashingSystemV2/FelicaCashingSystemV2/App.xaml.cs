@@ -354,7 +354,8 @@ namespace FelicaCashingSystemV2
 
             try
             {
-                this.DatabaseManager = new FelicaData.DatabaseManager();
+                var connectionString = FelicaCashingSystemV2.Properties.Settings.Default.ConnectionString;
+                this.DatabaseManager = new FelicaData.DatabaseManager(connectionString);
                 this.Collections = new FelicaData.CollectionManager(this.DatabaseManager);
             }
             catch (FelicaData.DatabaseException dbe)
@@ -468,6 +469,7 @@ namespace FelicaCashingSystemV2
             }
 
             Debug.WriteLine("Startup succeed");
+            this.ShowLoginWindow();
         }
 
         private void Application_Exit(object sender, ExitEventArgs e)
@@ -492,6 +494,21 @@ namespace FelicaCashingSystemV2
             {
                 this.ShowLoginWindow();
             }
+        }
+
+        /// <summary>
+        /// エラーを表示してプログラムを終了します。
+        /// </summary>
+        /// <param name="errorMessage"></param>
+        public void ExitError(string errorMessage)
+        {
+            MessageBox.Show(
+                errorMessage,
+                "エラー",
+                MessageBoxButton.OK,
+                MessageBoxImage.Stop
+                );
+            this.Shutdown(1);
         }
 
         /// <summary>

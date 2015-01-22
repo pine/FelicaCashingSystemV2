@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -14,8 +15,17 @@ namespace FelicaCashingSystemV2.Windows
     {
         public LoginWindowViewModel()
         {
-            this.Users =
-                new ObservableCollection<FelicaData.User>(App.Current.Collections.Users.GetUsers());
+            try
+            {
+                this.Users =
+                    new ObservableCollection<FelicaData.User>(App.Current.Collections.Users.GetUsers());
+            }
+            catch (FelicaData.DatabaseException e)
+            {
+                Debug.WriteLine(e);
+                this.ErrorMessage = "ユーザー一覧の取得に失敗しました。";
+                return;
+            }
 
             this.LoginCommand = new WpfCommonds.DelegateCommand<PasswordBox>(this.Login);
         }

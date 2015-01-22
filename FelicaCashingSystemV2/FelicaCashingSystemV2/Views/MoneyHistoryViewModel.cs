@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,9 +29,18 @@ namespace FelicaCashingSystemV2.Views
         {
             if (App.Current.User == null) { return; }
 
-            var histories = App.Current.Collections.MoneyHistories.GetMoneyHistories(App.Current.User.Id);
-            histories.Reverse();
-            this.MoneyHistories = histories;
+            try
+            {
+                var histories = App.Current.Collections.MoneyHistories.GetMoneyHistories(App.Current.User.Id);
+                histories.Reverse();
+                this.MoneyHistories = histories;
+            }
+
+            catch (FelicaData.DatabaseException e)
+            {
+                Debug.WriteLine(e);
+                this.ShowMessageBox("購入履歴の取得に失敗しました。", "エラー");
+            }
         }
 
         private List<FelicaData.MoneyHistory> moneyHistories = null;
@@ -43,6 +53,8 @@ namespace FelicaCashingSystemV2.Views
                 this.OnPropertyChanged("MoneyHistories");
             }
         }
+
+
 
         public ICommand CancelCommand { get; private set; }
         private void Cancel(FelicaData.MoneyHistory history)

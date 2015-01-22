@@ -234,10 +234,19 @@ namespace FelicaCashingSystemV2
         /// 取引の最大値を取得する
         /// </summary>
         /// <param name="pageType"></param>
+        /// <returns>失敗時は -1 を返す</returns>
         private int GetExecuteMax(FelicaData.UiPageType pageType)
         {
-            var page = App.Current.Collections.UiPageSettings.GetUiPageSetting(pageType);
-            return page.MaxMoney;
+            try
+            {
+                var page = App.Current.Collections.UiPageSettings.GetUiPageSetting(pageType);
+                return page.MaxMoney;
+            }
+            catch (FelicaData.DatabaseException e)
+            {
+                Debug.WriteLine(e);
+                return -1;
+            }
         }
 
         /// <summary>
@@ -307,7 +316,9 @@ namespace FelicaCashingSystemV2
                 // 購入処理
                 if (App.Current.User != null)
                 {
-                    this.ShowMessageBox(
+                    if (moneyAction(money))
+                    {
+                        this.ShowMessageBox(
                             succeedMessage(money),
                             actionName + "成功",
                             isAnimation,
@@ -315,25 +326,20 @@ namespace FelicaCashingSystemV2
                             {
                                 this.isExecuting = false;
                             });
+                        App.Current.UpdateUser();
 
-                    Task.Run(() =>
+                    }
+                    else
                     {
-                        if (moneyAction(money))
-                        {
-                            App.Current.UpdateUser();
-                        }
-                        else
-                        {
-                            this.ShowMessageBox(
-                                errorMessage,
-                                actionName + "失敗",
-                                isAnimation,
-                                () =>
-                                {
-                                    this.isExecuting = false;
-                                });
-                        }
-                    });
+                        this.ShowMessageBox(
+                            errorMessage,
+                            actionName + "失敗",
+                            isAnimation,
+                            () =>
+                            {
+                                this.isExecuting = false;
+                            });
+                    }
                 }
             }
         }

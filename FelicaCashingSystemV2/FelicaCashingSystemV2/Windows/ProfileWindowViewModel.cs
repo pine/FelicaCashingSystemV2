@@ -142,7 +142,16 @@ namespace FelicaCashingSystemV2.Windows
                 this.user.Password = password;
             }
 
-            App.Current.Collections.Users.UpdateUser(this.user);
+            try
+            {
+                App.Current.Collections.Users.UpdateUser(this.user);
+            }
+            catch (FelicaData.DatabaseException e)
+            {
+                this.ErrorMessage = e.Message;
+                return;
+            }
+
             App.Current.UpdateUser();
             
             this.ShowMessageBox("プロフィールの基本情報を変更しました。", "変更完了");
@@ -152,7 +161,6 @@ namespace FelicaCashingSystemV2.Windows
         public ICommand SelectFileCommand { get; private set; }
         private void SelectFile()
         {
-            Debug.WriteLine("SelectFile");
             this.ErrorMessage = string.Empty;
 
             var filter = Properties.Settings.Default.ImageFileFilter; // 画像ファイル
@@ -196,7 +204,6 @@ namespace FelicaCashingSystemV2.Windows
         public ICommand SaveAvatarCommand { get; private set; }
         private void SaveAvatar()
         {
-            Debug.WriteLine("SaveAvatar");
             this.ErrorMessage = string.Empty;
 
             if (this.NewAvatar == null)
@@ -205,11 +212,24 @@ namespace FelicaCashingSystemV2.Windows
                 return;
             }
 
+            var oldAvatar = this.user.Avatar != null ? (byte[])this.user.Avatar.Clone() : null;
             this.user.Avatar = this.NewAvatar.ToBytes();
-            this.OnPropertyChanged("AvatarSource");
+            
+            try
+            {
+                App.Current.Collections.Users.UpdateUser(this.user);
+            }
+            catch (FelicaData.DatabaseException e)
+            {
+                this.ErrorMessage = e.Message;
 
-            App.Current.Collections.Users.UpdateUser(this.user);
+                this.user.Avatar = oldAvatar;
+                this.OnPropertyChanged("AvatarSource");
+                return;
+            }
+
             App.Current.UpdateUser();
+            this.OnPropertyChanged("AvatarSource");
 
             this.ShowMessageBox("アバターを更新しました。", "保存成功");
             this.NewAvatar = null;
