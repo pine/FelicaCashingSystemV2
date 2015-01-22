@@ -15,7 +15,7 @@
         
         <StackPanel Grid.Row="0"
                     Orientation="Vertical"
-                    Margin="0,0,0,10">
+                    Margin="0,0,0,20">
             <TextBlock Text="管理者による金額操作は、利用者へ逐一メールで送信され、履歴に残ります。"/>
         </StackPanel>
         

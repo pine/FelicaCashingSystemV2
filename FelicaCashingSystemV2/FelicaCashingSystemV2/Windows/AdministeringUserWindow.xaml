@@ -42,13 +42,14 @@
                 </ScrollViewer>
             </TabItem>
             
-            <!--
+            
             <TabItem Header="メール送信">
                 <ScrollViewer>
-                    <TextBlock>管理者からのメール送信機能。未実装</TextBlock>
+                    <localViews:AdministeringMailView x:Name="administeringMailView"/>
                 </ScrollViewer>
             </TabItem>
             
+            <!--
             <TabItem Header="プロフィール変更">
                 <ScrollViewer>
                     <TextBlock>管理者からのプロフィール変更機能。未実装</TextBlock>

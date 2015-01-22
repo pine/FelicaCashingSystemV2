@@ -66,8 +66,8 @@
                                   ItemsSource="{Binding Users}"
                                   DisplayMemberPath="Name"
                                   SelectedValuePath="Id"
-                                  SelectedValue="{Binding UserId}" SelectionChanged="comboBoxUsers_SelectionChanged"
-                                  />
+                                  SelectedValue="{Binding UserId}"
+                                  SelectionChanged="comboBoxUsers_SelectionChanged"/>
 
                         <TextBlock Grid.Column="1" Text="さん"
                                    Style="{StaticResource FormHelperText}"/>

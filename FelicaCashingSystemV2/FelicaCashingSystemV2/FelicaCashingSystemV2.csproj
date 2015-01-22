@@ -84,6 +84,10 @@
     <Compile Include="MoneyHistoryToCanCancelVisibilityConverter.cs" />
     <Compile Include="TileMoneyToStringConverter.cs" />
     <Compile Include="UserIdToUserNameConverter.cs" />
+    <Compile Include="Views\AdministeringMailView.xaml.cs">
+      <DependentUpon>AdministeringMailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AdministeringMailViewModel.cs" />
     <Compile Include="Views\DormitoryProfileView.xaml.cs">
       <DependentUpon>DormitoryProfileView.xaml</DependentUpon>
     </Compile>
@@ -159,13 +163,13 @@
       <DependentUpon>SideProfileView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\LoginWindowViewModel.cs" />
-    <Compile Include="Windows\ProfileWindow.xaml.cs">
-      <DependentUpon>ProfileWindow.xaml</DependentUpon>
+    <Compile Include="Windows\ProfileEditWindow.xaml.cs">
+      <DependentUpon>ProfileEditWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\MainWindowViewModel.cs" />
     <Compile Include="NotifyIcon.cs" />
     <Compile Include="MoneyViewModel.cs" />
-    <Compile Include="Windows\ProfileWindowViewModel.cs" />
+    <Compile Include="Windows\ProfileEditWindowViewModel.cs" />
     <Compile Include="Windows\SelectingMoneyWindow.xaml.cs">
       <DependentUpon>SelectingMoneyWindow.xaml</DependentUpon>
     </Compile>
@@ -195,6 +199,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\SystemInformationButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\AdministeringMailView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -278,7 +286,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\ProfileWindow.xaml">
+    <Page Include="Windows\ProfileEditWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

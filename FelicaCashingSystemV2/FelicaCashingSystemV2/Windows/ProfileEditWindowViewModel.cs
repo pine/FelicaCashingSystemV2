@@ -15,11 +15,11 @@ using WpfCommonds;
 
 namespace FelicaCashingSystemV2.Windows
 {
-    class ProfileWindowViewModel : MetroWindowViewModelBase
+    class ProfileEditWindowViewModel : MetroWindowViewModelBase
     {
         private FelicaData.User user = App.Current.User.Clone();
 
-        public ProfileWindowViewModel()
+        public ProfileEditWindowViewModel()
         {
             this.SaveBasicProfileCommand = new DelegateCommand<PasswordBox[]>(this.SaveBasicProfile);
             this.SelectFileCommand = new DelegateCommand(this.SelectFile);

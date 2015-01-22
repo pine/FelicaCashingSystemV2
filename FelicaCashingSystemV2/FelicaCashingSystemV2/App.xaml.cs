@@ -179,7 +179,7 @@ namespace FelicaCashingSystemV2
         {
             if (this.User != null)
             {
-                this.ShowDialog<Windows.ProfileWindow>();
+                this.ShowDialog<Windows.ProfileEditWindow>();
             }
         }
 
@@ -187,7 +187,7 @@ namespace FelicaCashingSystemV2
         {
             if (this.User != null)
             {
-                this.ShowDialog<Windows.ProfileWindow>(
+                this.ShowDialog<Windows.ProfileEditWindow>(
                     beforeAction: (window) =>
                     {
                         window.SelectAvatarTab();
