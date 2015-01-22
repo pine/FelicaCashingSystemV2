@@ -17,8 +17,8 @@ Felica Cashing System V2
 - .NET Framework 4.5
   - Windows Forms (一部のみ)
   - WPF
-- MashApps.Metro
-- [RavenDB](http://ravendb.net)
+- MashApps.Metro ([カスタマイズ版](https://github.com/pine613/MahApps.Metro/tree/felica_master) を使用)
+- [MongoDB](http://www.mongodb.org) (v2.6)
 - iTextSharp
 - Adobe Acrobat 7.0 Browser Control Type Library 1.0
 - PC/SC (WinScard.dll)
