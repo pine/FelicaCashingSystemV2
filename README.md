@@ -35,5 +35,7 @@ Felica Cashing System V2
   カードリーダー (PaSoRi) を C# から利用するためのライブラリ
 - [FelicaDataV2](https://github.com/pine613/FelicaDataV2)<br />
   Felica Cashing System V2 のデータベースレイヤを担当するモジュール
+- [KutDormitoryReport](https://github.com/pine613/KutDormitoryReport)<br />
+  高知工科大学ドミトリーの門限超過届けを自動発行する部分のモジュール
 - [FelicaCashingSystemV2_Settings](https://github.com/RobotClubKut/FelicaCashingSystemV2_Settings)<br />
   ロボット倶楽部で運用している Felica Cashing System V2 の設定 (非公開)
