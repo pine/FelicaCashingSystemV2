@@ -139,7 +139,7 @@ namespace FelicaCashingSystemV2.Windows
             // パスワードを変更する場合 (空白のみ以外の入力が存在する場合)
             if (!string.IsNullOrWhiteSpace(password))
             {
-                this.user.Password = password;
+                this.user.PlainPassword = password;
             }
 
             try
