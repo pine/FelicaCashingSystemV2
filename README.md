@@ -6,7 +6,7 @@ Felica Cashing System V2
 
 |スクリーンショット|ポスター|
 |------------------|--------|
-|[![スクリーンショット](SS-min.png)](SS.png)|[![ポスター](Poster-min.png)](Poster.pdf)|
+|[![スクリーンショット](SS-min.png)](SS.png)|[![ポスター](Poster-min.png)](http://cdn.rawgit.com/pine613/FelicaCashingSystemV2/master/Poster.pdf)|
 
 ## 開発言語
 - C#
