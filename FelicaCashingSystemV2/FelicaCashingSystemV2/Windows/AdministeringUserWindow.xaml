@@ -48,6 +48,12 @@
                     <localViews:AdministeringMailView x:Name="administeringMailView"/>
                 </ScrollViewer>
             </TabItem>
+
+            <TabItem Header="権限">
+                <ScrollViewer>
+                    <localViews:AdministeringPermissionView x:Name="administeringPermissionView"/>
+                </ScrollViewer>
+            </TabItem>
             
             <!--
             <TabItem Header="プロフィール変更">

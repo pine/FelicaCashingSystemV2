@@ -11,17 +11,23 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
+        <TextBlock Text="[管理者]"
+                   TextAlignment="Center"
+                   Margin="0,5,0,0"
+                   Grid.Row="0"
+                   Visibility="{Binding IsAdministeringUserAdmin,Converter={StaticResource BooleanToVisibilityConverter}}"/>
+        
         <TextBlock Text="[管理対象者]"
                    TextAlignment="Center"
-                   Margin="5,5,5,0"
-                   Grid.Row="0"/>
-        
+                   Grid.Row="1"/>
+
         <TextBlock TextAlignment="Center" 
                    Margin="5"
-                   Grid.Row="1">
+                   Grid.Row="2">
                 <TextBlock Text="{Binding Name}"/>
                 <TextBlock Text="さん"/>
         </TextBlock>
@@ -29,7 +35,7 @@
         <TextBlock TextAlignment="Center" 
                    FontSize="17"
                    Margin="5"
-                   Grid.Row="2">
+                   Grid.Row="3">
             <TextBlock.Foreground>
                 <SolidColorBrush Color="{Binding Money,Converter={StaticResource MinusToColorConverter}}"/>
             </TextBlock.Foreground>
@@ -38,7 +44,7 @@
             <TextBlock Text="円"/>
         </TextBlock>
         
-        <ScrollViewer Grid.Row="3" >
+        <ScrollViewer Grid.Row="4" >
             <StackPanel Margin="0,5,0,0">
                 <StackPanel.Resources>
                     <Style TargetType="{x:Type Image}"

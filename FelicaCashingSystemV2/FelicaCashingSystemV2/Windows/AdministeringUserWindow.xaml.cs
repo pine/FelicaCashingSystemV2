@@ -26,6 +26,7 @@ namespace FelicaCashingSystemV2.Windows
                 this.administeringSideProfileView.AdministeringUser = value;
                 this.administeringMoneyView.AdministeringUser = value;
                 this.administeringMailView.AdministeringUser = value;
+                this.administeringPermissionView.AdministeringUser = value;
             }
         }
     }

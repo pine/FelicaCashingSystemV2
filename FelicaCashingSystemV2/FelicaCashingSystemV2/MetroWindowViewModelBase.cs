@@ -19,7 +19,7 @@ namespace FelicaCashingSystemV2
                     App.Current.User.IsAdmin;
             }
         }
-
+        
         /// <summary>
         /// メッセージボックスを表示する
         /// </summary>

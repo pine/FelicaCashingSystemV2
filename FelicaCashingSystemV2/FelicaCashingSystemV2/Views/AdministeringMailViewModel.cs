@@ -6,14 +6,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+
 using WpfCommonds;
+using FelicaMail;
 
 namespace FelicaCashingSystemV2.Views
 {
     class MailTemplate
     {
-        public string Id { get; set; }
+        public MailTemplateType Id { get; set; }
         public string Name { get; set; }
+    }
+
+    enum MailTemplateType
+    {
+        PaymentRequest,
+        Message
     }
 
     class AdministeringMailViewModel : AdministeringUserViewModel
@@ -22,17 +30,16 @@ namespace FelicaCashingSystemV2.Views
         {
             this.Templates.Add(new MailTemplate
             {
-                Id = "PaymentRequest",
+                Id = MailTemplateType.PaymentRequest,
                 Name = "支払い要求"
             });
             
             this.Templates.Add(new MailTemplate
             {
-                Id = "Message",
+                Id = MailTemplateType.Message,
                 Name = "任意のメッセージ"
             });
 
-            this.TemplateId = "PaymentRequest";
             this.SendCommand = new DelegateCommand(this.Send);
         }
 
@@ -47,24 +54,36 @@ namespace FelicaCashingSystemV2.Views
             }
         }
 
-        private string templateId = null;
-        public string TemplateId
+        private MailTemplateType templateId = MailTemplateType.PaymentRequest;
+        public MailTemplateType TemplateId
         {
             get {
-                if (this.templateId == null)
-                {
-                    if (this.Templates.Count > 0)
-                    {
-                        this.templateId = this.Templates[0].Id;
-                    }
-                }
-
                 return this.templateId;
             }
             set
             {
                 this.templateId = value;
                 this.OnPropertyChanged("TemplateId");
+                this.OnPropertyChanged("IsMessageRequired");
+            }
+        }
+
+        public bool IsMessageRequired
+        {
+            get
+            {
+                return this.TemplateId == MailTemplateType.Message;
+            }
+        }
+
+        private string message = "";
+        public string Message
+        {
+            get { return this.message; }
+            set
+            {
+                this.message = value;
+                this.OnPropertyChanged("Message");
             }
         }
 
@@ -84,8 +103,46 @@ namespace FelicaCashingSystemV2.Views
         {
             Debug.WriteLine("Send mail start");
 
+            this.ErrorMessage = string.Empty;
 
+            var email = this.AdministeringUser.Email;
+            var name = this.AdministeringUser.Name;
+            var adminName = App.Current.User.Name;
 
+            switch (this.TemplateId)
+            {
+                case MailTemplateType.Message:
+                    App.Current.Mailer.SendMessage(
+                        email,
+                        new MessageArgs
+                        {
+                            Name = name,
+                            AdminName = adminName,
+                            Message = this.Message,
+                        });
+                    break;
+
+                case MailTemplateType.PaymentRequest:
+                    var money = this.AdministeringUser.Money;
+
+                    if (money >= 0)
+                    {
+                        this.ErrorMessage = "利用者の金額がマイナスではありません。";
+                        return;
+                    }
+
+                    App.Current.Mailer.SendPaymentRequest(
+                        email,
+                        new PaymentRequestArgs
+                        {
+                            Name = name,
+                            AdminName = adminName,
+                            Money = money.ToCommaString(),
+                        });
+                    break;
+            }
+
+            this.ShowMessageBox("ユーザーにメールを送信しました。", "メール送信に成功");
             Debug.WriteLine("Send mail succeeded");
         }
     }

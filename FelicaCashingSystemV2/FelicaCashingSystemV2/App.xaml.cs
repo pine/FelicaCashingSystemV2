@@ -158,11 +158,19 @@ namespace FelicaCashingSystemV2
         /// メインウィンドウを指定したユーザーでログインして表示する。
         /// </summary>
         /// <param name="user">ログインするユーザー</param>
-        public void ShowMainWindow(FelicaData.User user)
+        public void ShowMainWindow(FelicaData.User user, FelicaData.Card card = null)
         {
             this.CloseAllWindows();
 
             this.User = user;
+
+            // 現在のカードを設定する
+            // 関連付け後のウィンドウ表示に利用
+            if (card != null)
+            {
+                this.Card = card;
+            }
+
             this.ShowWindow<Windows.MainWindow>();
         }
 
@@ -334,6 +342,8 @@ namespace FelicaCashingSystemV2
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
+            var settings = FelicaCashingSystemV2.Properties.Settings.Default;
+
             // 二重起動を検出
             if (!this.mutex.WaitOne(0, false))
             {
@@ -369,8 +379,15 @@ namespace FelicaCashingSystemV2
 
             try
             {
-                var connectionString = FelicaCashingSystemV2.Properties.Settings.Default.ConnectionString;
-                this.DatabaseManager = new FelicaData.DatabaseManager(connectionString);
+                var connectionString = settings.ConnectionString;
+
+#if DEBUG
+                var databaseName = settings.DatabaseName + "_Debug";
+#else
+                var databaseName = settings.DatabaseName;
+#endif
+
+                this.DatabaseManager = new FelicaData.DatabaseManager(databaseName, connectionString);
                 this.Collections = new FelicaData.CollectionManager(this.DatabaseManager);
             }
             catch (FelicaData.DatabaseException dbe)
@@ -386,13 +403,26 @@ namespace FelicaCashingSystemV2
                 return;
             }
 
-#if DEBUG
-            DebugSeed.Init();
-#endif
+            // シードを書き込む
+            try
+            {
+                Seed.Init();
+            }
+            catch (FelicaData.DatabaseException ee)
+            {
+                MessageBox.Show(
+                    ee.Message,
+                    "起動に失敗しました",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error
+                    );
+
+                this.Shutdown(1);
+                return;
+            }
 
             this.Mailer = new FelicaMail.Mailer();
 
-            var settings = FelicaCashingSystemV2.Properties.Settings.Default;
             this.Mailer.Setup(
                 settings.MailFrom,
                 settings.MailFromName,
@@ -432,6 +462,21 @@ namespace FelicaCashingSystemV2
             this.ShowLoginWindow();
         }
 
+        /// <summary>
+        /// エラーを表示してプログラムを終了します。
+        /// </summary>
+        /// <param name="errorMessage"></param>
+        public void ExitError(string errorMessage)
+        {
+            MessageBox.Show(
+                errorMessage,
+                "エラー",
+                MessageBoxButton.OK,
+                MessageBoxImage.Stop
+                );
+            this.Shutdown(1);
+        }
+
         private void Application_Exit(object sender, ExitEventArgs e)
         {
             this.CloseAllWindows();
@@ -454,21 +499,6 @@ namespace FelicaCashingSystemV2
             {
                 this.ShowLoginWindow();
             }
-        }
-
-        /// <summary>
-        /// エラーを表示してプログラムを終了します。
-        /// </summary>
-        /// <param name="errorMessage"></param>
-        public void ExitError(string errorMessage)
-        {
-            MessageBox.Show(
-                errorMessage,
-                "エラー",
-                MessageBoxButton.OK,
-                MessageBoxImage.Stop
-                );
-            this.Shutdown(1);
         }
 
         /// <summary>

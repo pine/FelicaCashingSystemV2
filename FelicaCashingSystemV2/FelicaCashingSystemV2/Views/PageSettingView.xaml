@@ -26,8 +26,8 @@
     </UserControl.Resources>
     
     <StackPanel HorizontalAlignment="Left">
-        <TextBlock Style="{StaticResource Heading2}">自由入力限度額</TextBlock>
-        <TextBlock>自由入力できる金額の限度額を設定します。0 は無制限です。</TextBlock>
+        <TextBlock Style="{StaticResource Heading2}">限度額</TextBlock>
+        <TextBlock>取引できる金額の限度額を設定します。0 は無制限です。</TextBlock>
 
         <StackPanel Orientation="Horizontal"
                                     Margin="15,15,15,30">

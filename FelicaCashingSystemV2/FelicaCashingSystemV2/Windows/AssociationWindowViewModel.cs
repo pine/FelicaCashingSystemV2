@@ -100,9 +100,11 @@ namespace FelicaCashingSystemV2.Windows
                 return;
             }
 
+            FelicaData.Card card = null;
+
             try
             {
-                App.Current.Collections.Cards.Assoate(new FelicaData.Card
+                card = App.Current.Collections.Cards.Assoate(new FelicaData.Card
                 {
                     PlainUid = App.Current.UnregisteredCard.Idm,
                     UserId = App.Current.User.Id,
@@ -124,7 +126,7 @@ namespace FelicaCashingSystemV2.Windows
                 "関連付け成功",
                 callback: () =>
                 {
-                    App.Current.ShowMainWindow(App.Current.User);
+                    App.Current.ShowMainWindow(App.Current.User, card);
                 });
         }
     }

@@ -17,7 +17,7 @@ namespace FelicaCashingSystemV2.Views
 
         private void UpdatePageType()
         {
-            var page = App.Current.Collections.UiPageSettings.GetUiPageSetting(this.pageType);
+            var page = App.Current.Collections.UiPages.GetUiPage(this.pageType);
 
             if (page != null)
             {
@@ -109,7 +109,7 @@ namespace FelicaCashingSystemV2.Views
 
                         if (maxMoneyInt != 0 && val > maxMoneyInt)
                         {
-                            this.ErrorMessage = "最大値以上の金額が、一覧で指定されています。";
+                            this.ErrorMessage = "限度額以上の金額が、一覧で指定されています。";
                             return;
                         }
 
@@ -130,10 +130,10 @@ namespace FelicaCashingSystemV2.Views
             // 更新
             try
             {
-                var page = App.Current.Collections.UiPageSettings.GetUiPageSetting(this.PageType);
+                var page = App.Current.Collections.UiPages.GetUiPage(this.PageType);
                 page.MoneyTiles = moneyListInt.ToArray();
                 page.MaxMoney = maxMoneyInt;
-                App.Current.Collections.UiPageSettings.UpdateUiPageSetting(page);
+                App.Current.Collections.UiPages.UpdateUiPage(page);
             }
             catch (Exception e)
             {

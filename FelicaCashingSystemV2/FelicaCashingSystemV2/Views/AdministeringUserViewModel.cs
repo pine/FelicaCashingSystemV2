@@ -18,6 +18,14 @@ namespace FelicaCashingSystemV2.Views
             App.Current.UserChanged += Current_UserChanged;
         }
 
+        ~AdministeringUserViewModel()
+        {
+            if (App.Current != null)
+            {
+                App.Current.UserChanged -= this.Current_UserChanged;
+            }
+        }
+
         /// <summary>
         /// ユーザー情報が更新された時のイベント
         /// </summary>
@@ -51,6 +59,7 @@ namespace FelicaCashingSystemV2.Views
                 this.OnPropertyChanged("Name");
                 this.OnPropertyChanged("Money");
                 this.OnPropertyChanged("AvatarSource");
+                this.OnPropertyChanged("IsAdministeringUserAdmin");
             }
             get
             {
@@ -84,6 +93,14 @@ namespace FelicaCashingSystemV2.Views
                 }
 
                 return null;
+            }
+        }
+
+        public bool IsAdministeringUserAdmin
+        {
+            get
+            {
+                return this.administeringUser.IsAdmin;
             }
         }
     }

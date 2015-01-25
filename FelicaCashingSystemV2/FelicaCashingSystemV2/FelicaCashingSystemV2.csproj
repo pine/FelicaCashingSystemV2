@@ -67,7 +67,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="BitmapSizeResizer.cs" />
-    <Compile Include="DebugSeed.cs" />
+    <Compile Include="Seed.cs" />
     <Compile Include="DormitoryReportWindowHelper.cs" />
     <Compile Include="MoneyActionSucceededEventArgs.cs" />
     <Compile Include="MoneyHistoryToCannotCancelVisibilityConverter.cs" />
@@ -84,10 +84,14 @@
     <Compile Include="MoneyHistoryToCanCancelVisibilityConverter.cs" />
     <Compile Include="TileMoneyToStringConverter.cs" />
     <Compile Include="UserIdToUserNameConverter.cs" />
+    <Compile Include="Views\AdministeringPermissionView.xaml.cs">
+      <DependentUpon>AdministeringPermissionView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AdministeringMailView.xaml.cs">
       <DependentUpon>AdministeringMailView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AdministeringMailViewModel.cs" />
+    <Compile Include="Views\AdministeringPermissionViewModel.cs" />
     <Compile Include="Views\DormitoryProfileView.xaml.cs">
       <DependentUpon>DormitoryProfileView.xaml</DependentUpon>
     </Compile>
@@ -199,6 +203,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\SystemInformationButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\AdministeringPermissionView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

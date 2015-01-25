@@ -20,7 +20,7 @@ namespace FelicaCashingSystemV2
             this.pageType = pageType;
 
             this.UpdateMoneyTiles();
-            App.Current.Collections.UiPageSettings.Changed += this.UiData_Changed;
+            App.Current.Collections.UiPages.Changed += this.UiData_Changed;
 
             this.BuyCommand = new DelegateCommand<int>(this.Buy);
             this.ChargeCommand = new DelegateCommand<int>(this.Charge);
@@ -31,7 +31,7 @@ namespace FelicaCashingSystemV2
         {
             if (App.Current != null && App.Current.Collections != null)
             {
-                App.Current.Collections.UiPageSettings.Changed -= this.UiData_Changed;
+                App.Current.Collections.UiPages.Changed -= this.UiData_Changed;
             }
         }
 
@@ -96,7 +96,7 @@ namespace FelicaCashingSystemV2
                 var list = new List<int>();
                 try
                 {
-                    var page = App.Current.Collections.UiPageSettings.GetUiPageSetting(this.pageType);
+                    var page = App.Current.Collections.UiPages.GetUiPage(this.pageType);
 
                     if (page != null && page.MoneyTiles != null)
                     {
@@ -245,7 +245,7 @@ namespace FelicaCashingSystemV2
         {
             try
             {
-                var page = App.Current.Collections.UiPageSettings.GetUiPageSetting(pageType);
+                var page = App.Current.Collections.UiPages.GetUiPage(pageType);
                 return page.MaxMoney;
             }
             catch (FelicaData.DatabaseException e)

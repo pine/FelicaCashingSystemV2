@@ -58,15 +58,19 @@
             <TextBlock Grid.Column="0"
                        Grid.Row="1"
                        Text="メッセージ"
-                       Style="{StaticResource FormLabel}"/>
+                       Style="{StaticResource FormLabel}"
+                       Visibility="{Binding IsMessageRequired,Converter={StaticResource BooleanToVisibilityConverter}}"/>
 
             <WrapPanel Grid.Column="1"
                        Grid.Row="1"
-                       Margin="10,5">
+                       Margin="10,5"
+                       Visibility="{Binding IsMessageRequired,Converter={StaticResource BooleanToVisibilityConverter}}">
                 <TextBox x:Name="textboxMessage"
                          Width="400"
                          Height="80"
-                         TextWrapping="Wrap"/>
+                         TextWrapping="Wrap"
+                         AcceptsReturn="True"
+                         Text="{Binding Message,UpdateSourceTrigger=PropertyChanged}"/>
             </WrapPanel>
 
             <Grid Grid.Column="1"
