@@ -362,7 +362,8 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="AfterBuild.ps1" />
+    <None Include="Scripts\RestoreSettings.ps1" />
+    <None Include="Scripts\BackupSettings.ps1" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -431,7 +432,11 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>cd "$(ProjectDir)"
-@powershell -NoProfile -ExecutionPolicy Unrestricted -File "$(ProjectDir)AfterBuild.ps1"</PostBuildEvent>
+@powershell -NoProfile -ExecutionPolicy Unrestricted -File "$(ProjectDir)Scripts\BackupSettings.ps1"</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>cd "$(ProjectDir)"
+@powershell -NoProfile -ExecutionPolicy Unrestricted -File "$(ProjectDir)Scripts\RestoreSettings.ps1"</PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
