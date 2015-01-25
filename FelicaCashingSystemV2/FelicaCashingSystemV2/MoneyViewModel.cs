@@ -29,7 +29,7 @@ namespace FelicaCashingSystemV2
 
         ~MoneyViewModel()
         {
-            if (App.Current.Collections != null)
+            if (App.Current != null && App.Current.Collections != null)
             {
                 App.Current.Collections.UiPageSettings.Changed -= this.UiData_Changed;
             }
