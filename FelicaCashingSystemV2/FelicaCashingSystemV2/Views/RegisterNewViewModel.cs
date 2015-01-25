@@ -109,7 +109,7 @@ namespace FelicaCashingSystemV2.Views
                     new FelicaData.Card
                     {
                         Name = "最初に登録したカード",
-                        Uid = cardUid
+                        PlainUid = cardUid
                     });
             }
             catch (FelicaData.DatabaseException e)

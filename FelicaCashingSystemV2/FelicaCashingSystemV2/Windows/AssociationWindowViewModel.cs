@@ -104,13 +104,13 @@ namespace FelicaCashingSystemV2.Windows
             {
                 App.Current.Collections.Cards.Assoate(new FelicaData.Card
                 {
-                    Uid = App.Current.UnregisteredCard.Idm,
+                    PlainUid = App.Current.UnregisteredCard.Idm,
                     UserId = App.Current.User.Id,
                     Name = this.CardName
                 });
             }
 
-            catch (Exception e)
+            catch (FelicaData.DatabaseException e)
             {
                 this.ErrorMessage = e.Message;
                 return;

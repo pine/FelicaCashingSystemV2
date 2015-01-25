@@ -88,11 +88,17 @@ namespace FelicaCashingSystemV2
             )
             where T: Window, new()
         {
-            this.Dispatcher.BeginInvoke((Action)(() =>
+            this.Dispatcher.Invoke((Action)(() =>
             {
                 if (isSingle && this.IsShownWindow<T>())
                 {
                     return;
+                }
+
+                // 他のウィンドウを削除
+                if (isSingle)
+                {
+                    this.CloseAllWindows(false);
                 }
 
                 var window = new T();
@@ -289,7 +295,7 @@ namespace FelicaCashingSystemV2
         /// <summary>
         /// 表示されているウィンドウをすべて閉じる
         /// </summary>
-        public void CloseAllWindows()
+        public void CloseAllWindows(bool isClearUserData = true)
         {
             lock (this.windows.SyncRoot)
             {
@@ -304,8 +310,11 @@ namespace FelicaCashingSystemV2
                 this.windows.Clear();
             }
 
-            this.User = null;
-            this.associationStarted = false;
+            if (isClearUserData)
+            {
+                this.User = null;
+                this.associationStarted = false;
+            }
         }
 
         protected virtual void OnUserChanged(FelicaData.User user)
