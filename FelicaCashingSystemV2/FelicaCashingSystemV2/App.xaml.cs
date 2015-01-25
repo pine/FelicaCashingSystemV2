@@ -63,14 +63,21 @@ namespace FelicaCashingSystemV2
 
         public void UpdateCard()
         {
-            if (this.Card != null)
+            try
             {
-                this.Card = this.Collections.Cards.GetCard(this.Card.Id);
-            }
+                if (this.Card != null)
+                {
+                    this.Card = this.Collections.Cards.GetCard(this.Card.Id);
+                }
 
-            else if (this.UnregisteredCard != null)
+                else if (this.UnregisteredCard != null)
+                {
+                    this.Card = this.Collections.Cards.GetCardByUid(this.UnregisteredCard.Idm);
+                }
+            }
+            catch (FelicaData.DatabaseException e)
             {
-                this.Card = this.Collections.Cards.GetCardByUid(this.UnregisteredCard.Idm);
+                Debug.WriteLine(e);
             }
         }
 
