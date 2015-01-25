@@ -35,7 +35,7 @@
                        Text="代表者名"
                        Style="{StaticResource FormLabel}"/>
 
-            <TextBox Text="{Binding LeaderName}"
+            <TextBox Text="{Binding LeaderName,UpdateSourceTrigger=PropertyChanged}"
                      Grid.Column="1"
                      Grid.Row="0"
                      Width="250"/>
@@ -45,7 +45,7 @@
                        Text="代表者の電話番号"
                        Style="{StaticResource FormLabel}"/>
             
-            <TextBox Text="{Binding LeaderPhoneNumber}"
+            <TextBox Text="{Binding LeaderPhoneNumber,UpdateSourceTrigger=PropertyChanged}"
                      Grid.Column="1"
                      Grid.Row="1"
                      Width="250"/>
@@ -55,11 +55,11 @@
                        Text="門限超過の理由"
                        Style="{StaticResource FormLabel}"/>
 
-            <TextBox Text="{Binding DormitoryReportReason}"
+            <TextBox Text="{Binding DormitoryReportReason,UpdateSourceTrigger=PropertyChanged}"
                      Grid.Column="1"
                      Grid.Row="2"
                      Width="400"
-                     Height="80"/>
+                     MaxLength="30"/>
             
             <Button Content="変更を保存"
                     Grid.Row="3"
