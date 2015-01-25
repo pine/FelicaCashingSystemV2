@@ -4,11 +4,9 @@ Felica Cashing System V2
 ## 概要
 非接触 IC カード FeliCa を用いた組織内電子決済システムです。
 
-### スクリーンショット
-[![スクリーンショット](SS-min.png)](SS.png)
-
-### ポスター
-[![ポスター](Poster-min.png)](Poster.pdf)
+|スクリーンショット|ポスター|
+|------------------|--------|
+|[![スクリーンショット](SS-min.png)](SS.png)|[![ポスター](Poster-min.png)](Poster.pdf)|
 
 ## 開発言語
 - C#
