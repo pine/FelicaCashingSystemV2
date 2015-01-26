@@ -32,6 +32,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>Resources\FelicaIcon.ico</ApplicationIcon>
@@ -362,6 +363,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Scripts\RemoveUnusedFiles.ps1" />
     <None Include="Scripts\RestoreSettings.ps1" />
     <None Include="Scripts\BackupSettings.ps1" />
     <None Include="Properties\Settings.settings">
@@ -431,8 +433,14 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>cd "$(ProjectDir)"
-@powershell -NoProfile -ExecutionPolicy Unrestricted -File "$(ProjectDir)Scripts\BackupSettings.ps1"</PostBuildEvent>
+    <PostBuildEvent>pushd "$(ProjectDir)"
+@powershell -NoProfile -ExecutionPolicy Unrestricted -File "$(ProjectDir)Scripts\BackupSettings.ps1"
+popd
+
+pushd "$(ProjectDir)"
+cd "$(OutDir)"
+if "$(ConfigurationName)" EQU "Release" @powershell -NoProfile -ExecutionPolicy Unrestricted -File "$(ProjectDir)\Scripts\RemoveUnusedFiles.ps1"
+popd</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>cd "$(ProjectDir)"
