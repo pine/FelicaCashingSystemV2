@@ -14,11 +14,8 @@ Pop-Location
 # Build FelicaCashingSystemV2
 Push-Location "FelicaCashingSystemV2"
 
-Push-Location "FelicaCashingSystemV2"
-powershell -NoProfile -ExecutionPolicy Unrestricted -File "Scripts\RestoreSettings.ps1"
-Pop-Location
-
 nuget restore
-msbuild
+msbuild /t:Build /p:Configuration=Debug
+msbuild /t:Build /p:Configuration=Release
 
 Pop-Location
