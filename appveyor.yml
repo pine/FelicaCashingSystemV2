@@ -5,12 +5,16 @@ init:
   - git config --global core.autocrlf false
 
 install:
+  - choco install adobereader 7zip.commandline
   - git submodule init
   - git submodule update
   - cd ..
   - git clone https://github.com/pine613/FelicaCashingSystemV2_Settings.git
+  - ps: Invoke-WebRequest -OutFile IPAexfont00201.zip -Uri http://ipafont.ipa.go.jp/ipaexfont/IPAexfont00201.php
+  - 7za x IPAexfont00201.zip
+  - ps: New-Item -Type Directory -Force -Path "KutDormitoryReport\KutDormitoryReport\KutDormitoryReport"
+  - copy IPAexfont00201\*.ttf "KutDormitoryReport\KutDormitoryReport\KutDormitoryReport"
   - cd FelicaCashingSystemV2
-  - choco install adobereader
 
 build_script:
   - powershell -NoProfile -ExecutionPolicy Unrestricted -File Build.ps1
