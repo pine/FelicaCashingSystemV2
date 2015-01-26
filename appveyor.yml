@@ -1,13 +1,15 @@
 # appveyor file
 # http://www.appveyor.com/docs/appveyor-yml
 
-install:
-  - choco install adobereader
-
 init:
   - git config --global core.autocrlf false
-  
+
+install:
+  - git submodule init
+  - git submodule update
+  - choco install adobereader
+
 build_script:
-  - powershell -NoProfile -ExecutionPolicy unrestricted -File Build.ps1
+  - powershell -NoProfile -ExecutionPolicy Unrestricted -File Build.ps1
 
 deploy: off
