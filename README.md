@@ -31,6 +31,15 @@ Felica Cashing System V2
 ## ビルド
 ソリューションを Visual Studio で開き、構成を **Release** にしてビルドしてください。ビルドには、Adobe Reader と NuGet コマンドラインツール、及び PowerShell がインストールされている必要があります。
 
+```
+$ git clone https://github.com/pine613/FelicaCashingSystemV2.git
+$ git clone https://github.com/pine613/FelicaCashingSystemV2_Settings.git
+
+$ cd FelicaCashingSystemV2
+$ git submodule update --init
+$ powershell -NoProfile -ExecutionPolicy Unrestricted -File Build.ps1
+```
+
 ## インストール
 ビルド結果をインストール先にコピーしてください。
 起動には、Adobe Reader と PaSoRi のドライバが必要です。
