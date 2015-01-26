@@ -7,7 +7,7 @@ install:
 init:
   - git config --global core.autocrlf false
   
-build:
+build_script:
   - powershell -NoProfile -ExecutionPolicy unrestricted -File Build.ps1
 
 deploy: off
