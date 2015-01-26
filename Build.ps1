@@ -16,6 +16,9 @@ Push-Location "FelicaCashingSystemV2"
 
 nuget restore
 msbuild /t:Build /p:Configuration=Debug
+
+if (!$?) { exit 1 }
+
 msbuild /t:Build /p:Configuration=Release
 
 Pop-Location
