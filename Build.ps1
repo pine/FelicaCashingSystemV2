@@ -7,7 +7,7 @@ nuget restore
 Pop-Location
 
 # Build KutDormitoryReport
-Push-Location "KutDormitoryReport"
+Push-Location "KutDormitoryReport\KutDormitoryReport"
 nuget restore
 Pop-Location
 
