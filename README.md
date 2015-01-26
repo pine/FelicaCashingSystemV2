@@ -26,9 +26,10 @@ Felica Cashing System V2
 - iTextSharp
 - Adobe Acrobat 7.0 Browser Control Type Library 1.0
 - PC/SC (WinScard.dll)
+- NuGet
 
 ## ビルド
-ソリューションを Visual Studio で開き、構成を **Release** にしてビルドしてください。
+ソリューションを Visual Studio で開き、構成を **Release** にしてビルドしてください。ビルドには、Adobe Reader と NuGet コマンドラインツール、及び PowerShell がインストールされている必要があります。
 
 ## インストール
 ビルド結果をインストール先にコピーしてください。
