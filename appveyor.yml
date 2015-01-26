@@ -10,11 +10,12 @@ install:
   - git submodule update
   - cd ..
   - git clone https://github.com/pine613/FelicaCashingSystemV2_Settings.git
+  - cd FelicaCashingSystemV2_Settings
   - ps: Invoke-WebRequest -OutFile IPAexfont00201.zip -Uri http://ipafont.ipa.go.jp/ipaexfont/IPAexfont00201.php
   - 7za x IPAexfont00201.zip
   - ps: New-Item -Type Directory -Force -Path "KutDormitoryReport\KutDormitoryReport\KutDormitoryReport"
   - copy IPAexfont00201\*.ttf "KutDormitoryReport\KutDormitoryReport\KutDormitoryReport"
-  - cd FelicaCashingSystemV2
+  - cd ..\FelicaCashingSystemV2
 
 build_script:
   - powershell -NoProfile -ExecutionPolicy Unrestricted -File Build.ps1
