@@ -42,7 +42,21 @@ $ powershell -NoProfile -ExecutionPolicy Unrestricted -File Build.ps1
 
 ## インストール
 ビルド結果をインストール先にコピーしてください。
-起動には、Adobe Reader と PaSoRi のドライバが必要です。
+
+## 起動
+FelicaCashingSystemV2.exe を実行してください。起動には、以下のソフトウェアが必要です。
+
+- .NET Framework 4.5
+- [Adobe Reader](http://www.adobe.com/jp/products/reader.html)
+- [NFCポートソフトウェア](http://www.sony.co.jp/Products/felica/consumer/download/netinstaller.html)
+
+接続先データベース (MongoDB) の設定は、FelicaCashingSystemV2.exe.config へ記述します。以下の localhost となっている部分を接続先のホスト名、または IP アドレスに置き換えてください。
+
+```xml
+<setting name="ConnectionString" serializeAs="String">
+    <value>mongodb://localhost</value>
+</setting>
+```
 
 ## 関係するプロジェクト
 - [FelicaSharp](https://github.com/pine613/FelicaSharp)<br />
