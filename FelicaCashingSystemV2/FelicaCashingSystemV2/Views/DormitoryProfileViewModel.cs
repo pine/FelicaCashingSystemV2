@@ -11,11 +11,20 @@ namespace FelicaCashingSystemV2.Views
 {
     class DormitoryProfileViewModel : MetroWindowViewModelBase
     {
-        private readonly FelicaData.User user = App.Current.User.Clone();
+        private FelicaData.User user = App.Current.User.Clone();
 
         public DormitoryProfileViewModel()
         {
             this.SaveCommand = new DelegateCommand(this.Save);
+            App.Current.UserChanged += Current_UserChanged;
+        }
+
+        private void Current_UserChanged(object sender, FelicaData.User e)
+        {
+            if (App.Current.User != null)
+            {
+                this.user = App.Current.User.Clone();
+            }
         }
 
         public string DormitoryRoomNo
