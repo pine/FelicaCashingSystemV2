@@ -1,5 +1,6 @@
 Felica Cashing System V2
 ========================
+[![Build status](https://ci.appveyor.com/api/projects/status/6wod5lhh8ipne8fh/branch/master?svg=true)](https://ci.appveyor.com/project/pine613/felicacashingsystemv2/branch/master)
 
 ## 概要
 非接触 IC カード FeliCa を用いた組織内電子決済システムです。
