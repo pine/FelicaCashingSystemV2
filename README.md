@@ -27,6 +27,7 @@ Felica Cashing System V2
 - Adobe Acrobat 7.0 Browser Control Type Library 1.0
 - PC/SC (WinScard.dll)
 - NuGet
+- [IPAex フォント](http://ipafont.ipa.go.jp)
 
 ## ビルド
 ソリューションを Visual Studio で開き、構成を **Release** にしてビルドしてください。ビルドには、Adobe Reader と NuGet コマンドラインツール、及び PowerShell がインストールされている必要があります。
