@@ -66,5 +66,7 @@ FelicaCashingSystemV2.exe を実行してください。起動には、以下の
   Felica Cashing System V2 のデータベースレイヤを担当するモジュール
 - [KutDormitoryReport](https://github.com/pine613/KutDormitoryReport)<br />
   高知工科大学ドミトリーの門限超過届けを自動発行する部分のモジュール
-- [FelicaCashingSystemV2_Settings](https://github.com/RobotClubKut/FelicaCashingSystemV2_Settings)<br />
+- [FelicaCashingSustemV2_Settings](https://github.com/pine613/FelicaCashingSystemV2_Settings)<br />
+  Felica Cashing System V2 ビルド時に必要となる設定
+- [RobotClubKut](https://github.com/RobotClubKut) / [FelicaCashingSystemV2_Settings](https://github.com/RobotClubKut/FelicaCashingSystemV2_Settings)<br />
   ロボット倶楽部で運用している Felica Cashing System V2 の設定 (非公開)
