@@ -299,6 +299,7 @@ namespace FelicaCashingSystemV2
                 // 購入金額選択
                 if (money == -1)
                 {
+                    this.isExecuting = false;
                     this.SelectMoney(max(), (newMoney) =>
                     {
                         if (newMoney > 0)
@@ -314,8 +315,6 @@ namespace FelicaCashingSystemV2
                                 moneyAction);
                         }
                     });
-
-                    this.isExecuting = false;
                     return;
                 }
 
