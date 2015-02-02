@@ -42,6 +42,12 @@ $ git submodule update --init
 $ powershell -NoProfile -ExecutionPolicy Unrestricted -File Build.ps1
 ```
 
+ビルド時には、下記フォルダに IPAex フォント (ipaexm.ttf, ipaexg.ttf) が入っているように、事前にダウンロードしておいてください。
+
+```
+FelicaCashingSystemV2_Settings/KutDormitoryReport/KutDormitoryReport/KutDormitoryReport
+```
+
 ## インストール
 ビルド結果をインストール先にコピーしてください。
 
