@@ -52,11 +52,19 @@ FelicaCashingSystemV2.exe を実行してください。起動には、以下の
 - [Adobe Reader](http://www.adobe.com/jp/products/reader.html)
 - [NFCポートソフトウェア](http://www.sony.co.jp/Products/felica/consumer/download/netinstaller.html)
 
-接続先データベース (MongoDB) の設定は、FelicaCashingSystemV2.exe.config へ記述します。以下の localhost となっている部分を接続先のホスト名、または IP アドレスに置き換えてください。
+接続先データベース (MongoDB) の設定は、FelicaCashingSystemV2.exe.config へ記述します。同一ホストで動作している場合、下記の通りになります (デフォルトのポート番号は 27017 です)。
 
 ```xml
 <setting name="ConnectionString" serializeAs="String">
     <value>mongodb://localhost</value>
+</setting>
+```
+
+別ホストや別ポートで動作している場合、以下のようになります。
+
+```xml
+<setting name="ConnectionString" serializeAs="String">
+    <value>mongodb://192.168.0.32:20002</value>
 </setting>
 ```
 
