@@ -536,7 +536,10 @@ namespace FelicaCashingSystemV2
             this.LoadAutoLogoutTimeoutSec();
 
             Debug.WriteLine("Startup succeed");
+
+#if DEBUG
             this.ShowLoginWindow();
+#endif
         }
 
         /// <summary>
