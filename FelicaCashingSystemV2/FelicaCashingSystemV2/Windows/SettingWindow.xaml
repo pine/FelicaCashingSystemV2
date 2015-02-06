@@ -46,6 +46,13 @@
                     <localViews:DormitorySettingsView/>
                 </ScrollViewer>
             </TabItem>
+
+            <TabItem Header="その他" 
+                     Visibility="{Binding IsAdmin,Converter={StaticResource BooleanToVisibilityConverter}}">
+                <ScrollViewer Visibility="{Binding IsAdmin,Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <localViews:EtcSettingsView/>
+                </ScrollViewer>
+            </TabItem>
         </TabControl>
         
     </Grid>

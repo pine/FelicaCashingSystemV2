@@ -25,6 +25,11 @@ namespace FelicaCashingSystemV2
         private FelicaSharp.EasyFelicaReader felica = null;
         private bool associationStarted = false;
 
+        /// <summary>
+        /// 自動ログアウト用のタイマー
+        /// </summary>
+        private System.Threading.Timer autoLogoutTimer = null;
+
         public FelicaSharp.EasyFelicaCardSetEventHandlerArgs UnregisteredCard { get; private set; }
 
         private FelicaData.DatabaseManager DatabaseManager { get; set; }
@@ -171,6 +176,7 @@ namespace FelicaCashingSystemV2
                 this.Card = card;
             }
 
+            this.StartAutoLogoutTimer();
             this.ShowWindow<Windows.MainWindow>();
         }
 
@@ -332,6 +338,74 @@ namespace FelicaCashingSystemV2
             }
         }
 
+        /// <summary>
+        /// 自動ログアウトの設定を読み込む
+        /// </summary>
+        protected int LoadAutoLogoutTimeoutSec()
+        {
+            try
+            {
+                return this.Collections.UiIntegers.GetInteger(FelicaData.UiIntegerType.AutoLogoutTimeoutSec);
+            }
+
+            catch (FelicaData.DatabaseException e)
+            {
+                this.ExitError(e.Message);
+            }
+
+            return 0;
+        }
+
+        /// <summary>
+        /// 自動ログアウトのタイマーを開始する
+        /// </summary>
+        protected void StartAutoLogoutTimer()
+        {
+            var autoLogoutTimeoutSec = this.LoadAutoLogoutTimeoutSec();
+
+            // 設定が読み込まれていない場合
+            if (autoLogoutTimeoutSec <= 0)
+            {
+                Debug.Write("自動ログアウト時間の設定が読み込めませんでした。");
+                return;
+            }
+
+            // 自動ログアウトタイマーを停止
+            this.StopAutoLogouttimer();
+
+            this.autoLogoutTimer = new System.Threading.Timer(
+                this.ExecAutoLogout,
+                null,
+                autoLogoutTimeoutSec * 1000,
+                System.Threading.Timeout.Infinite
+                );
+        }
+
+        /// <summary>
+        /// 自動ログアウトタイマーを停止する
+        /// </summary>
+        protected void StopAutoLogouttimer()
+        {
+            if (this.autoLogoutTimer != null)
+            {
+                this.autoLogoutTimer.Dispose();
+                this.autoLogoutTimer = null;
+            }
+        }
+
+        /// <summary>
+        /// 自動ログアウトを実行する
+        /// </summary>
+        protected void ExecAutoLogout(object arg)
+        {
+            if (this.autoLogoutTimer == null) { return; }
+
+            this.autoLogoutTimer.Dispose();
+            this.autoLogoutTimer = null;
+
+            this.CloseAllWindows();
+        }
+
         protected virtual void OnUserChanged(FelicaData.User user)
         {
             if (this.UserChanged != null)
@@ -458,6 +532,9 @@ namespace FelicaCashingSystemV2
                     );
             }
 
+            // 自動ログアウトの設定を読み込む
+            this.LoadAutoLogoutTimeoutSec();
+
             Debug.WriteLine("Startup succeed");
             this.ShowLoginWindow();
         }
@@ -483,6 +560,13 @@ namespace FelicaCashingSystemV2
 
             if (this.notifyIcon != null) { this.notifyIcon.Dispose(); }
             if (this.felica != null) { this.felica.Dispose(); }
+
+            // タイマーを開放する
+            if (this.autoLogoutTimer != null)
+            {
+                this.autoLogoutTimer.Dispose();
+                this.autoLogoutTimer = null;
+            }
 
             // Mutex を開放する
             if (this.mutex != null)

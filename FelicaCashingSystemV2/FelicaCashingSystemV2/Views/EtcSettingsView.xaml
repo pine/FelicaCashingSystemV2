@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="FelicaCashingSystemV2.Views.EtcSettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:localViews="clr-namespace:FelicaCashingSystemV2.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="700">
+    <UserControl.Resources>
+        <Style TargetType="{x:Type Button}"
+                       BasedOn="{StaticResource {x:Type Button}}"
+                       x:Key="SaveButton">
+            <Setter Property="Margin" Value="0,25,0,0"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+        </Style>
+    </UserControl.Resources>
+
+    <StackPanel>
+        <StackPanel HorizontalAlignment="Left">
+            <TextBlock Style="{StaticResource Heading2}">自動タイムアウト</TextBlock>
+            <TextBlock>自動タイムアウトする秒数を指定します。0 を指定した場合、自動タイムアウトしません。</TextBlock>
+
+            <StackPanel Orientation="Horizontal"
+                                    Margin="15,15,15,30">
+                <TextBlock VerticalAlignment="Center"
+                       Margin="0,0,15,0">秒数</TextBlock>
+                <TextBox Width="200"
+                     Text="{Binding AutoLogoutTimeoutSec,UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+        </StackPanel>
+        
+        <TextBlock Style="{StaticResource ErrorMessageText}"
+                   Text="{Binding ErrorMessage}"/>
+        
+        <Button Content="設定を保存"
+                Style="{StaticResource SaveButton}"
+                Command="{Binding SaveCommand}"
+                IsDefault="True"/>
+    </StackPanel>
+</UserControl>

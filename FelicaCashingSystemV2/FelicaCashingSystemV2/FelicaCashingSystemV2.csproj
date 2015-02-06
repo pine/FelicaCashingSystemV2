@@ -106,7 +106,11 @@
     </Compile>
     <Compile Include="Views\CardAssociationStartViewModel.cs" />
     <Compile Include="Views\DormitoryProfileViewModel.cs" />
+    <Compile Include="Views\EtcSettingsView.xaml.cs">
+      <DependentUpon>EtcSettingsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\DormitorySettingsViewModel.cs" />
+    <Compile Include="Views\EtcSettingsViewModel.cs" />
     <Compile Include="Views\MoneyHistoryViewModel.cs" />
     <Compile Include="Views\PageSettingView.xaml.cs">
       <DependentUpon>PageSettingView.xaml</DependentUpon>
@@ -224,6 +228,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\CardAssociationStartView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\EtcSettingsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
