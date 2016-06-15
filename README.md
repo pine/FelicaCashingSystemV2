@@ -27,7 +27,7 @@ Felica Cashing System V2
 - [iTextSharp](http://sourceforge.net/projects/itextsharp/)
 - Adobe Acrobat 7.0 Browser Control Type Library 1.0
 - PC/SC (WinScard.dll)
-- NuGet
+- [NuGet](https://dist.nuget.org/index.html)
 - [IPAex フォント](http://ipafont.ipa.go.jp)
 
 ## ビルド
